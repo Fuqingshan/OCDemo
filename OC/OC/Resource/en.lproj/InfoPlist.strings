@@ -1,0 +1,15 @@
+/* 
+  InfoPlist.strings
+  OC
+
+  Created by yier on 2019/2/13.
+  Copyright © 2019 yier. All rights reserved.
+*/
+
+CFBundleDisplayName = "OCDemo";
+NSCameraUsageDescription = "Need access to your camera";
+NSLocationWhenInUseUsageDescription = "When you use a location, you need your targeting permissions";
+NSMicrophoneUsageDescription = "When you send a voice, you need to use your voice permissions";
+NSPhotoLibraryAddUsageDescription = "Need access to your album";
+NSPhotoLibraryUsageDescription = "Need access to your album";
+

@@ -34,10 +34,10 @@ xcuserdata/
 *.dSYM
 
 ## pods
-Pods/*
-OC.xcworkspace/*
-OC.xcodeproj/xcuserdata
-OC.xcodeproj/project.xcworkspace/xcuserdata
+OC/Pods/*
+OC/OC.xcworkspace/*
+OC/OC.xcodeproj/xcuserdata
+OC/OC.xcodeproj/project.xcworkspace/xcuserdata
 
 # Carthage
 #

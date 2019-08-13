@@ -1,0 +1,14 @@
+/* 
+  InfoPlist.strings
+  OC
+
+  Created by yier on 2019/2/13.
+  Copyright © 2019 yier. All rights reserved.
+*/
+
+CFBundleDisplayName = "OC知识点整理";
+NSCameraUsageDescription = "需要访问您的相机";
+NSLocationWhenInUseUsageDescription = "当您使用位置时，需要您的定位权限";
+NSMicrophoneUsageDescription = "当您发送语音时，需要使用您的语音权限";
+NSPhotoLibraryAddUsageDescription = "需要访问您的相册";
+NSPhotoLibraryUsageDescription = "需要访问您的相册";

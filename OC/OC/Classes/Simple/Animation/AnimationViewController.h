@@ -1,0 +1,17 @@
+//
+//  AnimationViewController.h
+//  OC
+//
+//  Created by yier on 2019/3/31.
+//  Copyright © 2019 yier. All rights reserved.
+//
+
+#import "BaseViewController.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface AnimationViewController : BaseViewController
+
+@end
+
+NS_ASSUME_NONNULL_END

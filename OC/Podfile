@@ -1,0 +1,32 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '9.0'
+inhibit_all_warnings!
+
+target 'OC' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+#  use_frameworks!
+
+  # Pods for OC
+  
+  pod 'AFNetworking'
+  pod 'Masonry'
+  pod 'MBProgressHUD'
+  pod 'SDWebImage'
+  pod 'MJRefresh'
+  pod 'OpenSSL',:path => './LocalSpec/OpenSSL'
+  pod 'CocoaLumberjack'
+  pod 'fishhook'
+  pod 'Bugly'
+  pod 'SAMKeychain'
+  pod 'ReactiveObjC'
+  pod 'JLRoutes'
+  pod 'YYModel'
+  pod 'YYCategories'
+  pod 'YYText'
+  pod 'CKYPhotoBrowser'
+  pod 'YYImage'
+  
+  pod 'AMapLocation', '2.6.0'
+  pod 'AMapSearch', '6.1.1'
+
+end
