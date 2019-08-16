@@ -167,6 +167,7 @@
 
 #pragma mark - 自定义播放器
 - (void)customerPlay{
+    self.customPlay.currentTime = 0;
     [self.customPlay play];
 }
 
@@ -185,9 +186,9 @@
 - (CustomAudioPlayer *)customPlay{
     if (!_customPlay) {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"live_busy" ofType:@"mp3"];
-        _customPlay = [[CustomAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:path] error:nil];
+        _customPlay = [[CustomAudioPlayer alloc] init];
+        [_customPlay playAudioWithURL:[NSURL URLWithString:path]];
         _customPlay.delegate = self;
-        _customPlay.currentTime = 0;
     }
     
     return _customPlay;

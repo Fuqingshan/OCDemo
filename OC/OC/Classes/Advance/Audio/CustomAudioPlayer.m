@@ -32,141 +32,29 @@ const NSInteger bitDepth = 8;
 @implementation CustomAudioPlayer
 
 - (void)dealloc {
+    NSLog(@"CustomAudioPlayer dealloc");
     self.delegate = nil;
     [self.playerNode stop];
     [self.engine stop];
     [self.timer invalidate];
 }
 
-- (instancetype)initWithContentsOfURL:(NSURL *)url error:(NSError * _Nullable __autoreleasing *)outError {
-    if (url == nil) {
-        NSError *err = [NSError errorWithDomain:NSURLErrorDomain code:404 userInfo:nil];
-        *outError = err;
-        return nil;
-    }
+- (instancetype)init
+{
     self = [super init];
     if (self) {
-        self.url = url;
-        [self myInit];
-        [self readPCMData];
+        [self createEngine];
+        
+        // init a timer to catch current time;
+        @weakify(self);
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.01 block:^(NSTimer * _Nonnull timer) {
+            @strongify(self);
+            [self catchCurrentTime];
+        } repeats:YES];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eqDidChangedNotification:) name:kEQChangedNotificationName object:nil];
     }
     return self;
-}
-
-- (void)myInit {
-    // create engine and nodes
-    self.engine = [[AVAudioEngine alloc] init];
-    self.playerNode = [[AVAudioPlayerNode alloc] init];
-    
-    
-    /*
-     caseSmallRoom 小房间
-     caseMediumRoom 中等房间
-     caseLargeRoom 大房间
-     caseMediumHall 中等大厦
-     caseLargeHall 大型的大厦
-     casePlate 光面墙
-     caseMediumChamber 中等会议厅
-     caseLargeChamber 大型会议厅
-     caseCathedral 教堂
-     caseLargeRoom2 大型房间2
-     caseMediumHall2 中等大厦2
-     caseMediumHall3 中等大厦3
-     caseLargeHall2 大型大厦2
-     */
-    self.audioReverb = [[AVAudioUnitReverb alloc] init];
-    [self.audioReverb loadFactoryPreset:AVAudioUnitReverbPresetLargeRoom2];
-    self.audioReverb.wetDryMix = 20;
-
-    /*
-     caseDrumsBitBrush 轻微的小鼓刷
-     caseDrumsBufferBeats 鼓点
-     caseDrumsLoFi 低保真
-     AVAudioUnitDistortionPresetMultiBrokenSpeaker 多通道 破裂的嗓音
-     caseMultiCellphoneConcert 老式电话机的声音
-     caseMultiDecimated1 削波失真
-     caseMultiDecimated2 削波失真
-     caseMultiDecimated3 削波失真
-     caseMultiDecimated4 削波失真
-     caseMultiDistortedFunk  扭曲的funk效果失真
-     caseMultiDistortedCubed 扭曲的立方体效果
-     caseMultiDistortedSquared 扭曲的正方体效果
-     caseMultiEcho1 回声
-     AVAudioUnitDistortionPresetMultiEcho2  回声
-     caseMultiEchoTight1 紧密的回声
-     caseMultiEchoTight2 紧密的回声
-     caseMultiEverythingIsBroken 破碎的失真
-     AVAudioUnitDistortionPresetSpeechAlienChatter 外星人喋喋不休的声音
-     caseSpeechCosmicInterference 宇宙电子干扰的声音
-     caseSpeechGoldenPi 金属声音
-     caseSpeechRadioTower 收音机的声音
-     caseSpeechWaves 波形的声音
-     */
-    self.audioDistortion = [[AVAudioUnitDistortion alloc] init];
-    [self.audioDistortion loadFactoryPreset:AVAudioUnitDistortionPresetMultiEcho2];
-    self.audioDistortion.wetDryMix = 30;
-    
-    //10段均衡器
-    self.audioEQ = [[AVAudioUnitEQ alloc] initWithNumberOfBands:kEQBandCount];
-    NSArray *bands = self.audioEQ.bands;
-    NSInteger bandsCount = bands.count;
-        
-    // api默认的10分段是40、57、83、120、174、251、264、526、5414、10000，应该要改掉
-    // 假设是10段，那么市面上的频率分段为32、64、125、250、500、1k、2k、4k、8k、16k
-    NSInteger maxFre = 16000;
-    for (NSInteger i = bandsCount - 1; i >= 0; i --) {
-        AVAudioUnitEQFilterParameters *ban = [bands objectAtIndex:i];
-        ban.frequency = maxFre;
-        maxFre /= 2;
-    }
-    
-    [self eqDidChangedNotification:nil];
-    
-    AVAudioUnitEffect *effect = self.audioEQ;
-    
-    // connect effects
-    AVAudioMixerNode *mixer = self.engine.mainMixerNode;
-    AVAudioFormat *format = [mixer outputFormatForBus:0];
-    
-    [self.engine attachNode:self.playerNode];
-    [self.engine attachNode:self.audioReverb];
-    [self.engine attachNode:self.audioDistortion];
-    [self.engine attachNode:effect];
-
-    //连接时必须串联，最后输出到输出设备上面
-    [self.engine connect:self.playerNode to:effect format:format];
-    [self.engine connect:effect to:self.audioReverb format:format];
-    [self.engine connect:self.audioReverb to:self.audioDistortion format:format];
-    [self.engine connect:self.audioDistortion to:mixer format:format];
-
-    
-    // start engine
-    NSError *error = nil;
-    [self.engine startAndReturnError:&error];
-    
-    // create file or pcm buffer
-    self.audioFile = [[AVAudioFile alloc] initForReading:self.url error:nil];
-    
-    // calculate duration
-    AVAudioFrameCount frameCount = (AVAudioFrameCount)self.audioFile.length;
-    double sampleRate = self.audioFile.processingFormat.sampleRate;
-    if (sampleRate != 0) {
-        self.duration = frameCount / sampleRate;
-    } else {
-        self.duration = 1;
-    }
-    
-    // play file, or buffer
-    self.currentTime = 0;
-    
-   // init a timer to catch current time;
-    @weakify(self);
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.01 block:^(NSTimer * _Nonnull timer) {
-        @strongify(self);
-        [self catchCurrentTime];
-    } repeats:YES];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eqDidChangedNotification:) name:kEQChangedNotificationName object:nil];
 }
 
 - (void)eqDidChangedNotification:(NSNotification *)notification {
@@ -179,10 +67,118 @@ const NSInteger bitDepth = 8;
     NSInteger bandsCount = bands.count;
     for (NSInteger i = 0; i < bandsCount; i ++) {
         AVAudioUnitEQFilterParameters *ban = [bands objectAtIndex:i];
-//        NSLog(@"%f", ban.frequency);
+        //        NSLog(@"%f", ban.frequency);
         CGFloat gainValue = [[[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"%@%d", kEQBandKeyPrefix, (int)i]] floatValue];
         ban.bypass = gainValue == 0;
         ban.gain = gainValue;
+    }
+}
+
+- (void)createEngine{
+    self.engine = [[AVAudioEngine alloc] init];
+    self.playerNode = [[AVAudioPlayerNode alloc] init];
+    [self createAudioReverb];
+    [self createAVAudioUnitDistortion];
+    [self createUnitEQ];
+    
+    AVAudioUnitEffect *effect = self.audioEQ;
+    AVAudioMixerNode *mixer = self.engine.mainMixerNode;
+    AVAudioFormat *format = [mixer outputFormatForBus:0];
+    
+    [self.engine attachNode:self.playerNode];
+    [self.engine attachNode:self.audioReverb];
+    [self.engine attachNode:self.audioDistortion];
+    [self.engine attachNode:effect];
+    
+    //连接时必须串联，最后输出到输出设备上面
+    [self.engine connect:self.playerNode to:effect format:format];
+    [self.engine connect:effect to:self.audioReverb format:format];
+    [self.engine connect:self.audioReverb to:self.audioDistortion format:format];
+    [self.engine connect:self.audioDistortion to:mixer format:format];
+}
+
+/** 音频场景混响
+ caseSmallRoom 小房间
+ caseMediumRoom 中等房间
+ caseLargeRoom 大房间
+ caseMediumHall 中等大厦
+ caseLargeHall 大型的大厦
+ casePlate 光面墙
+ caseMediumChamber 中等会议厅
+ caseLargeChamber 大型会议厅
+ caseCathedral 教堂
+ caseLargeRoom2 大型房间2
+ caseMediumHall2 中等大厦2
+ caseMediumHall3 中等大厦3
+ caseLargeHall2 大型大厦2
+ */
+- (void)createAudioReverb{
+    self.audioReverb = [[AVAudioUnitReverb alloc] init];
+    [self.audioReverb loadFactoryPreset:AVAudioUnitReverbPresetLargeRoom2];
+    self.audioReverb.wetDryMix = 20;
+}
+
+/**音频扭曲效果
+ caseDrumsBitBrush 轻微的小鼓刷
+ caseDrumsBufferBeats 鼓点
+ caseDrumsLoFi 低保真
+ AVAudioUnitDistortionPresetMultiBrokenSpeaker 多通道 破裂的嗓音
+ caseMultiCellphoneConcert 老式电话机的声音
+ caseMultiDecimated1 削波失真
+ caseMultiDecimated2 削波失真
+ caseMultiDecimated3 削波失真
+ caseMultiDecimated4 削波失真
+ caseMultiDistortedFunk  扭曲的funk效果失真
+ caseMultiDistortedCubed 扭曲的立方体效果
+ caseMultiDistortedSquared 扭曲的正方体效果
+ caseMultiEcho1 回声
+ AVAudioUnitDistortionPresetMultiEcho2  回声
+ caseMultiEchoTight1 紧密的回声
+ caseMultiEchoTight2 紧密的回声
+ caseMultiEverythingIsBroken 破碎的失真
+ AVAudioUnitDistortionPresetSpeechAlienChatter 外星人喋喋不休的声音
+ caseSpeechCosmicInterference 宇宙电子干扰的声音
+ caseSpeechGoldenPi 金属声音
+ caseSpeechRadioTower 收音机的声音
+ caseSpeechWaves 波形的声音
+ */
+- (void)createAVAudioUnitDistortion{
+    self.audioDistortion = [[AVAudioUnitDistortion alloc] init];
+    [self.audioDistortion loadFactoryPreset:AVAudioUnitDistortionPresetMultiEcho2];
+    self.audioDistortion.wetDryMix = 30;
+}
+
+- (void)createUnitEQ{
+    //10段均衡器
+    self.audioEQ = [[AVAudioUnitEQ alloc] initWithNumberOfBands:kEQBandCount];
+    NSArray *bands = self.audioEQ.bands;
+    NSInteger bandsCount = bands.count;
+    
+    // api默认的10分段是40、57、83、120、174、251、264、526、5414、10000，应该要改掉
+    // 假设是10段，那么市面上的频率分段为32、64、125、250、500、1k、2k、4k、8k、16k
+    NSInteger maxFre = 16000;
+    for (NSInteger i = bandsCount - 1; i >= 0; i --) {
+        AVAudioUnitEQFilterParameters *ban = [bands objectAtIndex:i];
+        ban.frequency = maxFre;
+        maxFre /= 2;
+    }
+    
+    [self eqDidChangedNotification:nil];
+}
+
+- (void)playAudioWithURL:(NSURL *)url{
+    self.url = url;
+    self.currentTime = 0;
+    // create file or pcm buffer
+    self.audioFile = [[AVAudioFile alloc] initForReading:self.url error:nil];
+    
+    // calculate duration
+    AVAudioFrameCount frameCount = (AVAudioFrameCount)self.audioFile.length;
+    double sampleRate = self.audioFile.processingFormat.sampleRate;
+    if (sampleRate != 0) {
+        self.duration = frameCount / sampleRate;
+    } else {
+        self.duration = 1;
     }
 }
 
