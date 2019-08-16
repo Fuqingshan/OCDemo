@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -161,6 +161,7 @@
 		8179EC2F2251FCE200B1AFBA /* DrawCircleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8179EC2E2251FCE200B1AFBA /* DrawCircleViewController.m */; };
 		819E6544221A8BD9008C2B9D /* AdvantageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 819E6543221A8BD9008C2B9D /* AdvantageViewController.m */; };
 		819E6548221AA28D008C2B9D /* FoundationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 819E6547221AA28D008C2B9D /* FoundationViewController.m */; };
+		81C5A4512306A407000EEB08 /* CustomAudioRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C5A4502306A407000EEB08 /* CustomAudioRecord.m */; };
 		81E30D0622239B37003D215D /* FoundationBridgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E30D0522239B37003D215D /* FoundationBridgeViewController.m */; };
 		81E3A197221E798A0081D6D2 /* WKWebView+Crash.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E3A191221E798A0081D6D2 /* WKWebView+Crash.m */; };
 		81E3A198221E798A0081D6D2 /* WKWebViewController+MessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E3A192221E798A0081D6D2 /* WKWebViewController+MessageHandler.m */; };
@@ -777,6 +778,8 @@
 		819E6543221A8BD9008C2B9D /* AdvantageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdvantageViewController.m; sourceTree = "<group>"; };
 		819E6546221AA28D008C2B9D /* FoundationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoundationViewController.h; sourceTree = "<group>"; };
 		819E6547221AA28D008C2B9D /* FoundationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoundationViewController.m; sourceTree = "<group>"; };
+		81C5A44F2306A407000EEB08 /* CustomAudioRecord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomAudioRecord.h; sourceTree = "<group>"; };
+		81C5A4502306A407000EEB08 /* CustomAudioRecord.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomAudioRecord.m; sourceTree = "<group>"; };
 		81E30D0422239B37003D215D /* FoundationBridgeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoundationBridgeViewController.h; sourceTree = "<group>"; };
 		81E30D0522239B37003D215D /* FoundationBridgeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoundationBridgeViewController.m; sourceTree = "<group>"; };
 		81E3A191221E798A0081D6D2 /* WKWebView+Crash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+Crash.m"; sourceTree = "<group>"; };
@@ -1639,6 +1642,8 @@
 				81052EB3230152D40083DC65 /* OCAudioPlayer.m */,
 				81052EBD23015FF10083DC65 /* CustomAudioPlayer.h */,
 				81052EBE23015FF10083DC65 /* CustomAudioPlayer.m */,
+				81C5A44F2306A407000EEB08 /* CustomAudioRecord.h */,
+				81C5A4502306A407000EEB08 /* CustomAudioRecord.m */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -3777,6 +3782,7 @@
 				8179EC1B2251C46000B1AFBA /* XWInteractiveTransition.m in Sources */,
 				81E3A1A0221E88060081D6D2 /* MemoryViewController.m in Sources */,
 				02F143082251032A008A442A /* PPHeadCell.m in Sources */,
+				81C5A4512306A407000EEB08 /* CustomAudioRecord.m in Sources */,
 				81E7C890221BF53300A034C3 /* PropertyViewController.m in Sources */,
 				81F550D2223A444E00B924F9 /* UIControlHeader.m in Sources */,
 				02E4BDC32259F1680056686C /* View3.m in Sources */,

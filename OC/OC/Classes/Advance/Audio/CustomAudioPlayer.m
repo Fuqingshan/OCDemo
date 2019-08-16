@@ -8,19 +8,16 @@
 
 #import "CustomAudioPlayer.h"
 
-const double sampleRate = 44100;
-const NSInteger channelCount = 1;
-const NSInteger bitDepth = 8;
-
 @interface CustomAudioPlayer()
 @property (nonatomic, strong) AVAudioEngine *engine;
-@property (nonatomic, strong) AVAudioPlayerNode *playerNode;
 
 @property (nonatomic, strong) AVAudioFile *audioFile;
 
+@property (nonatomic, strong) AVAudioPlayerNode *playerNode;
 // effects
 @property (nonatomic, strong) AVAudioUnitReverb *audioReverb;
 @property (nonatomic, strong) AVAudioUnitDistortion *audioDistortion;
+@property (nonatomic, strong) AVAudioUnitVarispeed *audioSpeed;
 @property (nonatomic, strong) AVAudioUnitEQ *audioEQ;
 
 @property (nonatomic, strong) NSTimer *timer;
@@ -76,25 +73,55 @@ const NSInteger bitDepth = 8;
 
 - (void)createEngine{
     self.engine = [[AVAudioEngine alloc] init];
-    self.playerNode = [[AVAudioPlayerNode alloc] init];
     [self createAudioReverb];
     [self createAVAudioUnitDistortion];
+    [self createAudioSpeed];
     [self createUnitEQ];
     
-    AVAudioUnitEffect *effect = self.audioEQ;
-    AVAudioMixerNode *mixer = self.engine.mainMixerNode;
-    AVAudioFormat *format = [mixer outputFormatForBus:0];
+    [self createPlay];
+    //[self createSing];
+}
+
+- (void)createPlay{
+    self.playerNode = [[AVAudioPlayerNode alloc] init];
     
     [self.engine attachNode:self.playerNode];
     [self.engine attachNode:self.audioReverb];
     [self.engine attachNode:self.audioDistortion];
-    [self.engine attachNode:effect];
+    [self.engine attachNode:self.audioSpeed];
+    [self.engine attachNode:self.audioEQ];
     
-    //连接时必须串联，最后输出到输出设备上面
-    [self.engine connect:self.playerNode to:effect format:format];
-    [self.engine connect:effect to:self.audioReverb format:format];
-    [self.engine connect:self.audioReverb to:self.audioDistortion format:format];
-    [self.engine connect:self.audioDistortion to:mixer format:format];
+    AVAudioMixerNode *mixer = self.engine.mainMixerNode;
+    AVAudioFormat *formatInput= [mixer inputFormatForBus:AVAudioPlayerNodeBufferLoops];
+    AVAudioFormat *formatOutput = [mixer outputFormatForBus:0];
+    
+    //音频播放链式,效果针对播放
+    //input（音频文件playerNode）->效果器1->效果器2...->output
+    [self.engine connect:self.playerNode to:self.audioEQ format:formatInput];
+    [self.engine connect:self.audioEQ to:self.audioReverb format:formatOutput];
+    [self.engine connect:self.audioReverb to:self.audioDistortion format:formatOutput];
+    [self.engine connect:self.audioDistortion to:self.audioSpeed format:formatOutput];
+    [self.engine connect:self.audioSpeed to:mixer format:formatOutput];
+    
+}
+
+- (void)createSing{
+    [self.engine attachNode:self.audioReverb];
+    [self.engine attachNode:self.audioDistortion];
+    [self.engine attachNode:self.audioSpeed];
+    [self.engine attachNode:self.audioEQ];
+    
+    AVAudioNode *inputNode = self.engine.inputNode;
+    AVAudioNode *outputNode = self.engine.outputNode;
+    AVAudioFormat *formatInput= [inputNode inputFormatForBus:AVAudioPlayerNodeBufferLoops];
+    AVAudioFormat *formatOutput = [outputNode outputFormatForBus:0];
+
+    //清唱链式,input不要用变速，效果针对录入
+    [self.engine connect:inputNode to:self.audioReverb format:formatInput];
+    [self.engine connect:self.audioReverb to:self.audioDistortion format:formatInput];
+    [self.engine connect:self.audioDistortion to:outputNode format:formatOutput];
+    
+    [self.engine startAndReturnError:nil];
 }
 
 /** 音频场景混响
@@ -115,32 +142,33 @@ const NSInteger bitDepth = 8;
 - (void)createAudioReverb{
     self.audioReverb = [[AVAudioUnitReverb alloc] init];
     [self.audioReverb loadFactoryPreset:AVAudioUnitReverbPresetLargeRoom2];
-    self.audioReverb.wetDryMix = 20;
+    
+    self.audioReverb.wetDryMix = 70;//声音更空灵
 }
 
-/**音频扭曲效果
- caseDrumsBitBrush 轻微的小鼓刷
- caseDrumsBufferBeats 鼓点
- caseDrumsLoFi 低保真
+/**音频失真效果
+ AVAudioUnitDistortionPresetDrumsBitBrush 轻微的小鼓刷
+ AVAudioUnitDistortionPresetDrumsBufferBeats 鼓点
+ AVAudioUnitDistortionPresetDrumsLoFi 低保真
  AVAudioUnitDistortionPresetMultiBrokenSpeaker 多通道 破裂的嗓音
- caseMultiCellphoneConcert 老式电话机的声音
- caseMultiDecimated1 削波失真
- caseMultiDecimated2 削波失真
- caseMultiDecimated3 削波失真
- caseMultiDecimated4 削波失真
- caseMultiDistortedFunk  扭曲的funk效果失真
- caseMultiDistortedCubed 扭曲的立方体效果
- caseMultiDistortedSquared 扭曲的正方体效果
- caseMultiEcho1 回声
+ AVAudioUnitDistortionPresetMultiCellphoneConcert 老式电话机的声音
+ AVAudioUnitDistortionPresetMultiDecimated1 削波失真
+ AVAudioUnitDistortionPresetMultiDecimated2 削波失真
+ AVAudioUnitDistortionPresetMultiDecimated3 削波失真
+ AVAudioUnitDistortionPresetMultiDecimated4 削波失真
+ AVAudioUnitDistortionPresetMultiDistortedFunk  扭曲的funk效果失真
+ AVAudioUnitDistortionPresetMultiDistortedCubed 扭曲的立方体效果
+ AVAudioUnitDistortionPresetMultiDistortedSquared 扭曲的正方体效果
+ AVAudioUnitDistortionPresetMultiEcho1 回声
  AVAudioUnitDistortionPresetMultiEcho2  回声
- caseMultiEchoTight1 紧密的回声
- caseMultiEchoTight2 紧密的回声
- caseMultiEverythingIsBroken 破碎的失真
+ AVAudioUnitDistortionPresetMultiEchoTight1 紧密的回声
+ AVAudioUnitDistortionPresetMultiEchoTight2 紧密的回声
+ AVAudioUnitDistortionPresetMultiEverythingIsBroken 破碎的失真
  AVAudioUnitDistortionPresetSpeechAlienChatter 外星人喋喋不休的声音
- caseSpeechCosmicInterference 宇宙电子干扰的声音
- caseSpeechGoldenPi 金属声音
- caseSpeechRadioTower 收音机的声音
- caseSpeechWaves 波形的声音
+ AVAudioUnitDistortionPresetSpeechCosmicInterference 宇宙电子干扰的声音
+ AVAudioUnitDistortionPresetSpeechGoldenPi 金属声音
+ AVAudioUnitDistortionPresetSpeechRadioTower 收音机的声音
+ AVAudioUnitDistortionPresetSpeechWaves 波形的声音
  */
 - (void)createAVAudioUnitDistortion{
     self.audioDistortion = [[AVAudioUnitDistortion alloc] init];
@@ -148,6 +176,27 @@ const NSInteger bitDepth = 8;
     self.audioDistortion.wetDryMix = 30;
 }
 
+- (void)createAudioSpeed{
+    self.audioSpeed = [[AVAudioUnitVarispeed alloc] init];
+    self.audioSpeed.rate = 1;
+}
+
+
+/**
+ publicenumAVAudioUnitEQFilterType :Int{
+ caseParametric 参量均衡器 可以通过设置一些参量，来调节咱们均衡器的频点
+ caseLowPass 低通滤波器 衰弱高频
+ caseHighPass 高通滤波器 衰弱低频
+ caseResonantLowPass  可以引发共鸣的 低通滤波器
+ caseResonantHighPass 可以引发共鸣的  高通滤波器
+ caseBandPass 带通滤波器  提升某一频率附近的信号 忽略过高 或 过低的 部分
+ caseBandStop 与上面的相反  忽略某一频率附近的信号
+ caseLowShelf 低架 降低整体
+ caseHighShelf 高架 提升整体
+ caseResonantLowShelf  可以引发共鸣的 低架
+ caseResonantHighShelf可以引发共鸣的 高架
+ }
+ */
 - (void)createUnitEQ{
     //10段均衡器
     self.audioEQ = [[AVAudioUnitEQ alloc] initWithNumberOfBands:kEQBandCount];
@@ -159,6 +208,7 @@ const NSInteger bitDepth = 8;
     NSInteger maxFre = 16000;
     for (NSInteger i = bandsCount - 1; i >= 0; i --) {
         AVAudioUnitEQFilterParameters *ban = [bands objectAtIndex:i];
+//        ban.filterType = AVAudioUnitEQFilterTypeResonantHighShelf;//这个属性需要专业知识，设置的是苹果默认的滤波器
         ban.frequency = maxFre;
         maxFre /= 2;
     }
@@ -238,15 +288,16 @@ const NSInteger bitDepth = 8;
     self.delegate = nil;
     [self.playerNode stop];
     self.delegate = lastdelegate;
-    __weak typeof(self) weself = self;
     
+    //计算需要播放的内容长度
     AVAudioFramePosition startingFrame = currentTime * self.audioFile.processingFormat.sampleRate;
-    
     AVAudioFrameCount frameCount = (AVAudioFrameCount)(self.audioFile.length - startingFrame);
     if (frameCount > 1000) {
         self.lastStartFramePosition = startingFrame;
+        @weakify(self);
         [self.playerNode scheduleSegment:self.audioFile startingFrame:startingFrame frameCount:frameCount atTime:nil completionHandler:^{
-            [weself didFinishPlay];
+            @strongify(self);
+            [self didFinishPlay];
         }];
     }
     if (isPlaying) {
@@ -255,6 +306,10 @@ const NSInteger bitDepth = 8;
 }
 
 - (void)readPCMData {
+    double sampleRate = 44100;
+    NSInteger channelCount = 1;
+    NSInteger bitDepth = 8;
+    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         // 我现在知道通过（采样率、声道数、时长）可以计算出样品个数
         NSInteger sampleCount = self.duration * sampleRate * channelCount;

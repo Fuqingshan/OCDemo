@@ -11,6 +11,7 @@
 
 #import "OCAudioPlayer.h"
 #import "CustomAudioPlayer.h"
+#import "CustomAudioRecord.h"
 
 @interface AudioViewController ()<UITableViewDelegate,UITableViewDataSource,AVAudioPlayerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -18,6 +19,7 @@
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) OCAudioPlayer *audioPlay;//背景音乐
 @property (nonatomic, strong) CustomAudioPlayer *customPlay;//自定义播放
+@property (nonatomic, strong) CustomAudioRecord *customRecord;///<自定义录制
 
 @end
 
@@ -66,8 +68,11 @@
                             @"content":@"自定义播放器"
                             ,@"sel":@"customerPlay"
                             }
+                        ,@{
+                            @"content":@"自定义录制"
+                            ,@"sel":@"customRecordSelector"
+                            }
                         ];
-    
     [self.tableView reloadData];
 }
 
@@ -175,6 +180,19 @@
     NSLog(@"audioPlayerDidFinishPlaying");
 }
 
+#pragma mark - 自定义录制
+- (void)customRecordSelector{
+    self.customRecord.successBlock = ^(id model) {
+        NSLog(@"successBlock:\n%@",model);
+    };
+    
+    self.customRecord.failureBlock = ^(id model) {
+        NSLog(@"failureBlock:\n%@",model);
+    };
+    
+    [self.customRecord startRecordWithURL:[self recordURL]];
+}
+
 #pragma mark - lazy load
 - (OCAudioPlayer *)audioPlay{
     if(!_audioPlay){
@@ -193,5 +211,23 @@
     
     return _customPlay;
 }
+
+- (CustomAudioRecord *)customRecord{
+    if (!_customRecord) {
+        _customRecord = [[CustomAudioRecord alloc] init];
+        _customRecord.ignoreMixer = YES;
+    }
+    
+    return _customRecord;
+}
+
+#pragma mark - lazy load
+- (NSURL *)recordURL{
+    NSString * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
+    NSString * filePath = [path stringByAppendingPathComponent:@"record1.caf"];
+    NSURL * url = [NSURL fileURLWithPath:filePath];
+    return url;
+}
+
 
 @end
