@@ -8,6 +8,7 @@
 
 #import "CustomAudioRecord.h"
 #import <AVFoundation/AVFoundation.h>
+#import "DispatchTimer.h"
 
 @interface CustomAudioRecord()
 @property (nonatomic, strong) AVAudioEngine *engine;
@@ -19,7 +20,14 @@
 @property (nonatomic, strong) AVAudioUnitDistortion *audioDistortion;
 @property (nonatomic, strong) AVAudioUnitEQ *audioEQ;
 
-@property (nonatomic, strong) AVAudioNode *outputNode;
+@property (nonatomic, strong) AVAudioNode *recordNode;
+
+@property (nonatomic, assign) BOOL ignoreMixer;///<忽略混响录制
+@property (nonatomic, assign) BOOL supportPCM;///<录制原声，格式pcm，同时忽略混响录制
+
+//计算录制时长
+@property (nonatomic, strong) DispatchTimer *timer;
+@property (nonatomic, assign) NSInteger count;
 
 @end
 
@@ -27,18 +35,34 @@
 
 - (void)dealloc{
     NSLog(@"CustomAudioRecord dealloc");
+    [self.timer cancle];
     [self.engine stop];
+    [self.recordNode removeTapOnBus:0];
 }
 
-- (instancetype)init
-{
+- (instancetype)init{
+    return [self initIfIgnoreMixer:NO supportPCM:NO];
+}
+
+- (instancetype)initIfIgnoreMixer:(BOOL)ignoreMixer{
+    return [self initIfIgnoreMixer:ignoreMixer supportPCM:NO];
+}
+
+- (instancetype)initIfSupportPCM:(BOOL)supportPCM{
+    return [self initIfIgnoreMixer:NO supportPCM:supportPCM];
+}
+
+- (instancetype)initIfIgnoreMixer:(BOOL)ignoreMixer supportPCM:(BOOL)supportPCM{
     self = [super init];
     if (self) {
+        self.count = 0;
+        self.ignoreMixer = ignoreMixer;
+        self.supportPCM = supportPCM;
         [self createEngine];
     }
+    
     return self;
 }
-
 
 - (void)createEngine{
     self.engine = [[AVAudioEngine alloc] init];
@@ -54,38 +78,50 @@
     [self.engine attachNode:self.audioDistortion];
     [self.engine attachNode:self.audioEQ];
     
-    AVAudioNode *inputNode = self.engine.inputNode;
     AVAudioFormat *formatInput;
     AVAudioFormat *formatOutput;
-    AVAudioNode *recordNode;
+    AVAudioNode *outputNode;
 
     //根据设置确认录制的是原生还是混响
     if ((self.ignoreMixer || self.supportPCM)) {
-        self.outputNode = self.engine.outputNode;
-        formatInput = [inputNode inputFormatForBus:AVAudioPlayerNodeBufferLoops];
+        outputNode = self.engine.outputNode;
+        formatInput = [self.engine.inputNode inputFormatForBus:0];
+        formatOutput = [outputNode outputFormatForBus:0];
+        self.recordNode = self.engine.inputNode;
     }else{
-        self.outputNode = self.engine.mainMixerNode;
-        formatInput = [self.engine.mainMixerNode inputFormatForBus:AVAudioPlayerNodeBufferLoops];
+        outputNode = self.engine.mainMixerNode;
+        formatInput = [outputNode inputFormatForBus:0];
+        formatOutput = [outputNode outputFormatForBus:0];
+        self.recordNode = outputNode;
     }
     
-    AVAudioFormat *formatOutput = [self.outputNode outputFormatForBus:0];
-    
     //清唱链式,input不要用变速，效果针对录入
-    [self.engine connect:inputNode to:self.audioReverb format:formatInput];
+    [self.engine connect:self.engine.inputNode to:self.audioReverb format:formatInput];
     [self.engine connect:self.audioReverb to:self.audioDistortion format:formatInput];
-    [self.engine connect:self.audioDistortion to:self.outputNode format:formatOutput];
+    [self.engine connect:self.audioDistortion to:outputNode format:formatOutput];
     
     @weakify(self);
-    [self.outputNode installTapOnBus:0 bufferSize:4096 format:[self.outputNode inputFormatForBus:AVAudioPlayerNodeBufferLoops] block:^(AVAudioPCMBuffer * _Nonnull buffer, AVAudioTime * _Nonnull when) {
+    //添加前先移除，不然可能报错
+    [self.recordNode removeTapOnBus:0];
+    [self.recordNode installTapOnBus:0 bufferSize:4096 format:[self.engine.outputNode outputFormatForBus:0] block:^(AVAudioPCMBuffer * _Nonnull buffer, AVAudioTime * _Nonnull when) {
         @strongify(self);
         [self.audioFile writeFromBuffer:buffer error:nil];
-        !self.successBlock?:self.successBlock(self.audioFile.url.path);
-        CGFloat second = when.sampleTime/when.sampleRate;
-        //如果录制时间大于10秒，则停止录制
-        if (second > 10) {
-            [self stopRecord];
-        }
     }];
+    
+    if (!self.timer) {
+        @weakify(self);
+        self.timer = [DispatchTimer createDispatchTimer:0.1 eventHandler:^{
+            @strongify(self);
+            CGFloat count = self.audioFile.framePosition / self.audioFile.processingFormat.sampleRate;
+            //如果录制时间到了，暂停timer
+            if (self.recordTime <= count) {
+                !self.successBlock?:self.successBlock(self.audioFile.url.path);
+                [self stopRecord];
+            }
+        } cancelHandler:^{
+            //调用cancle之后的回调
+        }];
+    }
 }
 
 /** 音频场景混响
@@ -107,7 +143,7 @@
     self.audioReverb = [[AVAudioUnitReverb alloc] init];
     [self.audioReverb loadFactoryPreset:AVAudioUnitReverbPresetLargeRoom2];
     
-    self.audioReverb.wetDryMix = 100;//声音更空灵
+    self.audioReverb.wetDryMix = 70;//声音更空灵
 }
 
 /**音频失真效果
@@ -189,6 +225,11 @@
         !self.failureBlock?:self.failureBlock(error);
         return;
     }
+    //如果之前的文件还存在，先删掉
+    if ([[NSFileManager defaultManager] fileExistsAtPath:self.audioFile.url.absoluteString]) {
+        [[NSFileManager defaultManager] removeItemAtURL:self.audioFile.url error:nil];
+    }
+    
     //如果之前在录制，则停止
     [self stopRecord];
     
@@ -203,15 +244,20 @@
         [self.engine prepare];
        BOOL success = [self.engine startAndReturnError:&error];
         if (!success) {
-            [self.engine stop];
+            [self.engine pause];
             !self.failureBlock?:self.failureBlock(error);
+        }else{
+            //开始计时
+            self.count = 0;
+            [self.timer resume];
         }
     }
 }
 
 - (void)stopRecord{
     if (self.engine.isRunning) {
-        [self.engine stop];
+        [self.engine pause];
+        [self.timer suspend];
     }
 }
 

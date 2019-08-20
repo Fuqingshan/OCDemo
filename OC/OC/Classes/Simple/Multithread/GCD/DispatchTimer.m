@@ -17,6 +17,7 @@
 
 @interface DispatchTimer()
 @property (nonatomic, strong) dispatch_source_t timer;
+@property (nonatomic, assign) NSInteger interval;
 @property (nonatomic, copy) dispatch_block_t eventHandler;
 @property (nonatomic, copy) dispatch_block_t cancelHandler;
 @property (nonatomic, assign) SourceType type;///<0表示无法使用,1表示使用中，2表示暂停
@@ -26,6 +27,9 @@
 @implementation DispatchTimer
 
 - (void)dealloc{
+    if (self.type == SourceTypeUnusable) {
+        return;
+    }
     [self cancle];
 }
 
@@ -34,15 +38,17 @@
     self = [super init];
     if (self) {
         self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0,0, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
-        dispatch_time_t start = dispatch_time(DISPATCH_TIME_NOW, 1);
-        dispatch_source_set_timer(self.timer, start, 1 * NSEC_PER_SEC, 0);
-        self.type = SourceTypeSuspend;
-        
-        dispatch_source_set_event_handler(self.timer, self.eventHandler);
-        
-        dispatch_source_set_cancel_handler(self.timer, self.cancelHandler);
     }
     return self;
+}
+
+- (void)createTimerSourceEvent{
+    dispatch_time_t start = dispatch_time(DISPATCH_TIME_NOW, self.interval);
+    dispatch_source_set_timer(self.timer, start, self.interval * NSEC_PER_SEC, 0);
+    self.type = SourceTypeSuspend;
+    
+    dispatch_source_set_event_handler(self.timer, self.eventHandler);
+    dispatch_source_set_cancel_handler(self.timer, self.cancelHandler);
 }
 
 + (instancetype)createDispatchTimer:(NSInteger)interval
@@ -51,6 +57,9 @@
     DispatchTimer *timer = [[DispatchTimer alloc] init];
     timer.eventHandler = eventHandler;
     timer.cancelHandler = cancelHandler;
+    timer.interval = interval;
+    
+    [timer createTimerSourceEvent];
     
     return timer;
 }

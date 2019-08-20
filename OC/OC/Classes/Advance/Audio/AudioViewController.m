@@ -20,7 +20,6 @@
 @property (nonatomic, strong) OCAudioPlayer *audioPlay;//背景音乐
 @property (nonatomic, strong) CustomAudioPlayer *customPlay;//自定义播放
 @property (nonatomic, strong) CustomAudioRecord *customRecord;///<自定义录制
-
 @end
 
 @implementation AudioViewController
@@ -72,7 +71,12 @@
                             @"content":@"自定义录制"
                             ,@"sel":@"customRecordSelector"
                             }
+                        ,@{
+                            @"content":@"自定义录制5"
+                            ,@"sel":@"customRecordSelector5"
+                            }
                         ];
+    
     [self.tableView reloadData];
 }
 
@@ -182,7 +186,9 @@
 
 #pragma mark - 自定义录制
 - (void)customRecordSelector{
+    @weakify(self);
     self.customRecord.successBlock = ^(id model) {
+        @strongify(self);
         NSLog(@"successBlock:\n%@",model);
     };
     
@@ -190,6 +196,22 @@
         NSLog(@"failureBlock:\n%@",model);
     };
     
+    self.customRecord.recordTime = 10.0;
+    [self.customRecord startRecordWithURL:[self recordURL]];
+}
+
+- (void)customRecordSelector5{
+    @weakify(self);
+    self.customRecord.successBlock = ^(id model) {
+        @strongify(self);
+        NSLog(@"successBlock:\n%@",model);
+    };
+
+    self.customRecord.failureBlock = ^(id model) {
+        NSLog(@"failureBlock:\n%@",model);
+    };
+
+    self.customRecord.recordTime = 5.0;
     [self.customRecord startRecordWithURL:[self recordURL]];
 }
 
@@ -214,8 +236,7 @@
 
 - (CustomAudioRecord *)customRecord{
     if (!_customRecord) {
-        _customRecord = [[CustomAudioRecord alloc] init];
-        _customRecord.ignoreMixer = YES;
+        _customRecord = [[CustomAudioRecord alloc] initIfIgnoreMixer:YES supportPCM:NO];
     }
     
     return _customRecord;
