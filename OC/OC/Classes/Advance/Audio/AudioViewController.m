@@ -68,11 +68,11 @@
                             ,@"sel":@"customerPlay"
                             }
                         ,@{
-                            @"content":@"自定义录制"
+                            @"content":@"自定义录制10秒"
                             ,@"sel":@"customRecordSelector"
                             }
                         ,@{
-                            @"content":@"自定义录制5"
+                            @"content":@"自定义录制5秒"
                             ,@"sel":@"customRecordSelector5"
                             }
                         ];
