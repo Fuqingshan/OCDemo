@@ -14,31 +14,28 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - AMapFoundation (1.5.6)
+  - AMapFoundation (1.6.0)
   - AMapLocation (2.6.0):
     - AMapFoundation (~> 1.4)
   - AMapSearch (6.1.1):
     - AMapFoundation (~> 1.4)
-  - Bugly (2.5.0)
+  - Bugly (2.5.2)
   - CKYPhotoBrowser (1.0.0):
     - YYWebImage
-  - CocoaLumberjack (3.4.2):
-    - CocoaLumberjack/Default (= 3.4.2)
-    - CocoaLumberjack/Extensions (= 3.4.2)
-  - CocoaLumberjack/Default (3.4.2)
-  - CocoaLumberjack/Extensions (3.4.2):
-    - CocoaLumberjack/Default
+  - CocoaLumberjack (3.6.0):
+    - CocoaLumberjack/Core (= 3.6.0)
+  - CocoaLumberjack/Core (3.6.0)
   - fishhook (0.2)
   - JLRoutes (2.1)
   - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
-  - MJRefresh (3.1.15.7)
+  - MJRefresh (3.2.2)
   - OpenSSL (1.0.210)
-  - ReactiveObjC (3.1.0)
+  - ReactiveObjC (3.1.1)
   - SAMKeychain (1.5.3)
-  - SDWebImage (4.4.3):
-    - SDWebImage/Core (= 4.4.3)
-  - SDWebImage/Core (4.4.3)
+  - SDWebImage (5.3.1):
+    - SDWebImage/Core (= 5.3.1)
+  - SDWebImage/Core (5.3.1)
   - YYCache (1.0.4)
   - YYCategories (1.0.4):
     - YYCategories/no-arc (= 1.0.4)
@@ -63,7 +60,7 @@ DEPENDENCIES:
   - JLRoutes
   - Masonry
   - MBProgressHUD
-  - MJRefresh
+  - MJRefresh (= 3.2.2)
   - OpenSSL (from `./LocalSpec/OpenSSL`)
   - ReactiveObjC
   - SAMKeychain
@@ -74,7 +71,7 @@ DEPENDENCIES:
   - YYText
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - AFNetworking
     - AMapFoundation
     - AMapLocation
@@ -103,21 +100,21 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  AMapFoundation: 20fce2a12cd152e1092afdd04379cdac21932185
+  AMapFoundation: bc2f6e077b9279942734ba55f9624222fcf42848
   AMapLocation: 55116a2c8956eab7550cbb56e989aa5cdcc424e3
   AMapSearch: 3dcbf85c403a2a0fe0eda5318caabc272b31f5e1
-  Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
+  Bugly: dbac48b55ad469a97cc4321045cd50df8f63d44f
   CKYPhotoBrowser: ed30c642324e9341ce97709aa7afb82c7d1fdf96
-  CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
+  CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
   fishhook: ea19933abfe8f2f52c55fd8b6e2718467d3ebc89
   JLRoutes: d755245322b94227662ea3e43492fdca94e05c5b
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
+  MJRefresh: 72a46ecaa2a0feaf48fc5198dff95f25f8bb27c6
   OpenSSL: 3c526c73a9f496f030056f1545bd8c677c1ae221
-  ReactiveObjC: 2a38ea15335de4119d8b17caf1db1484f61db902
+  ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
-  SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
+  SDWebImage: 7137d57385fb632129838c1e6ab9528a22c666cc
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
@@ -125,6 +122,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 80e5ac2c68f80b0c69878b66cb9375b0cd5f0d43
+PODFILE CHECKSUM: 2439f5464a5acb3673bc30bdaba63bb82520378a
 
-COCOAPODS: 1.7.3
+COCOAPODS: 1.8.4

@@ -48,10 +48,6 @@
 #pragma mark - setupUI
 - (void)configCollectionView {
     JLWaterfallFlowLayout *waterfallFlowLayout = [[JLWaterfallFlowLayout alloc] init];
-    waterfallFlowLayout.itemSpacing = 10;//间距
-    waterfallFlowLayout.lineSpacing = 10;//间距
-    waterfallFlowLayout.colCount = 3;//控制列数
-    waterfallFlowLayout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);//视图边界
     waterfallFlowLayout.delegate = self;
     self.collectionView.collectionViewLayout = waterfallFlowLayout;
     self.collectionView.dataSource = self;
@@ -122,5 +118,20 @@
     return CGSizeMake(self.view.frame.size.width - 20, 20);
 }
 
+- (NSUInteger)columnCountInWaterFallLayout:(JLWaterfallFlowLayout *)waterFallLayout{
+    return 3;
+}
+
+- (CGFloat)itemSpacingInWaterFallLayout:(JLWaterfallFlowLayout *)waterFallLayout{
+    return 10;
+}
+
+- (CGFloat)lineSpacingInWaterFallLayout:(JLWaterfallFlowLayout *)waterFallLayout{
+    return 10;
+}
+
+- (UIEdgeInsets)edgeInsetdInWaterFallLayout:(JLWaterfallFlowLayout *)waterFallLayout{
+    return UIEdgeInsetsMake(10, 10, 10, 10);
+}
 
 @end

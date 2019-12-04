@@ -382,6 +382,14 @@
 				<key>desc</key>
 				<string>ios常用设计模式</string>
 			</dict>
+			<dict>
+				<key>url</key>
+				<string>sumup://advance/designmode/login</string>
+				<key>class</key>
+				<string>LoginViewController</string>
+				<key>desc</key>
+				<string>登录</string>
+			</dict>
 		</array>
 		<key>Audio</key>
 		<array>

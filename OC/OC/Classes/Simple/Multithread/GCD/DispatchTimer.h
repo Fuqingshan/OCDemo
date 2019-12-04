@@ -7,11 +7,11 @@
 //
 /*
  
- @property (nonatomic, strong) DispatchTimer *timer;
+ @property (nonatomic, strong) LKDispatchTimer *timer;
 
  if (!self.timer) {
      @weakify(self);
-     self.timer = [DispatchTimer createDispatchTimer:1 eventHandler:^{
+     self.timer = [LKDispatchTimer createDispatchTimer:1 eventHandler:^{
          @strongify(self);
          if (self.count >= self.authModel.roomMaxWaitMintes * 60) {
              [self.timer cancle];

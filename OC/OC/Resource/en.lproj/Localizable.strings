@@ -23,6 +23,9 @@
 //进阶
 "进阶" = "Advance";
 "设计模式" = "DesignMode";
+"登录" = "Login";
+"电子邮件" = "email address";
+"登录密码" = "login password";
 
 //练习
 "练习" = "Practice";

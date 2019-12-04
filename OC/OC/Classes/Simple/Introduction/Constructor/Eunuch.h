@@ -38,6 +38,7 @@ __attribute__((objc_subclassing_restricted))
 
 @end
 
+//混淆类名,该类涉及到重要的内容时，注意反射时也对应的变了，用来判断类型已经不准确了
 __attribute__((objc_runtime_name("40ea43d7629d01e4b8d6289a132482d0dd5df4fa")))
 @interface Sark : NSObject
 @end

@@ -80,6 +80,10 @@
                             @"content":@"适配器模式"
                             ,@"sel":@"adapterSelector"
                             }
+                        ,@{
+                            @"content":@"MVVM"
+                            ,@"url":@"sumup://advance/designmode/login"
+                        }
                         ];
     
     [self.tableView reloadData];
@@ -208,6 +212,11 @@
     //对象适配器的例子
     id<AdapterProtocol> mode = [[AdapterMode alloc] init];
     [mode test];
+}
+
+#pragma mark - mvvm
+- (void)mvvmSelector{
+    
 }
 
 @end

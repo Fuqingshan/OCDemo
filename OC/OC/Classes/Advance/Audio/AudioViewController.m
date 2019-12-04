@@ -11,7 +11,6 @@
 
 #import "OCAudioPlayer.h"
 #import "CustomAudioPlayer.h"
-#import "CustomAudioRecord.h"
 
 @interface AudioViewController ()<UITableViewDelegate,UITableViewDataSource,AVAudioPlayerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -19,7 +18,7 @@
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) OCAudioPlayer *audioPlay;//背景音乐
 @property (nonatomic, strong) CustomAudioPlayer *customPlay;//自定义播放
-@property (nonatomic, strong) CustomAudioRecord *customRecord;///<自定义录制
+
 @end
 
 @implementation AudioViewController
@@ -66,14 +65,6 @@
                         ,@{
                             @"content":@"自定义播放器"
                             ,@"sel":@"customerPlay"
-                            }
-                        ,@{
-                            @"content":@"自定义录制10秒"
-                            ,@"sel":@"customRecordSelector"
-                            }
-                        ,@{
-                            @"content":@"自定义录制5秒"
-                            ,@"sel":@"customRecordSelector5"
                             }
                         ];
     
@@ -176,43 +167,11 @@
 
 #pragma mark - 自定义播放器
 - (void)customerPlay{
-    self.customPlay.currentTime = 0;
     [self.customPlay play];
 }
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
     NSLog(@"audioPlayerDidFinishPlaying");
-}
-
-#pragma mark - 自定义录制
-- (void)customRecordSelector{
-    @weakify(self);
-    self.customRecord.successBlock = ^(id model) {
-        @strongify(self);
-        NSLog(@"successBlock:\n%@",model);
-    };
-    
-    self.customRecord.failureBlock = ^(id model) {
-        NSLog(@"failureBlock:\n%@",model);
-    };
-    
-    self.customRecord.recordTime = 10.0;
-    [self.customRecord startRecordWithURL:[self recordURL]];
-}
-
-- (void)customRecordSelector5{
-    @weakify(self);
-    self.customRecord.successBlock = ^(id model) {
-        @strongify(self);
-        NSLog(@"successBlock:\n%@",model);
-    };
-
-    self.customRecord.failureBlock = ^(id model) {
-        NSLog(@"failureBlock:\n%@",model);
-    };
-
-    self.customRecord.recordTime = 5.0;
-    [self.customRecord startRecordWithURL:[self recordURL]];
 }
 
 #pragma mark - lazy load
@@ -226,29 +185,12 @@
 - (CustomAudioPlayer *)customPlay{
     if (!_customPlay) {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"live_busy" ofType:@"mp3"];
-        _customPlay = [[CustomAudioPlayer alloc] init];
-        [_customPlay playAudioWithURL:[NSURL URLWithString:path]];
+        _customPlay = [[CustomAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:path] error:nil];
         _customPlay.delegate = self;
+        _customPlay.currentTime = 0;
     }
     
     return _customPlay;
 }
-
-- (CustomAudioRecord *)customRecord{
-    if (!_customRecord) {
-        _customRecord = [[CustomAudioRecord alloc] initIfIgnoreMixer:YES supportPCM:NO];
-    }
-    
-    return _customRecord;
-}
-
-#pragma mark - lazy load
-- (NSURL *)recordURL{
-    NSString * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
-    NSString * filePath = [path stringByAppendingPathComponent:@"record1.caf"];
-    NSURL * url = [NSURL fileURLWithPath:filePath];
-    return url;
-}
-
 
 @end

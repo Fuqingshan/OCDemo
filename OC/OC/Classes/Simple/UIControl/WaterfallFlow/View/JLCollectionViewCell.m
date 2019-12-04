@@ -29,7 +29,9 @@
 - (void)fillCellWithModel:(id)model indexPath:(NSIndexPath *)indexPath{
     if ([model isKindOfClass:[WaterfallFlowDataUnitModel class]]) {
         WaterfallFlowDataUnitModel *dataModel = model;
-        [self.cellImg sd_setImageWithURL:[NSURL URLWithString:dataModel.img]];
+//        [self.cellImg sd_setImageWithURL:[NSURL URLWithString:dataModel.img]];
+        [self.cellImg sd_setImageWithURL:[NSURL URLWithString:@"https://ws3.sinaimg.cn/large/006tNbRwgy1fy3rvsnzsbj30dw099mx5.jpg"]];
+        
         self.priceLa.text = dataModel.price;
     }
 }

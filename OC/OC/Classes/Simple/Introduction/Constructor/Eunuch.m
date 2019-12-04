@@ -39,4 +39,8 @@
 
 @implementation Sark
 
+- (NSString *)description{
+    return [NSString stringWithFormat:@"%@",self];
+}
+
 @end

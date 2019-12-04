@@ -12,7 +12,7 @@ target 'OC' do
   pod 'Masonry'
   pod 'MBProgressHUD'
   pod 'SDWebImage'
-  pod 'MJRefresh'
+  pod 'MJRefresh','3.2.2'
   pod 'OpenSSL',:path => './LocalSpec/OpenSSL'
   pod 'CocoaLumberjack'
   pod 'fishhook'

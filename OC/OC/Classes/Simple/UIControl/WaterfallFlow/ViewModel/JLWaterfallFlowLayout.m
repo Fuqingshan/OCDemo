@@ -7,11 +7,12 @@
 //
 
 #import "JLWaterfallFlowLayout.h"
-//默认值
-static const CGFloat inset = 10;
-static const CGFloat colCount = 3;
 
 @interface JLWaterfallFlowLayout ()
+@property (nonatomic, assign) UIEdgeInsets sectionInset;///<item的内边距
+@property (nonatomic, assign) CGFloat lineSpacing;///<行间距
+@property (nonatomic, assign) CGFloat itemSpacing;///<列间距
+@property (nonatomic, assign) NSInteger colCount;///<列数
 @property (nonatomic, strong) NSMutableDictionary *colunMaxYDic;
 @end
 
@@ -23,13 +24,10 @@ static const CGFloat colCount = 3;
 -(void)prepareLayout
 {
     [super prepareLayout];
-    self.itemSpacing = inset;
-    self.lineSpacing = inset;
-    self.sectionInset = UIEdgeInsetsMake(inset, inset, inset, inset);
-    self.colCount = colCount;
-    self.colunMaxYDic = [[NSMutableDictionary alloc] init];
+   
 }
 
+/// 当边界发生改变时，是否应该刷新。
 -(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
 {
     return YES;
@@ -54,14 +52,14 @@ static const CGFloat colCount = 3;
 /*
  *  初始Layout外观
  *  @param rect 所有元素的布局属性
- *  @return 所有元素的布局
+ *  @return 方法返回rect中所有元素的布局属性，返回的是一个数组
  */
 -(NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect
 {
     for (NSInteger i = 0; i < self.colCount; i++) {
-        NSString *col = [NSString stringWithFormat:@"%ld", i];
-        self.colunMaxYDic[col] = @0;
-    }
+         NSString *col = [NSString stringWithFormat:@"%zd", i];
+         self.colunMaxYDic[col] = @0;
+     }
     
     NSMutableArray *attrsArray = [NSMutableArray array];
     
@@ -87,7 +85,7 @@ static const CGFloat colCount = 3;
 /*
  *  根据不同的indexPath,给出布局
  *  @param indexPath
- *  @return 布局
+ *  @return 方法返回对应的indexPath的位置的cell的布局属性
  */
 -(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -112,9 +110,7 @@ static const CGFloat colCount = 3;
     CGFloat space = 0;
     if (indexPath.item < self.colCount) {
         space = 0;
-    }
-    else
-    {
+    }else{
         space = self.lineSpacing;
     }
     CGFloat y = [self.colunMaxYDic[minCol] floatValue] + space;
@@ -129,6 +125,7 @@ static const CGFloat colCount = 3;
     return attrItem;
 }
 
+/// 方法返回对应indexPath的位置的追加视图的布局属性，如果没有就不用重载
 -(UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
 {
     __block NSString *maxCol = @"0";
@@ -179,7 +176,46 @@ static const CGFloat colCount = 3;
     }
 }
 
+#pragma mark - lazy load
 
+- (NSMutableDictionary *)colunMaxYDic{
+    if(!_colunMaxYDic){
+        _colunMaxYDic = [[NSMutableDictionary alloc] init];
+    }
+    return _colunMaxYDic;
+}
 
+- (NSInteger)colCount{
+    
+    if ([self.delegate respondsToSelector:@selector(columnCountInWaterFallLayout:)]) {
+        return [self.delegate columnCountInWaterFallLayout:self];
+    }else{
+        return 3;
+    }
+}
+
+- (CGFloat)itemSpacing{
+    if ([self.delegate respondsToSelector:@selector(itemSpacingInWaterFallLayout:)]) {
+        return [self.delegate itemSpacingInWaterFallLayout:self];
+    }else{
+        return 10;
+    }
+}
+
+- (CGFloat)lineSpacing{
+    if ([self.delegate respondsToSelector:@selector(lineSpacingInWaterFallLayout:)]) {
+        return [self.delegate lineSpacingInWaterFallLayout:self];
+    }else{
+        return 10;
+    }
+}
+
+- (UIEdgeInsets)sectionInset{
+    if ([self.delegate respondsToSelector:@selector(edgeInsetdInWaterFallLayout:)]) {
+        return [self.delegate edgeInsetdInWaterFallLayout:self];
+    }else{
+        return UIEdgeInsetsMake(10, 10, 10, 10);
+    }
+}
 
 @end

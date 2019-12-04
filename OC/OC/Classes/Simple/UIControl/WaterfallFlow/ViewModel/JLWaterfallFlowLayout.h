@@ -10,10 +10,6 @@
 
 @protocol JLWaterfallFlowLayoutDelegate;
 @interface JLWaterfallFlowLayout : UICollectionViewLayout
-@property (nonatomic, assign) UIEdgeInsets sectionInset;
-@property (nonatomic, assign) CGFloat lineSpacing;
-@property (nonatomic, assign) CGFloat itemSpacing;
-@property (nonatomic, assign) CGFloat colCount;
 @property (nonatomic, weak) id<JLWaterfallFlowLayoutDelegate>delegate;
 @end
 
@@ -24,8 +20,29 @@
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(JLWaterfallFlowLayout*)collectionViewLayout heightForWidth:(CGFloat)width atIndexPath:(NSIndexPath*)indexPath;
 
 @optional
+/**
+ * 有多少列
+ */
+- (NSUInteger)columnCountInWaterFallLayout:(JLWaterfallFlowLayout *)waterFallLayout ;
+
+/**
+ * item之间的间距
+ */
+- (CGFloat)itemSpacingInWaterFallLayout:(JLWaterfallFlowLayout *)waterFallLayout;
+
+/**
+ * 每行之间的间距
+ */
+- (CGFloat)lineSpacingInWaterFallLayout:(JLWaterfallFlowLayout *)waterFallLayout;
+
+/**
+ * 每个item的内边距
+ */
+- (UIEdgeInsets)edgeInsetdInWaterFallLayout:(JLWaterfallFlowLayout *)waterFallLayout;
+
 //section header
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(JLWaterfallFlowLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section;
+
 //section footer
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(JLWaterfallFlowLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section;
 

@@ -149,7 +149,7 @@
                             }
                         ,@{
                             @"content":@"高斯模糊提交按钮"
-                            ,@"sel":@"yooliSubmitBtnSelector"
+                            ,@"sel":@"gaosiSubmitBtnSelector"
                             }
                         ,@{
                             @"content":@"截取图片"
@@ -895,7 +895,7 @@
 }
 
 #pragma mark - 高斯模糊的提交按钮
-- (void)yooliSubmitBtnSelector{
+- (void)gaosiSubmitBtnSelector{
     if (self.submitBtn) {
         [self.submitBtn removeFromSuperview];
         self.submitBtn = nil;

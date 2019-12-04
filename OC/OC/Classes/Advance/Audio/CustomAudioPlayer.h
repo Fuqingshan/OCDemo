@@ -21,7 +21,7 @@
 @property (nonatomic, assign, getter=isPlaying) BOOL playing;
 @property (nonatomic, weak) id<AVAudioPlayerDelegate> delegate;
 
-- (void)playAudioWithURL:(NSURL *)url;
+- (instancetype)initWithContentsOfURL:(NSURL *)url error:(NSError **)outError;
 - (void)play;
 - (void)pause;
 - (void)stop;

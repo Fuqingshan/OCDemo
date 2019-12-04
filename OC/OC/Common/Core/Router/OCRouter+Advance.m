@@ -39,6 +39,8 @@
     //DesignMode
     else if([[url path] isEqualToString:@"/designmode"]) {
         [self showViewControllerByIdentifier:@"DesignModeVC" storyboardName:@"DesignMode"];
+    }else if([[url path] isEqualToString:@"/designmode/login"]) {
+        [self showViewControllerByIdentifier:@"LoginVC" storyboardName:@"Login"];
     }
     //Audio
     else if([[url path] isEqualToString:@"/audio"]) {

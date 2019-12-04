@@ -8,6 +8,7 @@
 
 #import "GCDViewController.h"
 #import <objc/message.h>
+#import <SDWebImage/SDWebImage.h>
 
 typedef NS_ENUM(NSInteger,SourceType) {
     SourceTypeUnusable = 0,///<无法使用
@@ -911,7 +912,7 @@ typedef NS_ENUM(NSInteger,SourceType) {
         
         NSURL *url1 = [NSURL URLWithString:@"https://ws3.sinaimg.cn/large/006tNc79gy1fopahdxlrqj31kw0wuag8.jpg"];
         @weakify(self);
-        [self.downloadImg sd_setImageWithURL:url1 placeholderImage:nil options:SDWebImageProgressiveDownload progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+        [self.downloadImg sd_setImageWithURL:url1 placeholderImage:nil options:SDWebImageProgressiveLoad progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
             @strongify(self);
             NSLog(@"%f",receivedSize/(CGFloat)expectedSize);
             [self changeAlpha:receivedSize/(CGFloat)expectedSize];
@@ -933,7 +934,7 @@ typedef NS_ENUM(NSInteger,SourceType) {
     NSURL *url2 = [NSURL URLWithString:@"https://ws1.sinaimg.cn/large/006tNc79gy1fopai2lwrlj31kw0zk7wl.jpg"];
     
     dispatch_group_enter(group);
-    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:url1 options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+    [SDWebImageDownloader.sharedDownloader downloadImageWithURL:url1 options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
         NSLog(@"%f",receivedSize/(CGFloat)expectedSize);
     } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
         [[SDImageCache sharedImageCache] storeImageDataToDisk:data forKey:url1.absoluteString];
@@ -941,7 +942,7 @@ typedef NS_ENUM(NSInteger,SourceType) {
     }];
     
     dispatch_group_enter(group);
-    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:url2 options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+    [SDWebImageDownloader.sharedDownloader downloadImageWithURL:url2 options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
         NSLog(@"%f",receivedSize/(CGFloat)expectedSize);
     } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
         [[SDImageCache sharedImageCache] storeImageDataToDisk:data forKey:url1.absoluteString];
@@ -956,13 +957,12 @@ typedef NS_ENUM(NSInteger,SourceType) {
 
 - (void)deleteCache{
     NSURL * url1 = [NSURL URLWithString:@"https://ws3.sinaimg.cn/large/006tNc79gy1fopahdxlrqj31kw0wuag8.jpg"];
-
-    [[SDImageCache sharedImageCache] diskImageExistsWithKey:url1.absoluteString completion:^(BOOL isInCache) {
+    [SDImageCache.sharedImageCache diskImageExistsWithKey:url1.absoluteString completion:^(BOOL isInCache) {
         NSLog(@"url1的图片存在");
     }];
     
     NSLog(@"delete cache");
-    [[SDImageCache sharedImageCache] clearDiskOnCompletion:nil];
+    [SDImageCache.sharedImageCache clearDiskOnCompletion:nil];
 }
 
 - (void)changeAlpha:(CGFloat)alpha{

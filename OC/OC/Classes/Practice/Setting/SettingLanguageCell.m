@@ -49,11 +49,11 @@
 #pragma mark - Event
 - (IBAction)switchEvent:(id)sender {
     if (self.switchBtn.on) {
-        [[LanguageManager shareInstance] setUserlanguage:LanguageTypeEN];
-    }else{
         [[LanguageManager shareInstance] setUserlanguage:LanguageTypeCH];
+    }else{
+        [[LanguageManager shareInstance] setUserlanguage:LanguageTypeEN];
     }
-    self.switchBtn.on = !self.switchBtn.on;
+//    self.switchBtn.on = !self.switchBtn.on;
     self.contentLabel.text = LocalizedString(@"中文");
 }
 
