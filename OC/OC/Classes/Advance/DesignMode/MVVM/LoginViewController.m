@@ -80,7 +80,7 @@
     
     [[[[self.viewModel.loginCommand executionSignals] switchToLatest] takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id  _Nullable x) {
         @strongify(self);
-        [MBProgressHUD lk_dismiss];
+        [MBProgressHUD hideHUDForView:self.view animated:NO];
         NSLog(@"success:%@",x);
         [self.navigationController popViewControllerAnimated:YES];
     }];

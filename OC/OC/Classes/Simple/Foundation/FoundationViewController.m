@@ -108,6 +108,10 @@
                             ,@"sel":@"NSCacheSelector"
                             }
                         ,@{
+                            @"content":@"NSURLCache"
+                            ,@"sel":@"NSURLCacheSelector"
+                            }
+                        ,@{
                             @"content":@"NSXMLParser"
                             ,@"sel":@"NSXMLParserSelector"
                             }
@@ -368,6 +372,35 @@
             NSLog(@"%@",[self.cache objectForKey:[NSString stringWithFormat:@"h%d",i]]);
         }
     }];
+}
+
+#pragma mark - request cache
+- (void)NSURLCacheSelector{
+    //10M
+    [[NSURLCache sharedURLCache] setDiskCapacity:10 * 1024 * 1024];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://ws3.sinaimg.cn/large/006tNbRwgy1fy3rvsnzsbj30dw099mx5.jpg"] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:10];
+    NSCachedURLResponse *cache = [[NSURLCache sharedURLCache] cachedResponseForRequest:request];
+    if (cache.data) {
+        UIImage *img = [UIImage imageWithData:cache.data];
+        NSLog(@"cache:%@",img);
+    }else{
+        [MBProgressHUD lk_showRequestHUDWithMessage:@"获取中..." inView:self.view];
+        @weakify(self);
+        NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            @strongify(self);
+                   dispatch_async(dispatch_get_main_queue(), ^{
+                       [MBProgressHUD hideHUDForView:self.view animated:NO];
+                       if (error) {
+                           NSLog(@"error:%@",error);
+                           return ;
+                       }
+                       UIImage *img = [UIImage imageWithData:data];
+                       NSLog(@"%zd request:%@",((NSHTTPURLResponse *)response).statusCode,img);
+                   });
+        }];
+        
+        [task resume];
+    }
 }
 
 #pragma mark - XML 解析
