@@ -67,7 +67,6 @@
 
 /**
  dismiss all, 这个方法会dismiss KeyWindow 上全部的MBProgressHUD
- 注意： inView:(UIView *)view方法加的非KeyWIndow的上HUD需要用下面的方法单独移除，因为hideAnimated只查找了一层subviews
  
  要dismiss 某一个视图上的HUD用：
  + (instancetype)showHUDAddedTo:(UIView *)view animated:(BOOL)animated;

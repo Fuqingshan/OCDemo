@@ -39,19 +39,19 @@
         return NO;
     }
     
-    //查找对应模块是否在首页
+    //查找对应模块是否在简单
     for (OCRouterModel *model in self.plistModel.Simple.all) {
         if ([valideURL isEqualToString:model.url]) {
             return YES;
         }
     }
-    //查找对应模块是否在商城
+    //查找对应模块是否在高级
     for (OCRouterModel *model in self.plistModel.Advance.all) {
         if ([valideURL isEqualToString:model.url]) {
             return YES;
         }
     }
-    //查找对应模块是否在个人中心
+    //查找对应模块是否在联系
     for (OCRouterModel *model in self.plistModel.Practice.all) {
         if ([valideURL isEqualToString:model.url]) {
             return YES;

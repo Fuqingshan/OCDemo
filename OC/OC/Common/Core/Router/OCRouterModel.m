@@ -112,6 +112,9 @@
         for (OCRouterModel *model in self.Video) {
             [models addObject:model];
         }
+        for (OCRouterModel *model in self.CoreText) {
+            [models addObject:model];
+        }
         
         _all = [models copy];
     }

@@ -412,6 +412,25 @@
 				<key>desc</key>
 				<string>视频</string>
 			</dict>
+			<dict>
+				<key>url</key>
+				<string>sumup://advance/video/avfoundation</string>
+				<key>class</key>
+				<string>AVFoundationViewController</string>
+				<key>desc</key>
+				<string>AVFoundation</string>
+			</dict>
+		</array>
+		<key>CoreText</key>
+		<array>
+			<dict>
+				<key>url</key>
+				<string>sumup://advance/coretext</string>
+				<key>class</key>
+				<string>CoreTextViewController</string>
+				<key>desc</key>
+				<string>CoreText</string>
+			</dict>
 		</array>
 	</dict>
 	<key>Practice</key>

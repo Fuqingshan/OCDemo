@@ -43,6 +43,7 @@
 @property (nonatomic, strong) NSArray<OCRouterModel> *DesignMode;
 @property (nonatomic, strong) NSArray<OCRouterModel> *Audio;
 @property (nonatomic, strong) NSArray<OCRouterModel> *Video;
+@property (nonatomic, strong) NSArray<OCRouterModel> *CoreText;
 
 @property (nonatomic, strong) NSArray<OCRouterModel> *all;
 

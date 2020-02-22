@@ -69,6 +69,10 @@
                             @"content":@"Video"
                             ,@"url":@"sumup://advance/video"
                             }
+                        ,@{
+                            @"content":@"CoreText"
+                            ,@"url":@"sumup://advance/coretext"
+                            }
                         ];
     [self.tableView reloadData];
 }

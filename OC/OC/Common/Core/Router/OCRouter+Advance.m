@@ -50,6 +50,13 @@
     else if([[url path] isEqualToString:@"/video"]) {
         [self showViewControllerByIdentifier:@"VideoVC" storyboardName:@"Video"];
     }
+    else if([[url path] isEqualToString:@"/video/avfoundation"]) {
+        [self showViewControllerByIdentifier:@"AVFoundationVC" storyboardName:@"Video"];
+    }
+    //CoreText
+    else if([[url path] isEqualToString:@"/coretext"]) {
+        [self showViewControllerByIdentifier:@"CoreTextVC" storyboardName:@"CoreText"];
+    }
     else{
         return NO;
     }

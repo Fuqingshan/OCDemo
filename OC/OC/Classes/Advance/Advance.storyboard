@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4Uj-Mq-qy3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4Uj-Mq-qy3">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -42,6 +42,7 @@
                         <segue destination="hO4-q2-QzD" kind="show" identifier="DesignMode" id="XAM-MQ-aVK"/>
                         <segue destination="CFp-7J-SRI" kind="show" identifier="Video" id="kOx-AM-yyP"/>
                         <segue destination="Ace-hK-iYs" kind="show" identifier="Audio" id="4I1-hW-moy"/>
+                        <segue destination="KWO-ON-LsL" kind="show" id="1RQ-tb-7Sj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="heu-sx-1Ie" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -96,7 +97,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="VideoVC" storyboardName="Video" referencedIdentifier="VideoVC" id="CFp-7J-SRI" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sub-du-giq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1488" y="258"/>
+            <point key="canvasLocation" x="1488" y="212"/>
         </scene>
         <!--AudioVC-->
         <scene sceneID="j2M-zc-M4s">
@@ -104,7 +105,17 @@
                 <viewControllerPlaceholder storyboardIdentifier="AudioVC" storyboardName="Audio" referencedIdentifier="AudioVC" id="Ace-hK-iYs" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ku-1N-8vB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1548" y="472"/>
+            <point key="canvasLocation" x="1488" y="257"/>
+        </scene>
+        <!--CoreTextVC-->
+        <scene sceneID="f0r-xf-3fo">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="CoreTextVC" storyboardName="CoreText" referencedIdentifier="CoreTextVC" id="KWO-ON-LsL" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Gfp-3c-ZEm"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mBE-G0-Qps" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1503" y="311"/>
         </scene>
     </scenes>
 </document>
