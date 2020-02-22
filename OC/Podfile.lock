@@ -14,7 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - AMapFoundation (1.6.0)
+  - AMapFoundation (1.6.1)
   - AMapLocation (2.6.0):
     - AMapFoundation (~> 1.4)
   - AMapSearch (6.1.1):
@@ -33,9 +33,9 @@ PODS:
   - OpenSSL (1.0.210)
   - ReactiveObjC (3.1.1)
   - SAMKeychain (1.5.3)
-  - SDWebImage (5.3.1):
-    - SDWebImage/Core (= 5.3.1)
-  - SDWebImage/Core (5.3.1)
+  - SDWebImage (5.4.0):
+    - SDWebImage/Core (= 5.4.0)
+  - SDWebImage/Core (5.4.0)
   - YYCache (1.0.4)
   - YYCategories (1.0.4):
     - YYCategories/no-arc (= 1.0.4)
@@ -71,7 +71,7 @@ DEPENDENCIES:
   - YYText
 
 SPEC REPOS:
-  trunk:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - AFNetworking
     - AMapFoundation
     - AMapLocation
@@ -100,7 +100,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  AMapFoundation: bc2f6e077b9279942734ba55f9624222fcf42848
+  AMapFoundation: df9a0ceec845ae2b5f57bdf9884666f2ed73bf5b
   AMapLocation: 55116a2c8956eab7550cbb56e989aa5cdcc424e3
   AMapSearch: 3dcbf85c403a2a0fe0eda5318caabc272b31f5e1
   Bugly: dbac48b55ad469a97cc4321045cd50df8f63d44f
@@ -114,7 +114,7 @@ SPEC CHECKSUMS:
   OpenSSL: 3c526c73a9f496f030056f1545bd8c677c1ae221
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
-  SDWebImage: 7137d57385fb632129838c1e6ab9528a22c666cc
+  SDWebImage: 5bf6aec6481ae2a062bdc59f9d6c1d1e552090e0
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
@@ -122,6 +122,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 2439f5464a5acb3673bc30bdaba63bb82520378a
+PODFILE CHECKSUM: 4919de66a915d427e06bab44b19bdee919f60cf8
 
 COCOAPODS: 1.8.4
