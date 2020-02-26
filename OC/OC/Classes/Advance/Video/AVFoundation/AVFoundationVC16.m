@@ -6,6 +6,7 @@
 //  Copyright © 2020 yier. All rights reserved.
 //
 //播放、录制以及混合视频
+//获取视频某一秒的图片
 #import "AVFoundationVC16.h"
 #import <AVKit/AVKit.h>
 #import <MobileCoreServices/MobileCoreServices.h>
@@ -45,7 +46,18 @@ typedef NS_ENUM(NSInteger,EventType){
 }
 
 - (void)initData{
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"AVFoundation_testMOV" withExtension:@"mov"];
+    UIImage *img = [self getImageWIthVideoURL:url atTime:2];
+    NSLog(@"获取第二秒的图片:%@",img);
     
+    UIImageView *imgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 300, 600)];
+    imgV.image = img;
+    imgV.contentMode = UIViewContentModeScaleAspectFit;
+    [self.view addSubview:imgV];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [imgV removeFromSuperview];
+    });
 }
 
 - (void)setupUI{
@@ -141,6 +153,13 @@ typedef NS_ENUM(NSInteger,EventType){
     
     NSError *error;
     [firstTrack insertTimeRange:firstVideoAssetTrack.timeRange ofTrack:firstVideoAssetTrack atTime:offsetTime error:&error];
+    /*
+    // 这块是裁剪,rangtime .前面的是开始时间,后面是裁剪多长 (我这裁剪的是从第二秒开始裁剪，裁剪2.55秒时长.)
+    [firstTrack insertTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(2.0f, 30), CMTimeMakeWithSeconds(2.55f, 30))
+                                       ofTrack:firstVideoAssetTrack
+                                        atTime:kCMTimeZero
+                                         error:&error];
+     */
     if (error) {
         NSLog(@"Failed to load first track");
         return;
@@ -168,21 +187,38 @@ typedef NS_ENUM(NSInteger,EventType){
        NSLog(@"Failed to load audio track");
        return;
    }
+    /**
+     AVMutableVideoComposition: 用来生成video的组合指令，包含多段instruction。可以决定最终视频的尺寸，裁剪需要在这里进行 视频效果集合(转场、水印等)
+     AVMutableVideoCompositionInstruction: 一个指令，决定一个timeRange内每个轨道的状态，包含多个layerInstruction
+     AVMutableVideoCompositionLayerInstruction: 视频显示layer层效果 需要添加到AVMutableVideoCompositionInstruction
+     */
     
     //3、AVMutableVideoCompositionInstruction
-    AVMutableVideoCompositionLayerInstruction *firstInstruction = [self videoCompositionInstruction:firstTrack asset:self.firstAsset];
-    [firstInstruction setOpacity:0 atTime:firstVideoAssetTrack.timeRange.duration];
-    AVMutableVideoCompositionLayerInstruction *secondInstruction = [self videoCompositionInstruction:secondTrack asset:self.secondAsset];
+    AVMutableVideoComposition *mainComposition = [AVMutableVideoComposition videoCompositionWithPropertiesOfAsset:mixComposition];
     
-    AVMutableVideoCompositionInstruction *mainInstruction = [[AVMutableVideoCompositionInstruction alloc] init];
+    AVMutableVideoCompositionInstruction *mainInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
     mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeAdd(offsetTime, secondAssetTrack.timeRange.duration));
-    mainInstruction.layerInstructions = @[firstInstruction,secondInstruction];
-    
-    AVMutableVideoComposition *mainComposition = [[AVMutableVideoComposition alloc] init];
-    mainComposition.instructions = @[mainInstruction];
     mainComposition.frameDuration = CMTimeMake(1, 30);
     CGSize size = [UIScreen mainScreen].bounds.size;
     mainComposition.renderSize = CGSizeMake(size.width, size.height);
+    
+    AVMutableVideoCompositionLayerInstruction *firstInstruction = [self videoCompositionInstruction:firstTrack asset:self.firstAsset];
+    AVMutableVideoCompositionLayerInstruction *secondInstruction = [self videoCompositionInstruction:secondTrack asset:self.secondAsset];
+    //转场动画
+    //第一个视频播放完成时设置为透明
+    CMTimeRange transformDuration = CMTimeRangeMake(firstVideoAssetTrack.timeRange.duration, CMTimeMake(2, 1));
+    [firstInstruction setOpacityRampFromStartOpacity:1 toEndOpacity:0 timeRange:transformDuration];
+    [secondInstruction setOpacityRampFromStartOpacity:0 toEndOpacity:1 timeRange:transformDuration];
+    
+    //这两个视频本身尺寸有差距，做动画看着很怪异
+//    CGFloat videoWidth = mainComposition.renderSize.width;
+//    [firstInstruction setTransformRampFromStartTransform:CGAffineTransformIdentity toEndTransform:CGAffineTransformMakeTranslation(-videoWidth, 0) timeRange:transformDuration];
+//    [secondInstruction setTransformRampFromStartTransform:CGAffineTransformMakeTranslation(videoWidth, 0) toEndTransform:CGAffineTransformIdentity timeRange:transformDuration];
+    
+    mainInstruction.layerInstructions = @[firstInstruction,secondInstruction];
+    
+    mainComposition.instructions = @[mainInstruction];
+
     
     //4、get path
     
@@ -531,6 +567,53 @@ typedef NS_ENUM(NSInteger,EventType){
 {
     NSLog(@"%s===%@===%@",__func__,layerInstruction,asset);
     return YES;
+}
+
+#pragma mark - 获取视频某一帧的图片
+- (UIImage *)getImageWIthVideoURL:(NSURL *)videoURL atTime:(NSTimeInterval)second{
+    
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
+    NSParameterAssert(asset);
+    
+    AVAssetImageGenerator *assetImageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    assetImageGenerator.appliesPreferredTrackTransform = YES;
+    assetImageGenerator.apertureMode = AVAssetImageGeneratorApertureModeEncodedPixels;
+    //设置容忍度，如果不设置，那么在获取某一帧的时候，系统会在某一个范围内查找，如果有缓存或者索引内的关键帧，它会优先返回，优化性能。
+    assetImageGenerator.requestedTimeToleranceAfter = kCMTimeZero;
+    assetImageGenerator.requestedTimeToleranceBefore = kCMTimeZero;
+    
+    //获取视频帧率
+    CGFloat fps =  [asset tracksWithMediaType:AVMediaTypeVideo].firstObject.nominalFrameRate;
+    CMTime resultTime = CMTimeMakeWithSeconds(second, fps);
+    
+    NSError *error;
+    CMTime actualTime;
+    CGImageRef image = [assetImageGenerator copyCGImageAtTime:resultTime actualTime:&actualTime error:&error];
+    
+    NSLog(@"这是真实的时间:");
+    CMTimeShow(actualTime);
+    
+    if (!image){
+        NSLog(@"thumbnailImageGenerationError %@", error);
+        return nil;
+    }
+    
+    UIImage *thumbnailImage = [UIImage imageWithCGImage:image];
+    CFRelease(image);
+    
+    return thumbnailImage;
+}
+
+//获取视频总时长
+- (NSInteger )getVideoAllTimeWith:(NSURL *)url
+{
+    NSDictionary *opts = @{
+        AVURLAssetPreferPreciseDurationAndTimingKey:@(NO)
+    };
+    AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:url options:opts];  // 初始化视频媒体文件
+    NSInteger second = floor(urlAsset.duration.value / urlAsset.duration.timescale); // 获取视频总时长,单位秒
+
+    return second;
 }
 
 @end
