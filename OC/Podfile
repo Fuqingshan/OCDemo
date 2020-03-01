@@ -16,7 +16,7 @@ target 'OC' do
   pod 'SDWebImage'
   pod 'MJRefresh','3.2.2'
   pod 'OpenSSL',:path => './LocalSpec/OpenSSL'
-  pod 'CocoaLumberjack'
+  pod 'CocoaLumberjack','3.6.0'
   pod 'fishhook'
   pod 'Bugly'
   pod 'SAMKeychain'
@@ -31,4 +31,8 @@ target 'OC' do
   pod 'AMapLocation', '2.6.0'
   pod 'AMapSearch', '6.1.1'
 
+end
+
+target 'OCTests' do
+  pod 'OCMock'
 end
