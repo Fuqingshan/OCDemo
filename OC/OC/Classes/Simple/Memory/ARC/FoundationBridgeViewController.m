@@ -48,7 +48,7 @@
                             }
                         ];
     [self.tableView reloadData];
-    
+    [self NSSet];
     /*忽略performSelectory警告
     
      #pragma clang diagnostic push

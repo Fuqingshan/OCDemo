@@ -25,7 +25,7 @@
 /**
  load方法会在 initialize方法的调用操作之前、类被加载之后立即被调用。实际上,对于
  以静态方式链接的类(可执行程序的组成部分,调用load方法的操作在调用main()函数
- 的操作之前执行。如果10ad方法是由可选包裹中的类实现的,那么当该包以动态方式被加
+ 的操作之前执行。如果load方法是由可选包裹中的类实现的,那么当该包以动态方式被加
  载时load方法就会运行。应非常小心地使用load方法,因为在启动应用过程中它的次序非
  常靠前。尤其是,当该方法被调用时,程序的自动释放池(通常)还不存在,其他类可能还没有加载等。
  
@@ -508,7 +508,7 @@
 #pragma mark - 锁
 
 /**
- 使用NLok、 NSDistributedLock、 NSConditionlock和 NSRecursivelock类可以为同步执行的
+ 使用NSLock、 NSDistributedLock、 NSConditionlock和 NSRecursivelock类可以为同步执行的
  代码创建锁。 NSLock类为并行编程方式实现了一个基本的互斥锁。该类遵守 NSLocking协议,因此
  实现了用于获取和释放锁的1ock方法和 unlock方法。
  NSDistributedlock类定义了可由多台主机上的多个应用程序使用的锁,该锁可以控制对共享
