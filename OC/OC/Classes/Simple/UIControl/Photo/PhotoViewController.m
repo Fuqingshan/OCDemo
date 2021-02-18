@@ -11,6 +11,7 @@
 #import <objc/message.h>
 
 @import Photos;
+@import PhotosUI;
 
 @interface PhotoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -51,6 +52,10 @@
                         ,@{
                             @"content":@"photoKit使用"
                             ,@"sel":@"PhotoKitSelector"
+                            }
+                        ,@{
+                            @"content":@"手动重新选择"
+                            ,@"sel":@"PhotoKitChooseAgainSelector"
                             }
                         ].mutableCopy;
     [self.tableView reloadData];
@@ -148,6 +153,12 @@
                 });
             }
                 break;
+            case PHAuthorizationStatusLimited:
+                /*iOS14 中当用户选择“PHAuthorizationStatusLimited” 时，如果未进行适配，有可能会在每次触发相册功能时都进行弹窗询问用户是否需要修改照片权限。
+                对于这种情况可通过在 Info.plist 中设置“PHPhotoLibraryPreventAutomaticLimitedAccessAlert”的值为 YES 来阻止该弹窗反复弹出，
+                 并且可通过下面这个 API 来主动控制何时弹出PHPickerViewController 进行照片选择 [[PHPhotoLibrary sharedPhotoLibrary]presentLimitedLibraryPickerFromViewController:self];
+                 */
+                break;
         }
     }];
 }
@@ -215,6 +226,56 @@
         [KYPhotoBrowserController showPhotoBrowserWithImages:arr.copy currentImageIndex:0 delegate:nil];
     });
 
+}
+
+- (void)PhotoKitChooseAgainSelector{
+    @weakify(self);
+    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+        @strongify(self);
+        /*
+         当status等于PHAuthorizationStatusAuthorized表示用户已经授予了权限。
+         该方法在应用初次询问时，会直接弹出系统的权限询问，
+         用户操作后才会回调，所以不存在PHAuthorizationStatusNotDetermined
+         （用户还未对权限进行选择）的状态。
+         PHAuthorizationStatusRestricted,这种是当前用户无权限访问，比如开启了父母控制模式，登录的用户是孩子
+         */
+        switch (status) {
+            case PHAuthorizationStatusNotDetermined:
+                NSLog(@"权限弹窗出来了，用户还未决定，这儿不会出现");
+                break;
+            case PHAuthorizationStatusRestricted:
+            case PHAuthorizationStatusDenied:
+            {
+                NSLog(@"访问被拒 --- status：%zd   thread：%@",status,[NSThread currentThread]);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self showDeniedAlert];
+                });
+            }
+                break;
+            case PHAuthorizationStatusAuthorized:
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self showChooseAgainPhoto];
+                });
+            }
+                break;
+            case PHAuthorizationStatusLimited:
+                /*iOS14 中当用户选择“PHAuthorizationStatusLimited” 时，如果未进行适配，有可能会在每次触发相册功能时都进行弹窗询问用户是否需要修改照片权限。
+                对于这种情况可通过在 Info.plist 中设置“PHPhotoLibraryPreventAutomaticLimitedAccessAlert”的值为 YES 来阻止该弹窗反复弹出，
+                 并且可通过下面这个 API 来主动控制何时弹出PHPickerViewController 进行照片选择 [[PHPhotoLibrary sharedPhotoLibrary]presentLimitedLibraryPickerFromViewController:self]; 需要导入"<PhotosUI/PHPhotoLibrary+PhotosUISupport.h>";
+                 */
+                break;
+        }
+    }];
+}
+
+- (void)showChooseAgainPhoto{
+    if (@available(iOS 14, *)) {
+        [[PHPhotoLibrary sharedPhotoLibrary] presentLimitedLibraryPickerFromViewController:self];
+    } else {
+        // Fallback on earlier versions
+    }
+    
 }
 
 @end

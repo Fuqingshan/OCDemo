@@ -141,6 +141,7 @@
 		8149A9B5240BE0E400631664 /* TwitterPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 8149A9AE240BE0E400631664 /* TwitterPerson.m */; };
 		8149A9B6240BE0E400631664 /* TwitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8149A9B0240BE0E400631664 /* TwitterViewController.m */; };
 		8149A9B8240BE11500631664 /* TwitterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8149A9B7240BE11500631664 /* TwitterTests.m */; };
+		814C0FC1258F438B0013AD98 /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 814C0FC0258F438A0013AD98 /* PhotosUI.framework */; };
 		81580B772394B32F005A25D1 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81580B752394B32F005A25D1 /* LoginViewController.m */; };
 		81580B7C2394BC36005A25D1 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81580B7B2394BC36005A25D1 /* Login.storyboard */; };
 		81580B7F2394EEC1005A25D1 /* LoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 81580B7E2394EEC1005A25D1 /* LoginViewModel.m */; };
@@ -816,6 +817,7 @@
 		8149A9B0240BE0E400631664 /* TwitterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterViewController.m; sourceTree = "<group>"; };
 		8149A9B1240BE0E400631664 /* Twitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Twitter.h; sourceTree = "<group>"; };
 		8149A9B7240BE11500631664 /* TwitterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterTests.m; sourceTree = "<group>"; };
+		814C0FC0258F438A0013AD98 /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
 		81580B742394B32F005A25D1 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		81580B752394B32F005A25D1 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		81580B7B2394BC36005A25D1 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Login.storyboard; path = OC/Classes/Advance/DesignMode/Login.storyboard; sourceTree = SOURCE_ROOT; };
@@ -1526,6 +1528,7 @@
 			files = (
 				28D91D224AC50DA2FFCFC9ED /* libPods-OC.a in Frameworks */,
 				02E4BCB82259C72B0056686C /* CrashReporter.framework in Frameworks */,
+				814C0FC1258F438B0013AD98 /* PhotosUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3589,6 +3592,7 @@
 		F2AA6FEBCB8165D161AA93CC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				814C0FC0258F438A0013AD98 /* PhotosUI.framework */,
 				8EB38C304318F6B93BF76C46 /* libPods-OC.a */,
 				7E85EC8CAC63056C62D0C86C /* libPods-OCTests.a */,
 			);

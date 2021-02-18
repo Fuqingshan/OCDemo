@@ -3,12 +3,13 @@
 //  App
 //
 //  Created by yier on 2018/10/18.
-//  Copyright © 2018 yier. All rights reserved.
+//  Copyright © 2018 yooli. All rights reserved.
 //
 
 #import "LKPermissionCheck.h"
-#import <AddressBook/AddressBook.h>
 #import <Contacts/Contacts.h>
+#import <CoreLocation/CLLocationManager.h>
+#import <AVFoundation/AVFoundation.h>
 
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
@@ -16,16 +17,66 @@
 
 @implementation LKPermissionCheck
 
+#pragma mark - 是否有定位权限
++ (LKAuthorizationStatus)hasLocationAuthorization{
+    //设备是否支持
+    if (![CLLocationManager locationServicesEnabled]) {
+        return LKAuthorizationStatusNotDetermined;
+    }
+    
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    switch (status) {
+        case kCLAuthorizationStatusNotDetermined:
+            return LKAuthorizationStatusNotDetermined;
+        case kCLAuthorizationStatusRestricted:
+        case kCLAuthorizationStatusDenied:
+            return LKAuthorizationStatusShowGuide;
+        case kCLAuthorizationStatusAuthorizedAlways:
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+            return LKAuthorizationStatusAuthorized;
+    }
+}
+
+
 #pragma mark - 是否有通讯录权限
-+ (BOOL)hasABAuthorization{
++ (LKAuthorizationStatus)hasABAuthorization{
     CNAuthorizationStatus status = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
     switch (status) {
         case CNAuthorizationStatusNotDetermined:
+            return LKAuthorizationStatusNotDetermined;
         case CNAuthorizationStatusRestricted:
         case CNAuthorizationStatusDenied:
-            return NO;
+            return LKAuthorizationStatusShowGuide;
         case CNAuthorizationStatusAuthorized:
-            return YES;
+            return LKAuthorizationStatusAuthorized;
+    }
+}
+
+#pragma mark - 是否有视频权限
++ (LKAuthorizationStatus)hasVideoAuthorization{
+    AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    switch (status) {
+        case AVAuthorizationStatusNotDetermined:
+            return LKAuthorizationStatusNotDetermined;
+        case AVAuthorizationStatusRestricted:
+        case AVAuthorizationStatusDenied:
+            return LKAuthorizationStatusShowGuide;
+        case AVAuthorizationStatusAuthorized:
+            return LKAuthorizationStatusAuthorized;
+    }
+}
+
+#pragma mark - 是否有音频权限
++ (LKAuthorizationStatus)hasAudioAuthorization{
+    AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+    switch (status) {
+        case AVAuthorizationStatusNotDetermined:
+            return LKAuthorizationStatusNotDetermined;
+        case AVAuthorizationStatusRestricted:
+        case AVAuthorizationStatusDenied:
+            return LKAuthorizationStatusShowGuide;
+        case AVAuthorizationStatusAuthorized:
+            return LKAuthorizationStatusAuthorized;
     }
 }
 
@@ -49,6 +100,31 @@
         BOOL auth = [UIApplication sharedApplication].isRegisteredForRemoteNotifications;
         !completeBlock?:completeBlock(auth);
     }
+}
+
+#pragma mark - 请求视频权限
++ (void)requestVideoAuthorization:(dispatch_block_t)successBlock failureBlock:(dispatch_block_t)failureBlock{
+    [LKPermissionCheck requestMediaAuthorization:AVMediaTypeVideo successBlock:successBlock failureBlock:failureBlock];
+}
+
+#pragma mark - 请求音频权限
++ (void)requestAudioAuthorization:(dispatch_block_t)successBlock failureBlock:(dispatch_block_t)failureBlock{
+    [LKPermissionCheck requestMediaAuthorization:AVMediaTypeAudio successBlock:successBlock failureBlock:failureBlock];
+}
+
+#pragma mark - 请求视频、音频权限(AVMediaTypeVideo || AVMediaTypeAudio)
++ (void)requestMediaAuthorization:(AVMediaType)type
+                     successBlock:(dispatch_block_t)successBlock
+                     failureBlock:(dispatch_block_t)failureBlock{
+    [AVCaptureDevice requestAccessForMediaType:type completionHandler:^(BOOL granted) {
+        dispatch_queue_async_safe(dispatch_get_main_queue(), ^{
+            if (granted) {
+                !successBlock?:successBlock();
+            } else {
+                !failureBlock?:failureBlock();
+            }
+        });
+    }];
 }
 
 @end

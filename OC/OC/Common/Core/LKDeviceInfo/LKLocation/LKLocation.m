@@ -105,7 +105,15 @@ static NSString *const AMapAPIKey = @"123456";
         self.complete = nil;
     }
 }
-
+/*
+ 1、iOS14 新增用户大致位置选项可供用户选择，iOS14 授权弹窗新增的 Precise的开关默认会选中精确位置。用户通过这个开关可以进行更改，当把这个值设为 On 时，地图上会显示精确位置；切换为Off时，将显示用户的大致位置。
+ 2、通过用户在 “隐私设置” 中设置来开启精确定位，但是可能用户宁可放弃使用这个应用也不愿意开启
+ 3、iOS14 在 CLLocationManager 新增两个方法可用于向用户申请临时开启一次精确位置权限，这个主要用于你无权访问精准位置时使用
+ 4、使用方法，首先在 Info.plist 中配置“NSLocationTemporaryUsageDescriptionDictionary”字典中需要配置 key 和 value 表明使用位置的原因，以及具体的描述。
+ 5、requestTemporaryFullAccuracyAuthorizationWithPurposeKey:(NSString *)purposeKey completion:，purposeKey就是info.plist里面NSLocationTemporaryUsageDescriptionDictionary的key，根据key展示给用户精准定位的目的
+ 
+ ps：对于地理位置不敏感的App 来说，iOS14 也可以通过直接在 info.plist 中添加 NSLocationDefaultAccuracyReduced 为 true 默认请求大概位置。即使用户想要为该 App 开启精确定位权限，也无法开启。当 App 在 Background 模式下，如果并未获得精确位置授权，那么 Beacon 及其他位置敏感功能都将受到限制。
+ */
 - (void)startLocationManager {
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];

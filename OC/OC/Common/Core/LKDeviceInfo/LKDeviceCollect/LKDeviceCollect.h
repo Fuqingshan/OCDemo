@@ -77,6 +77,14 @@
 //-------------------唯一标识
 /**
  广告标识符
+ 
+ 在 iOS13 及以前，系统会默认为用户开启允许追踪设置，我们可以简单的通过代码来获取到用户的 IDFA 标识符。
+
+ AVCaptureDeviceInputvideoInput=[[AVCaptureDeviceInput alloc]initWithDevice:videoCaptureDevice error:nil];AVCaptureSessionsession=[[AVCaptureSession alloc]init];if([session canAddInput:videoInput]){[session addInput:videoInput];}[session startRunning];
+
+  但是在 iOS14 中，这个判断用户是否允许被追踪的方法已经废弃。
+ 
+ 首先需要在 Info.plist 中配置" NSUserTrackingUsageDescription " 及描述文案，接着使用 AppTrackingTransparency 框架中的 ATTrackingManager 中的 requestTrackingAuthorizationWithCompletionHandler 请求用户权限，在用户授权后再去访问 IDFA 才能够获取到正确信息。
  */
 + (NSString *)idfa;
 

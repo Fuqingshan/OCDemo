@@ -83,7 +83,7 @@
                             }
                         ,@{
                             @"content":@"侧滑置顶删除"
-                            ,@"sel":@""
+                            ,@"sel":@"nothingSelector"
                             }
                         ,@{
                             @"content":@"tableview自适应高度"
@@ -304,6 +304,10 @@
     [self.btnAdd addSubview:self.bv];
 }
 
+- (void)nothingSelector{
+    NSLog(@"左滑出现置顶和删除按钮");
+}
+
 - (void)onlySelectImgBtnSelector{
     if (self.customBtn) {
         [self.customBtn removeFromSuperview];
@@ -323,6 +327,28 @@
 }
 
 - (void)UIPasteboardSelector{
+    /*
+     在 iOS14 中，读取用户剪切板的数据会弹出提示。
+     
+     如果应用访问剪切板仅仅用于判断是否为URL格式，则 iOS14 新增了两个 API 可以用于规避该提示。如果应用想直接访问剪切板的数据，暂时可能无法做到规避该提示。比如复制url到淘宝打开某个页面就会提示。
+     UIPasteboardDetectionPatternProbableWebURL、UIPasteboardDetectionPatternProbableWebSearch
+     
+     两个 API 可以获得具体的 URL 信息，但是会触发剪切板提示。并且实测当用户剪切板中包含多个 URL 时只会返回第一个：
+     - (void)detectPatternsForPatterns:(NSSet<UIPasteboardDetectionPattern> *)patterns
+                     completionHandler:(void(^)(NSSet<UIPasteboardDetectionPattern> * _Nullable,
+                                                NSError * _Nullable))completionHandler
+     
+     NSSet patterns=[[NSSet alloc]initWithObjects:UIPasteboardDetectionPatternProbableWebURL,nil];
+     [[UIPasteboard generalPasteboard]detectPatternsForPatterns:patterns
+                                              completionHandler:^(NSSet<UIPasteboardDetectionPattern>*_Nullable result,NSError*_Nullable error)
+     {
+         if(result&&result.count){
+             // 当前剪切板中存在 URL
+             
+         }}
+      ];
+     
+     */
     UIPasteboard *pboard = [UIPasteboard generalPasteboard];
     pboard.string = @"在其他应用中粘贴";
 }

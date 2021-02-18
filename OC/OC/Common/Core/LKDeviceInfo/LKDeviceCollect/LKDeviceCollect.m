@@ -17,6 +17,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import <objc/message.h>
 #import <objc/runtime.h>
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
 
 #define ARRAY_SIZE(a) sizeof(a)/sizeof(a[0])
 
@@ -270,7 +271,28 @@ char* printEnv(void)
  广告标识符
  */
 + (NSString *)idfa{
-    NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    __block NSString *adId = nil;
+
+        dispatch_semaphore_t signal = dispatch_semaphore_create(0);
+
+       if (@available(iOS 14, *)) {
+                // iOS14使用 AppTrackingTransparency 新框架
+                [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+                    if (status == ATTrackingManagerAuthorizationStatusAuthorized) {
+                        adId = [[ASIdentifierManager sharedManager] advertisingIdentifier].UUIDString;
+                    }else{
+                        adId =  @"";
+                    }
+                   dispatch_semaphore_signal(signal);
+                }];
+        } else {
+               // 使用原方式访问 IDFA
+                adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+                dispatch_semaphore_signal(signal);
+        }
+
+        dispatch_semaphore_wait(signal, DISPATCH_TIME_FOREVER);
+    
     return adId.length >0 ? adId : @"";
 }
 
