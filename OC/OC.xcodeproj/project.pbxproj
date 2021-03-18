@@ -171,6 +171,7 @@
 		8179EC2F2251FCE200B1AFBA /* DrawCircleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8179EC2E2251FCE200B1AFBA /* DrawCircleViewController.m */; };
 		819E6544221A8BD9008C2B9D /* AdvantageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 819E6543221A8BD9008C2B9D /* AdvantageViewController.m */; };
 		819E6548221AA28D008C2B9D /* FoundationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 819E6547221AA28D008C2B9D /* FoundationViewController.m */; };
+		81C281B526030A8E003F606C /* PThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C281B426030A8E003F606C /* PThreadViewController.m */; };
 		81E0567323CC70B60003552C /* CoreTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E0567223CC70B60003552C /* CoreTextViewController.m */; };
 		81E0567523CC71230003552C /* CoreText.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81E0567423CC71230003552C /* CoreText.storyboard */; };
 		81E0567723CC719A0003552C /* layout.json in Resources */ = {isa = PBXBuildFile; fileRef = 81E0567623CC719A0003552C /* layout.json */; };
@@ -870,6 +871,8 @@
 		819E6543221A8BD9008C2B9D /* AdvantageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdvantageViewController.m; sourceTree = "<group>"; };
 		819E6546221AA28D008C2B9D /* FoundationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoundationViewController.h; sourceTree = "<group>"; };
 		819E6547221AA28D008C2B9D /* FoundationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoundationViewController.m; sourceTree = "<group>"; };
+		81C281B326030A8E003F606C /* PThreadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PThreadViewController.h; sourceTree = "<group>"; };
+		81C281B426030A8E003F606C /* PThreadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PThreadViewController.m; sourceTree = "<group>"; };
 		81E0567123CC70B60003552C /* CoreTextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreTextViewController.h; sourceTree = "<group>"; };
 		81E0567223CC70B60003552C /* CoreTextViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreTextViewController.m; sourceTree = "<group>"; };
 		81E0567423CC71230003552C /* CoreText.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CoreText.storyboard; sourceTree = "<group>"; };
@@ -2005,6 +2008,15 @@
 			path = Foundation;
 			sourceTree = "<group>";
 		};
+		81C281B226030A57003F606C /* PThread */ = {
+			isa = PBXGroup;
+			children = (
+				81C281B326030A8E003F606C /* PThreadViewController.h */,
+				81C281B426030A8E003F606C /* PThreadViewController.m */,
+			);
+			path = PThread;
+			sourceTree = "<group>";
+		};
 		81E0567023CC709C0003552C /* CoreText */ = {
 			isa = PBXGroup;
 			children = (
@@ -2144,6 +2156,7 @@
 				8140BCA5222F9C57009D1D65 /* Queue */,
 				81E4797B222E75B5005F459A /* NSThread */,
 				81E47975222E6F53005F459A /* GCD */,
+				81C281B226030A57003F606C /* PThread */,
 			);
 			path = Multithread;
 			sourceTree = "<group>";
@@ -4357,6 +4370,7 @@
 				81EBD9B32212BD0F0011392E /* AdvanceViewController.m in Sources */,
 				81E7EF7622379110008CAD43 /* UnReadBubbleView.m in Sources */,
 				81EDD02222FBD0F80006A52B /* MemoMode.m in Sources */,
+				81C281B526030A8E003F606C /* PThreadViewController.m in Sources */,
 				81E591CA2240BD9D001B71CA /* WaterfallFlowViewController.m in Sources */,
 				02E4BCAD2259C4080056686C /* Runloop2ViewController.m in Sources */,
 				81EBD9A22212A7CD0011392E /* WMScrollView.m in Sources */,

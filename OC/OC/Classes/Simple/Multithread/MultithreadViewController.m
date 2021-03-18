@@ -79,6 +79,10 @@
                             @"content":@"Queue"
                             ,@"url":@"sumup://simple/multithread/queue"
                             }
+                        ,@{
+                            @"content":@"PThread"
+                            ,@"url":@"sumup://simple/multithread/pthread"
+                        }
                         ];
     [self.tableView reloadData];
 }

@@ -71,6 +71,8 @@
         [self showViewControllerByIdentifier:@"NSThreadVC" storyboardName:@"Multithread"];
     }else if([[url path] isEqualToString:@"/multithread/queue"]){
         [self showViewControllerByIdentifier:@"QueueVC" storyboardName:@"Multithread"];
+    }else if([[url path] isEqualToString:@"/multithread/pthread"]){
+        [self showViewControllerByIdentifier:@"PThreadVC" storyboardName:@"Multithread"];
     }
     //debug
     else if([[url path] isEqualToString:@"/debug"]){

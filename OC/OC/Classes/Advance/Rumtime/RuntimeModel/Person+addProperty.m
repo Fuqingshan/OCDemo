@@ -29,10 +29,15 @@ char eName;
 // 该方法在类或分类在第一次加载内存的时候自动调用
 + (void)load
 {
-    Method orginalMethod = class_getInstanceMethod([Person class], @selector(sleep));
-    Method newMethod = class_getInstanceMethod([Person class], @selector(noSleep));
-    
-    method_exchangeImplementations(orginalMethod, newMethod);
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        //这儿严格来讲应该先add判断能否添加在交换,避免方法不存在
+        Method orginalMethod = class_getInstanceMethod([Person class], @selector(sleep));
+        Method newMethod = class_getInstanceMethod([Person class], @selector(noSleep));
+        
+        method_exchangeImplementations(orginalMethod, newMethod);
+    });
+  
 }
 - (void)noSleep{
     NSLog(@"睡个屁起来high");
