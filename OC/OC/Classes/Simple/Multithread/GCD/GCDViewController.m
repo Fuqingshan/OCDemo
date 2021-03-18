@@ -188,6 +188,14 @@ typedef NS_ENUM(NSInteger,SourceType) {
                             @"content":@"下载图片实例"
                             ,@"sel":@"downloadImgSelector"
                             }
+                        ,@{
+                            @"content":@"enter-level"
+                            ,@"sel":@"enterLevelSelector"
+                        }
+                        ,@{
+                            @"content":@"groupAsync"
+                            ,@"sel":@"groupAsyncSelector"
+                        }
                         ];
     
     [self.tableView reloadData];
@@ -344,6 +352,16 @@ typedef NS_ENUM(NSInteger,SourceType) {
 
 /**
  NSTimer和runloop挂钩，如果在子线程使用，默认子线程没有开启runloop，需要获取一次runloop来创建新的，要么用dispatch_source_set_timer
+ 
+ dispatch_source_t主要用于计时操作，其原因是因为它创建的timer不依赖于RunLoop，且计时精准度比NSTimer高
+ 
+ 注意：
+ GCDTimer需要强持有，否则出了作用域立即释放，也就没有了事件回调
+ GCDTimer默认是挂起状态，需要手动激活
+ GCDTimer没有repeat，需要封装来增加标志位控制
+ GCDTimer如果存在循环引用，使用weak+strong或者提前调用dispatch_source_cancel取消timer
+ dispatch_resume和dispatch_suspend调用次数需要平衡
+ source在挂起状态下，如果直接设置source = nil或者重新创建source都会造成crash.正确的方式是在激活状态下调用dispatch_source_cancel(source)释放当前的source
  */
 - (void)GCDTimerSelector{
     dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
@@ -490,6 +508,14 @@ typedef NS_ENUM(NSInteger,SourceType) {
         NSLog(@"Unable to open the path = %@",[directoryURL path]);
         return;
     }
+    /*
+     Timer Dispatch Source：定时器事件源，用来生成周期性的通知或回调
+     Signal Dispatch Source：监听信号事件源，当有UNIX信号发生时会通知
+     Descriptor Dispatch Source：监听文件或socket事件源，当文件或socket数据发生变化时会通知
+     Process Dispatch Source：监听进程事件源，与进程相关的事件通知
+     Mach port Dispatch Source：监听Mach端口事件源
+     Custom Dispatch Source：监听自定义事件源
+     */
     dispatch_source_t source = dispatch_source_create(DISPATCH_SOURCE_TYPE_VNODE,fd,DISPATCH_VNODE_DELETE|DISPATCH_VNODE_WRITE|DISPATCH_VNODE_RENAME,DISPATCH_TARGET_QUEUE_DEFAULT);
     dispatch_source_set_event_handler(source,^(){
         unsigned long const type = dispatch_source_get_data(source);
@@ -536,20 +562,22 @@ typedef NS_ENUM(NSInteger,SourceType) {
 
  */
 - (void)DispatchSuspendSelector{
-    dispatch_queue_t queue1 = dispatch_queue_create("com.yier.sumup.queue1", 0);
-    dispatch_queue_t queue2 = dispatch_queue_create("com.yier.sumup.queue2", 0);
+    dispatch_queue_t queue1 = dispatch_queue_create("com.yier.sumup.queue1", DISPATCH_QUEUE_SERIAL);
+    dispatch_queue_t queue2 = dispatch_queue_create("com.yier.sumup.queue2", DISPATCH_QUEUE_SERIAL);
     dispatch_group_t group = dispatch_group_create();
     
     NSLog(@"1");
+    
+    //✅完成任务 1和2顺序不确定
     dispatch_async(queue1, ^{
         NSLog(@"任务 1 ： queue 1...");
-        [NSThread sleepForTimeInterval:2.f];
+        [NSThread sleepForTimeInterval:3.f];
         NSLog(@"✅完成任务 1");
     });
     
     dispatch_async(queue2, ^{
         NSLog(@"任务 1 ： queue 2...");
-        [NSThread sleepForTimeInterval:2.f];
+        [NSThread sleepForTimeInterval:3.f];
         NSLog(@"✅完成任务 2");
     });
     
@@ -564,6 +592,7 @@ typedef NS_ENUM(NSInteger,SourceType) {
     });
 
     NSLog(@"3");
+    //当前线程暂停，等待group执行完成，再往后执行
     dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
     NSLog(@"＝＝＝＝＝＝＝等待两个queue完成, 再往下进行...");
     dispatch_async(queue1, ^{
@@ -592,7 +621,7 @@ typedef NS_ENUM(NSInteger,SourceType) {
  
  dispatch_semaphore_create 创建semaphore,代表信号总量。
  dispatch_semaphore_wait 等待semaphore，当信号量总数少于0，就会处于等待状态（因为本身为0，执行wait就会-1，执行等待）
- dispatch_semaphore_signal 通知semaphore，信号量+1
+ dispatch_semaphore_signal 通知semaphore，信号量+1。当信号量>= 0 会执行wait之后的代码.
  */
 - (void)SemaphoreAsyncSelector{
     dispatch_queue_t queue = dispatch_get_global_queue ( DISPATCH_QUEUE_PRIORITY_DEFAULT , 0 ) ;
@@ -648,9 +677,9 @@ typedef NS_ENUM(NSInteger,SourceType) {
     dispatch_queue_t serialQueue = dispatch_queue_create("com.yier.sumup.serialQueue", DISPATCH_QUEUE_SERIAL);
     dispatch_queue_t concurrentQueue = dispatch_queue_create("com.yier.sumup.concurrentQueue", DISPATCH_QUEUE_CONCURRENT);
     
-    //firstQueue变成串行
+    //serialQueue变成串行
     dispatch_set_target_queue(serialQueue, targetQueue);
-    //secondQueue变成串行
+    //concurrentQueue变成串行
     dispatch_set_target_queue(concurrentQueue, targetQueue);
     
     dispatch_async(serialQueue, ^{
@@ -671,6 +700,20 @@ typedef NS_ENUM(NSInteger,SourceType) {
 
 /**
  防止文件读写冲突，可以创建一个串行队列，操作都在这个队列中进行，没有更新数据读用并行，写用串行。
+ 
+ 同步栅栏函数dispatch_barrier_sync（在主线程中执行）：前面的任务执行完毕才会来到这里，但是同步栅栏函数会堵塞线程，影响后面的任务执行
+ 异步栅栏函数dispatch_barrier_async：前面的任务执行完毕才会来到这里
+
+ 作用：栅栏函数最直接的作用就是 控制任务执行顺序，使同步执行
+
+ 注意：
+ 1、栅栏函数只能控制同一并发队列
+2、 同步栅栏添加进入队列的时候，当前线程会被锁死，直到同步栅栏之前的任务和同步栅栏任务本身执行完毕时，当前线程才会打开然后继续执行下一句代码
+ 
+ 因此，在使用栅栏函数时,使用自定义队列才有意义:
+ 
+ 如果栅栏函数中使用全局队列，运行会崩溃，原因是系统也在用全局并发队列，使用栅栏同时会拦截系统的，所以会崩溃
+ 如果将自定义并发队列改为串行队列，即serial ，串行队列本身就是有序同步 此时加栅栏，会浪费性能
  */
 -  (void)dispatchBarrierAsyncDemo{
     dispatch_queue_t dataQueue = dispatch_queue_create("com.yier.sumup.dataqueue", DISPATCH_QUEUE_CONCURRENT);
@@ -833,9 +876,26 @@ typedef NS_ENUM(NSInteger,SourceType) {
 #pragma mark - GCD错误使用范例
 
 /**
- 主队列的同步线程，按照FIFO的原则（先入先出），2排在3后面会等3执行完，但因为同步线程，3又要等2执行完，相互等待成为死锁。
- */
+ dispatch_sync: 同步执行提交block到指定队列，直到block完成再返回
+ 1、必须等待当前语句执行完毕，才会执行下一条语句
+ 2、不会开启线程|即不具备开启新线程的能力
+ 3、在当前线程中执行block任务
+ 
+ dispatch_async:
+ 1、不用等待当前语句执行完毕，就可以执行下一条语句
+ 2、会开启线程执行block任务，即具备开启新线程的能力（但并不一定开启新线程，这个与任务所指定的队列类型有关）
+ 3、异步是多线程的代名词
+ 
+ mainqueue：主队列中的任务,都会放到主线程中执行，如果主队列发现当前主线程有任务在执行,那么主队列会暂停调度队列中的任务,直到主线程空闲为止
+ 死锁: dispatch_sync 底层是同步栅栏函数，会阻塞线程，影响后面任务执行。当前等待的和正在执行的是同一个队列时，即判断线程ID是否相等，如果相等，则会造成死锁
+  */
+
+/*
+mainThread：因为同步函数的原因，阻塞主线程执行，需要等待提交block函数到主队列并执行block
+mainqueue：主队列收到block之后，发现主线程有任务(比如主线程的runloop会处理各种消息)，因此暂停调度并挂起，等主线程先执行
+*/
 - (void)deadLockCase1{
+    //[NSOperationQueue currentQueue] 为 mainQueue
     NSLog(@"1");
     dispatch_sync(dispatch_get_main_queue(), ^{
         NSLog(@"2");
@@ -910,7 +970,7 @@ typedef NS_ENUM(NSInteger,SourceType) {
         self.downloadImg.contentMode = UIViewContentModeScaleAspectFit;
         [self.view addSubview:self.downloadImg];
         
-        NSURL *url1 = [NSURL URLWithString:@"https://ws3.sinaimg.cn/large/006tNc79gy1fopahdxlrqj31kw0wuag8.jpg"];
+        NSURL *url1 = [NSURL URLWithString:@"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ffcaeded792e4372a980c098d9f35c53~tplv-k3u1fbpfcp-watermark.image"];
         @weakify(self);
         [self.downloadImg sd_setImageWithURL:url1 placeholderImage:nil options:SDWebImageProgressiveLoad progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
             @strongify(self);
@@ -929,9 +989,9 @@ typedef NS_ENUM(NSInteger,SourceType) {
     dispatch_group_t group = dispatch_group_create();
     dispatch_queue_t queue = dispatch_queue_create("prefetcher", DISPATCH_QUEUE_SERIAL);
     
-    NSURL * url1 = [NSURL URLWithString:@"https://ws3.sinaimg.cn/large/006tNc79gy1fopahdxlrqj31kw0wuag8.jpg"];
+    NSURL * url1 = [NSURL URLWithString:@"https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4b2fb8ec4ef8446997e927e4f9f7516a~tplv-k3u1fbpfcp-watermark.image"];
     
-    NSURL *url2 = [NSURL URLWithString:@"https://ws1.sinaimg.cn/large/006tNc79gy1fopai2lwrlj31kw0zk7wl.jpg"];
+    NSURL *url2 = [NSURL URLWithString:@"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5dd50ea1022e4528948ead3079056e92~tplv-k3u1fbpfcp-watermark.image"];
     
     dispatch_group_enter(group);
     [SDWebImageDownloader.sharedDownloader downloadImageWithURL:url1 options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
@@ -949,6 +1009,29 @@ typedef NS_ENUM(NSInteger,SourceType) {
         dispatch_group_leave(group);
     }];
     
+    /*
+     long dispatch_group_wait(dispatch_group_t group, dispatch_time_t timeout)
+
+     group：需要等待的调度组
+     timeout：等待的超时时间（即等多久）
+        - 设置为DISPATCH_TIME_NOW意味着不等待直接判定调度组是否执行完毕
+        - 设置为DISPATCH_TIME_FOREVER则会阻塞当前调度组，直到调度组执行完毕
+
+
+     返回值：为long类型
+        - 返回值为0——在指定时间内调度组完成了任务
+        - 返回值不为0——在指定时间内调度组没有按时完成任务
+
+     */
+    //    long timeout = dispatch_group_wait(group, DISPATCH_TIME_NOW);
+    //    long timeout = dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+    long timeout = dispatch_group_wait(group, dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC));
+    if (timeout == 0) {
+        NSLog(@"按时完成任务");
+    }else{
+        NSLog(@"超时: %ld",timeout);
+    }
+    
     dispatch_group_notify(group, queue, ^{
         [self performSelectorOnMainThread:@selector(deleteCache) withObject:nil waitUntilDone:YES];
         NSLog(@"until");
@@ -956,7 +1039,7 @@ typedef NS_ENUM(NSInteger,SourceType) {
 }
 
 - (void)deleteCache{
-    NSURL * url1 = [NSURL URLWithString:@"https://ws3.sinaimg.cn/large/006tNc79gy1fopahdxlrqj31kw0wuag8.jpg"];
+    NSURL * url1 = [NSURL URLWithString:@"https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4b2fb8ec4ef8446997e927e4f9f7516a~tplv-k3u1fbpfcp-watermark.image"];
     [SDImageCache.sharedImageCache diskImageExistsWithKey:url1.absoluteString completion:^(BOOL isInCache) {
         NSLog(@"url1的图片存在");
     }];
@@ -968,6 +1051,59 @@ typedef NS_ENUM(NSInteger,SourceType) {
 - (void)changeAlpha:(CGFloat)alpha{
     dispatch_async(dispatch_get_main_queue(), ^{
         self.downloadImg.alpha = alpha;
+    });
+}
+
+
+/* enter level，enter执行--操作，level执行++操作，notify只要检测到是0就执行。enter和level个数必须相同，且level必须在enter之后
+ 因此，notify并不一定是在所有enter-level之后，只要state=0，就会触发，比如下面这个例子
+ */
+- (void)enterLevelSelector{
+    dispatch_queue_t queue1 = dispatch_queue_create("com.yier.sumup.queue1", DISPATCH_QUEUE_SERIAL);
+    dispatch_queue_t queue2 = dispatch_queue_create("com.yier.sumup.queue2", DISPATCH_QUEUE_SERIAL);
+    dispatch_group_t group = dispatch_group_create();
+    
+    dispatch_group_enter(group);
+    dispatch_async(queue1, ^{
+        NSLog(@"下载图片一");
+        dispatch_group_leave(group);
+    });
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        NSLog(@"更新UI");
+    });
+    
+    [NSThread sleepForTimeInterval:1];
+    dispatch_group_enter(group);
+    dispatch_async(queue2, ^{
+        [NSThread sleepForTimeInterval:1];
+        NSLog(@"下载图片二");
+        dispatch_group_leave(group);
+    });
+    
+}
+
+/*
+ dispatch_group_async 效果等同于enter dispatch_async level,其底层的实现就是enter-leave
+ */
+- (void)groupAsyncSelector{
+    dispatch_queue_t queue1 = dispatch_queue_create("com.yier.sumup.queue1", DISPATCH_QUEUE_SERIAL);
+    dispatch_queue_t queue2 = dispatch_queue_create("com.yier.sumup.queue2", DISPATCH_QUEUE_SERIAL);
+    dispatch_group_t group = dispatch_group_create();
+    
+    dispatch_group_async(group, queue1, ^{
+//        [NSThread sleepForTimeInterval:3];
+        NSLog(@"下载图片一");
+    });
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        NSLog(@"更新UI");
+    });
+    
+    [NSThread sleepForTimeInterval:1];
+    dispatch_group_async(group,queue2, ^{
+        [NSThread sleepForTimeInterval:1];
+        NSLog(@"下载图片二");
     });
 }
 

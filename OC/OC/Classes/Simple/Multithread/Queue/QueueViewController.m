@@ -65,6 +65,14 @@
                             @"content":@"生产销售系统"
                             ,@"sel":@"prosellSelector"
                             }
+                        ,@{
+                            @"content":@"设置优先级"
+                            ,@"sel":@"qualityOfService"
+                        }
+                        ,@{
+                            @"content":@"根据打印证明异步并发"
+                            ,@"sel":@"testOperationQueue"
+                        }
                         ];
     
     [self.tableView reloadData];
@@ -138,11 +146,18 @@
 }
 
 #pragma mark - 模仿网络下载图片
+//NSBlockOperation,类似block形式执行
 - (void)updateImageUI{
     // 1. 下载
     NSBlockOperation *op1 = [NSBlockOperation blockOperationWithBlock:^{
         NSLog(@"\n下载 %@" , [NSThread currentThread]);
     }];
+    
+    // 1.5 下载和处理数据是异步执行，不能确定顺序
+    [op1 addExecutionBlock:^{
+        NSLog(@"\n处理数据 %@" , [NSThread currentThread]);
+    }];
+    
     // 2. 滤镜
     NSBlockOperation *op2 = [NSBlockOperation blockOperationWithBlock:^{
         NSLog(@"\n滤镜 %@" , [NSThread currentThread]);
@@ -200,6 +215,7 @@
     self.operationQueue = [[NSOperationQueue alloc] init];
     [self.operationQueue setMaxConcurrentOperationCount:2];
     
+    //类似target形式
     self.inOpe1 = [[NSInvocationOperation alloc]initWithTarget:self selector:@selector(operationRun1) object:nil];
     self.inOpe2 = [[NSInvocationOperation alloc]initWithTarget:self selector:@selector(operationRun2) object:nil];
     [self.operationQueue addOperations:@[self.inOpe1,self.inOpe2] waitUntilFinished:NO];
@@ -229,4 +245,45 @@
     }
 }
 
+#pragma marl - 设置优先级
+- (void)qualityOfService{
+    /*
+     NSOperation设置优先级只会让CPU有更高的几率调用，不是说设置高就一定全部先完成
+     - 不使用sleep——高优先级的任务一先于低优先级的任务二
+     - 使用sleep进行延时——高优先级的任务一慢于低优先级的任务二
+     */
+    NSBlockOperation *bo1 = [NSBlockOperation blockOperationWithBlock:^{
+        for (int i = 0; i < 5; i++) {
+            sleep(1);
+            NSLog(@"第一个操作 %d --- %@", i, [NSThread currentThread]);
+        }
+    }];
+    // 设置最高优先级
+    bo1.qualityOfService = NSQualityOfServiceUserInteractive;
+    
+    NSBlockOperation *bo2 = [NSBlockOperation blockOperationWithBlock:^{
+        for (int i = 0; i < 5; i++) {
+            NSLog(@"第二个操作 %d --- %@", i, [NSThread currentThread]);
+        }
+    }];
+    // 设置最低优先级
+    bo2.qualityOfService = NSQualityOfServiceBackground;
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [queue addOperation:bo1];
+    [queue addOperation:bo2];
+}
+
+#pragma mark - 证明OperationQueue是异步并发
+- (void)testOperationQueue {
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    for (int i = 0; i < 5; i++) {
+        [queue addOperationWithBlock:^{
+            NSLog(@"%@---%d", [NSThread currentThread], i);
+        }];
+    }
+    
+    //设置是否挂起，如果正在执行或者马上就要执行的队列，是无法挂起的。
+    //queue.suspended = YES;
+}
 @end
