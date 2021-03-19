@@ -891,8 +891,8 @@ typedef NS_ENUM(NSInteger,SourceType) {
   */
 
 /*
-mainThread：因为同步函数的原因，阻塞主线程执行，需要等待提交block函数到主队列并执行block
-mainqueue：主队列收到block之后，发现主线程有任务(比如主线程的runloop会处理各种消息)，因此暂停调度并挂起，等主线程先执行
+mainThread：因为同步函数的原因，阻塞主线程执行dispatch_sync之后的操作（这儿是打印3，即使没有打印3，这儿主线程也会继续往下走，也算一个任务），需要等待提交block函数到主队列并执行block
+mainqueue：主队列收到block之后，发现主线程有任务(比如监听通知什么的)，因此暂停调度并挂起，等主线程先执行
 */
 - (void)deadLockCase1{
     //[NSOperationQueue currentQueue] 为 mainQueue
@@ -901,6 +901,19 @@ mainqueue：主队列收到block之后，发现主线程有任务(比如主线�
         NSLog(@"2");
     });
     NSLog(@"3");
+    
+    //变形
+    dispatch_queue_t q = dispatch_queue_create("hello", DISPATCH_QUEUE_SERIAL);
+    /*
+     异步函数block为b1，同步函数block为b2.
+     异步函数正在执行b1，sync阻塞当前线程，需要先执行提交b2到hello并执行，因此异步函数出现等待
+     hello队列收到b2之后准备执行，但是发现hello队列已经有任务b1在执行，自己挂起了
+     */
+    dispatch_async(q, ^{
+        dispatch_sync(q, ^{
+            
+        });
+    });
 }
 
 /**

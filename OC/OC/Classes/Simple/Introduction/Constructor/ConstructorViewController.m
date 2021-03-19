@@ -15,6 +15,10 @@
 
 @implementation ConstructorViewController
 
++ (void)load{
+    
+}
+
 /*
  constructor 和 +load 都是在 main 函数执行前调用，但 +load 比 constructor 更加早一丢丢，因为 dyld（动态链接器，程序的最初起点）在加载 image（可以理解成 Mach-O 文件）时会先通知 objc runtime 去加载其中所有的类，每加载一个类时，它的 +load 随之调用，全部加载完成后，dyld 才会调用这个 image 中所有的 constructor 方法。
  
@@ -23,6 +27,8 @@
  所有 Class 都已经加载完成
  main 函数还未执行
  无需像 +load 还得挂载在一个 Class 中
+ 
+ +load因为比constructor还早，因此可以用来做安全防护，比如判断app是否被重签名
  */
 
 //101指的优先级,constructor数字越小优先级越高,destructor数字越大优先级越高,0~100默认为系统所用
