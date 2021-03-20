@@ -8,7 +8,60 @@
 
 #import "BaseTabBar.h"
 
+@interface BaseTabBar()
+@property(nonatomic, strong) UIButton *centerBtn;
+
+@end
+
 @implementation BaseTabBar
+
+#pragma mark - 给中间增加一个大范围可点击的按钮
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+
+    UIView *view = [super hitTest:point withEvent:event];
+    
+    //检测点击是否落在了centerBtn上
+    CGPoint hitPoint = [self.centerBtn convertPoint:point fromView:self];
+    if (![self.centerBtn pointInside:hitPoint withEvent:event]) {
+        return view;
+    }
+
+    return self.centerBtn;
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    if (!self.centerBtn && self.items.count > 0) {
+        UIView *findCenterBarButton;
+        CGFloat tabbarBtnWidth = self.frame.size.width/self.items.count;
+        CGFloat centerX = CGRectGetCenter(self.frame).x;
+        CGRect theoryCenterBtnRect = CGRectMake(centerX - tabbarBtnWidth/2, 0, tabbarBtnWidth, self.frame.size.height);
+
+        for (UIView *v in self.subviews) {
+            if ([NSStringFromClass([v class]) isEqualToString: @"UITabBarButton"]) {
+                if (CGRectContainsRect(theoryCenterBtnRect, v.frame)) {
+                    findCenterBarButton = v;
+                    break;
+                }
+            }
+        }
+        
+        if (!findCenterBarButton) {
+            return;;
+        }
+        
+        //-50表示Tabbar向上增加50可点击范围
+        //这儿也可以不给item设置image，而是给centerBtn设置，不过没必要，除非这张图片需要动态替换，比如是个股票的缩略实时图，那就可以通过新写一个button来做
+        self.centerBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(findCenterBarButton.frame) - 50, tabbarBtnWidth, 102)];
+        [self.centerBtn addTarget:self action:@selector(centerTap) forControlEvents:UIControlEventTouchUpInside];
+        [findCenterBarButton addSubview:self.centerBtn];
+    }
+}
+
+- (void)centerTap{
+    [OCRouter openURL:[NSURL URLWithString:@"sumup://advance"]];
+}
 
 - (void)setItems:(NSArray<UITabBarItem *> *)items animated:(BOOL)animated{
     [self getBaseItemsByTabBarItems:items];

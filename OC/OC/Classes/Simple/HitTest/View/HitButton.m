@@ -19,12 +19,12 @@
 */
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+    //相当于在按钮周围增加了50的点击范围
     CGRect rect = CGRectMake(self.bounds.origin.x - 50, self.bounds.origin.y -50, self.bounds.size.width + 100, self.bounds.size.height + 100);
-    if (CGRectEqualToRect(rect, self.bounds)) {
-        return [super hitTest:point withEvent:event];
-    }
-    
-    return CGRectContainsPoint(rect, point)?self:nil;
+   
+    UIView * view = [super hitTest:point withEvent:event];
+    //如果在范围内，否则看父视图上平级的有没有能响应的视图
+    return CGRectContainsPoint(rect, point)?self:view;
 }
 
 @end

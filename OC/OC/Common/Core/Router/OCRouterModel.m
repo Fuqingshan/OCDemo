@@ -94,7 +94,7 @@
 - (NSArray *)all{
     if(!_all){
         NSMutableArray *models = [[NSMutableArray alloc] init];
-        for (OCRouterModel *model in self.Advantage) {
+        for (OCRouterModel *model in self.Advance) {
             [models addObject:model];
         }
         for (OCRouterModel *model in self.Runtime) {

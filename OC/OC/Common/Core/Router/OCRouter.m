@@ -47,6 +47,7 @@
     }
     //查找对应模块是否在高级
     for (OCRouterModel *model in self.plistModel.Advance.all) {
+        NSLog(@"%@ %@", valideURL, model.url);
         if ([valideURL isEqualToString:model.url]) {
             return YES;
         }

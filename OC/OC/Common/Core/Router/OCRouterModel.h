@@ -37,7 +37,7 @@
 @end
 
 @interface OCRouterAdvanceModel : NSObject<YYModel>
-@property (nonatomic, strong) NSArray<OCRouterModel> *Advantage;
+@property (nonatomic, strong) NSArray<OCRouterModel> *Advance;
 @property (nonatomic, strong) NSArray<OCRouterModel> *Runtime;
 @property (nonatomic, strong) NSArray<OCRouterModel> *Runloop;
 @property (nonatomic, strong) NSArray<OCRouterModel> *DesignMode;
