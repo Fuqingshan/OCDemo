@@ -36,7 +36,8 @@
         UIView *findCenterBarButton;
         CGFloat tabbarBtnWidth = self.frame.size.width/self.items.count;
         CGFloat centerX = CGRectGetCenter(self.frame).x;
-        CGRect theoryCenterBtnRect = CGRectMake(centerX - tabbarBtnWidth/2, 0, tabbarBtnWidth, self.frame.size.height);
+        CGFloat theoryCenterBtnH = self.frame.size.height;
+        CGRect theoryCenterBtnRect = CGRectMake(centerX - tabbarBtnWidth/2, 0, tabbarBtnWidth, theoryCenterBtnH);
 
         for (UIView *v in self.subviews) {
             if ([NSStringFromClass([v class]) isEqualToString: @"UITabBarButton"]) {
@@ -51,9 +52,10 @@
             return;;
         }
         
-        //-50表示Tabbar向上增加50可点击范围
+        CGFloat positionValue = 50.0;
+        //-50表示Tabbar向上增加50可点击的偏移量
         //这儿也可以不给item设置image，而是给centerBtn设置，不过没必要，除非这张图片需要动态替换，比如是个股票的缩略实时图，那就可以通过新写一个button来做
-        self.centerBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(findCenterBarButton.frame) - 50, tabbarBtnWidth, 102)];
+        self.centerBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(findCenterBarButton.frame) - positionValue, tabbarBtnWidth, theoryCenterBtnH + positionValue)];
         [self.centerBtn addTarget:self action:@selector(centerTap) forControlEvents:UIControlEventTouchUpInside];
         [findCenterBarButton addSubview:self.centerBtn];
     }
@@ -115,6 +117,12 @@
 //        item.title = title;
         item.image = image;
         item.selectedImage = selectedImage;
+        
+        //设置角标看是否有遮挡，角标设置为空格就是红点
+        if (i == 1) {
+//            item.badgeValue = @"2";
+            item.badgeValue = @" ";
+        }
     }
     self.backgroundImage = [[UIImage imageNamed:[NSString stringWithFormat:@"tabbar_%@_background.png",symbol]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 }
