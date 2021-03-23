@@ -33,4 +33,8 @@
     return @"我要去唱歌";
 }
 
+- (NSString *)doSomeOtherThingWIthAction:(NSString *)action{
+    return  [NSString stringWithFormat:@"我要去%@",action];
+}
+
 @end

@@ -33,5 +33,6 @@
 - (void)sleep;
 - (NSString *)doSomeThing;
 - (NSString *)doSomeOtherThing;
+- (NSString *)doSomeOtherThingWIthAction:(NSString *)action;
 
 @end

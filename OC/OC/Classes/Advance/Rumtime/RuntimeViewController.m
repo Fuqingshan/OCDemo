@@ -280,9 +280,22 @@
     
     
     // 也可以在类目中添加自己方法去替换 类 或者系统类的方法
-    
     [self.student sleep];
     
+    //调用方法的两种方式imp 和 msgSend
+    IMP imp = class_getMethodImplementation([student2 class], NSSelectorFromString(@"doSomeOtherThingWIthAction:"));
+    SEL sel = NSSelectorFromString(@"doSomeOtherThingWIthAction:");
+    
+    char *returnType = method_copyReturnType(class_getClassMethod([student2 class], sel));
+    //判断返回的是id类型
+    if (strcmp(returnType, "@") == 0) {
+        id(*func)(id,SEL, id) = (id(*)(id,SEL, id))imp;
+        NSString *action1 = func(student2,sel,@"吃饭");
+        NSLog(@"action1%@",action1);
+        
+        NSString *action2 =  ((NSString *(*)(id,SEL, id))objc_msgSend)(student2,sel,@"唱歌");
+        NSLog(@"action2 %@",action2);
+    }
 }
 
 #pragma mark - 动态添加方法

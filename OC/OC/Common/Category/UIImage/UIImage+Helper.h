@@ -17,4 +17,8 @@
 + (UIImage *)lk_imageWithColor:(UIColor *)color size:(CGSize)size cornerRadius:(CGFloat)cornerRadius;
 
 - (UIImage*)blurredImage;
+
+- (UIImage *)gaussiBlurByImage:(UIImage *)img radius:(CGFloat)number useRect:(CGRect)useRect;
+
++ (UIImage *)screenShot;
 @end

@@ -20,6 +20,7 @@
 #import "LKSafeData.h"
 #import "OCRouterLib.h"
 #import "MBProgressHUD+LKAdditions.h"
+#import "UIImage+Helper.h"
 
 //三方
 #import <YYCategories/YYCategories.h>

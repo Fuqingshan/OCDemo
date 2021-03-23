@@ -77,7 +77,7 @@ void functionForResolve(id self, SEL _cmd) {
 }
 
 /**
- 完整消息转发methodSignatureForSelector返回对应的signature才会z调用
+ 完整消息转发methodSignatureForSelector返回对应的signature才会调用
 
  @param anInvocation
  */

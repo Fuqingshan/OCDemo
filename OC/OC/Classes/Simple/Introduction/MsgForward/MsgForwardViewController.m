@@ -23,17 +23,18 @@
  当继承NSObject的类找不到方法时，通常由NSObject的“doesNotRecognizeSelector”抛出异常；当一个对象无法接收某一消息时，就会启动”消息转发(message forwarding)“机制，通过这一机制，我们可以告诉对象如何处理未知的消息，但是大多数时候，我们调用前会用respondsToSelector判断一下
  消息转发的三个步骤：
  
- 1、动态方法解析：Runtime 会发送 +resolveInstanceMethod: 或者 +resolveClassMethod: 尝试去 resolve 这个消息；
+ 1、动态方法决议(解析)：Runtime 会发送 +resolveInstanceMethod: 或者 +resolveClassMethod: 尝试去 resolve 这个消息；
  
+ 注意：resolveInstanceMethod执行两次的问题，没有找到IMP的时候，第一次是正常流程，第二次是在methodSignatureForSelector和forwardInvocation之间，苹果给了第二次机会，这儿也会走一次resolveInstanceMethod
  2、备用接收者：如果 resolve 方法返回 NO，Runtime 就发送 -forwardingTargetForSelector: 允许你把这个消息转发给另一个对象；
  
  3、完整消息转发：如果没有新的目标对象返回， Runtime 就会发送-methodSignatureForSelector: 和 -forwardInvocation: 消息。你可以发送 -invokeWithTarget: 消息来手动转发消息或者发送 -doesNotRecognizeSelector: 抛出异常。
  
  type encoding:https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html#//apple_ref/doc/uid/TP40008048-CH100
  
- 注意：MsgForward.m用-w屏蔽⚠️
+ 注意：MsgForward.m用-w屏蔽⚠️，在build phases设置
  
- iosu不允许继承多个类（多继承），但是可以通过分类、协议、消息转发的方式实现
+ ios不允许继承多个类（多继承），但是可以通过分类、协议、消息转发的方式实现
  */
 
 - (void)dealloc{

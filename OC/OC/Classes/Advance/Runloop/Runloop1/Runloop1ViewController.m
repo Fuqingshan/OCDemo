@@ -50,7 +50,7 @@
 {
     @autoreleasepool {
         NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-        //如果注释了下面这一行，子线程中的任务并不能正常执行
+        //如果注释了下面这一行，子线程中的任务并不能正常执行，machport是为了让这个线程保活，用移除machport的方式，并不能关掉这个线程，需要手动关掉，比如把线程保存成属性，在不需要这个线程的时候设置=nil就可以了
         [runLoop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
         NSLog(@"启动RunLoop前--%@",runLoop.currentMode);
         NSLog(@"currentRunLoop:%@",[NSRunLoop currentRunLoop]);

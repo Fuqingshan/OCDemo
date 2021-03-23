@@ -875,25 +875,6 @@
     }
 }
 
-- (UIImage *)gaussiBlurByImage:(UIImage *)img radius:(CGFloat)number useRect:(CGRect)useRect{
-    CIContext *context = [CIContext contextWithOptions:nil];
-    CIImage *inputImage = [[CIImage alloc] initWithImage:img];
-    // create gaussian blur filter
-    CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
-    [filter setValue:inputImage forKey:kCIInputImageKey];
-    [filter setValue:[NSNumber numberWithFloat:number] forKey:@"inputRadius"];
-    // blur image
-    CIImage *result = [filter valueForKey:kCIOutputImageKey];
-    if (CGRectEqualToRect(useRect, CGRectZero)) {
-        useRect = [result extent];
-    }
-    CGImageRef cgImage = [context createCGImage:result fromRect:useRect];
-    UIImage *image = [UIImage imageWithCGImage:cgImage];
-    CGImageRelease(cgImage);
-    
-    return image;
-}
-
 #pragma mark - 高斯模糊的提交按钮
 - (void)gaosiSubmitBtnSelector{
     if (self.submitBtn) {
