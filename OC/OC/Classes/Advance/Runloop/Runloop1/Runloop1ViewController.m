@@ -9,8 +9,10 @@
 #import "Runloop1ViewController.h"
 #import "HLThread.h"
 
-@interface Runloop1ViewController ()
+@interface Runloop1ViewController ()<NSURLConnectionDataDelegate>
 @property (strong, nonatomic)   HLThread            *subThread;  /**< 子线程 */
+@property(nonatomic, strong) NSURLConnection *connection;
+@property (weak, nonatomic) IBOutlet UIImageView *downloadImageView;
 
 @end
 
@@ -70,9 +72,46 @@
 - (void)subThreadOpetion
 {
     NSLog(@"启动RunLoop后--%@",[NSRunLoop currentRunLoop].currentMode);
-    NSLog(@"%@----子线程任务开始",[NSThread currentThread]);
+    NSLog(@"%@----子线程任务开始，延时3秒",[NSThread currentThread]);
     [NSThread sleepForTimeInterval:3.0];
+    
+    [self download];
     NSLog(@"%@----子线程任务结束",[NSThread currentThread]);
+}
+
+/*测试保活的子线程发起请求的情况。这儿如果没有machport保活，也不设置回调队列，那么回调回来就会无法响应。
+ 因此解决回调有两种方式：
+ 1、子线程machport保活
+ 2、增加回调队列
+ */
+- (void)download{
+    if (!self.connection) {
+        NSURL *url = [NSURL URLWithString:@"https://tva1.sinaimg.cn/large/008eGmZEly1gous39kl86j31fz0u0ag8.jpg"];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2];
+        self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO];
+//        [self.connection setDelegateQueue:[NSOperationQueue mainQueue]];
+    }
+
+    [self.connection start];
+}
+
+#pragma mark - delegate
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
+    NSHTTPURLResponse *result = (NSHTTPURLResponse *)response;
+    NSLog(@"❌ %zd",result.statusCode);
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
+    UIImage *image = [UIImage imageWithData:data];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.downloadImageView.image = image;
+    });
+    NSLog(@"当前线程：%@  下载完成：%@",[NSThread currentThread],image);
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+    NSLog(@"❌ %@",error.description);
 }
 
 @end

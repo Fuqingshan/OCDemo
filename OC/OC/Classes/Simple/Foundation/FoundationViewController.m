@@ -657,7 +657,7 @@ void printArgs(int numArgs, ...){
 
 - (void)NSRunloopSelector{
     NSRunLoop *runloop = [NSRunLoop currentRunLoop];
-    NSURL *url = [NSURL URLWithString:@"https://ws3.sinaimg.cn/large/006tNbRwgy1fy3rvsnzsbj30dw099mx5.jpg"];
+    NSURL *url = [NSURL URLWithString:@"https://th.bing.com/th/id/Rd6e52d9ddf702b20e2e6a7e09884e2c7?rik=4O65ogaEGltQGg&riu=http%3a%2f%2fimg95.699pic.com%2fphoto%2f50101%2f2806.jpg_wh860.jpg&ehk=ChEA9l2Os4Rf90br0hRr4xI6u%2foLBl4vtDNCMVIyjAU%3d&risl=&pid=ImgRaw"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     __block BOOL downloadEnd = NO;
     [[NSURLConnection rac_sendAsynchronousRequest:request] subscribeNext:^(RACTwoTuple<NSURLResponse *,NSData *> * _Nullable x) {
