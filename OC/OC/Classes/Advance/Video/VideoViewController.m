@@ -55,7 +55,12 @@
                             @"content":@"AVFoundation"
                             ,@"url":@"sumup://advance/video/avfoundation"
                             }
+                        ,@{
+                            @"content":@"视频的编辑和拍摄GPUImage"
+                            ,@"url":@"待添加"
+                            }
                         ];
+    
     [self.tableView reloadData];
 }
 
