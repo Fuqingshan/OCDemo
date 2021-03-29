@@ -8,6 +8,8 @@
 
 #import "ReactiveCocoaViewController.h"
 #import "RACNormalViewController.h"
+#import "RACSignalViewController.h"
+#import "RACIntervalViewController.h"
 
 #import <objc/message.h>
 
@@ -47,6 +49,12 @@
                         @{
                             @"content":@"常见用法"
                             ,@"sel":@"pushRACNormalVC"
+                            }
+                        ,@{@"content":@"冷热信号"
+                            ,@"sel":@"pushRACSignalVC"
+                            }
+                        ,@{@"content":@"模拟验证码发送"
+                            ,@"sel":@"pushIntervalVC"
                             }
                         ];
 
@@ -98,8 +106,29 @@
 }
 
 - (void)pushRACNormalVC{
-    RACNormalViewController *vc = [[RACNormalViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
+    //两种跳转sb的方法
+//    RACNormalViewController *vc = [[UIStoryboard storyboardWithName:@"ReactiveCocoa" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"RACNormalVC"];
+//    [self.navigationController pushViewController:vc animated:YES];
+    
+    [self performSegueWithIdentifier:@"RACNormal" sender:@"常见用法"];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"RACNormal"]) {
+        NSString *detailStr = sender;
+        RACNormalViewController *normalVC = segue.destinationViewController;
+        normalVC.des = detailStr;
+    }
+}
+
+- (void)pushRACSignalVC{
+    RACSignalViewController *vc = [[UIStoryboard storyboardWithName:@"ReactiveCocoa" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"RACSignalVC"];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+- (void)pushIntervalVC{
+    RACIntervalViewController *vc = [[UIStoryboard storyboardWithName:@"ReactiveCocoa" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"RACIntervalVC"];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

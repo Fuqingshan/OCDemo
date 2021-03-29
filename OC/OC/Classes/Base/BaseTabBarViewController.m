@@ -14,7 +14,7 @@
 #import "BaseTabBar.h"
 
 @interface BaseTabBarViewController ()
-
+@property(nonatomic, strong) RACDisposable *dispose;
 @end
 
 @implementation BaseTabBarViewController
@@ -32,8 +32,12 @@
 
 - (void)addNotifacation{
     @weakify(self);
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ChangeLanguageNotification object:nil];
-    [[[[NSNotificationCenter defaultCenter] rac_addObserverForName:ChangeLanguageNotification object:nil] takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNotification * _Nullable x) {
+    //如果之前已经注册过了，直接移除，防止重复
+    if (self.dispose) {
+        [self.dispose dispose];
+        self.dispose = nil;
+    }
+   self.dispose = [[[[NSNotificationCenter defaultCenter] rac_addObserverForName:ChangeLanguageNotification object:nil] takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNotification * _Nullable x) {
         @strongify(self);
         BaseTabBar *tabbar = (BaseTabBar *)self.tabBar;
         [tabbar getBaseItemsByTabBarItems:self.tabBar.items];

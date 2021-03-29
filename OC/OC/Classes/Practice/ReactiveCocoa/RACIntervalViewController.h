@@ -1,5 +1,5 @@
 //
-//  RACNormalViewController.h
+//  RACIntervalViewController.h
 //  OC
 //
 //  Created by yier on 2021/3/29.
@@ -10,8 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RACNormalViewController : BaseViewController
-@property (nonatomic, copy) NSString *des;
+@interface RACIntervalViewController : BaseViewController
 
 @end
 

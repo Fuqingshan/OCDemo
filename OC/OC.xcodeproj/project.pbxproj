@@ -192,6 +192,8 @@
 		81E34D9726117FA200C53092 /* YYTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E34D9626117FA200C53092 /* YYTextViewController.m */; };
 		81E34DA12611810200C53092 /* YYText.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81E34DA02611810100C53092 /* YYText.storyboard */; };
 		81E34DA52611810A00C53092 /* ReactiveCocoa.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81E34DA42611810A00C53092 /* ReactiveCocoa.storyboard */; };
+		81E34DAA26119B8800C53092 /* RACSignalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E34DA926119B8800C53092 /* RACSignalViewController.m */; };
+		81E34DB42611E37300C53092 /* RACIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E34DB32611E37300C53092 /* RACIntervalViewController.m */; };
 		81E3A197221E798A0081D6D2 /* WKWebView+Crash.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E3A191221E798A0081D6D2 /* WKWebView+Crash.m */; };
 		81E3A198221E798A0081D6D2 /* WKWebViewController+MessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E3A192221E798A0081D6D2 /* WKWebViewController+MessageHandler.m */; };
 		81E3A199221E798A0081D6D2 /* WKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E3A193221E798A0081D6D2 /* WKWebViewController.m */; };
@@ -912,6 +914,10 @@
 		81E34D9626117FA200C53092 /* YYTextViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YYTextViewController.m; sourceTree = "<group>"; };
 		81E34DA02611810100C53092 /* YYText.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = YYText.storyboard; sourceTree = "<group>"; };
 		81E34DA42611810A00C53092 /* ReactiveCocoa.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReactiveCocoa.storyboard; sourceTree = "<group>"; };
+		81E34DA826119B8800C53092 /* RACSignalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RACSignalViewController.h; sourceTree = "<group>"; };
+		81E34DA926119B8800C53092 /* RACSignalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RACSignalViewController.m; sourceTree = "<group>"; };
+		81E34DB22611E37300C53092 /* RACIntervalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RACIntervalViewController.h; sourceTree = "<group>"; };
+		81E34DB32611E37300C53092 /* RACIntervalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RACIntervalViewController.m; sourceTree = "<group>"; };
 		81E3A191221E798A0081D6D2 /* WKWebView+Crash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+Crash.m"; sourceTree = "<group>"; };
 		81E3A192221E798A0081D6D2 /* WKWebViewController+MessageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebViewController+MessageHandler.m"; sourceTree = "<group>"; };
 		81E3A193221E798A0081D6D2 /* WKWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewController.m; sourceTree = "<group>"; };
@@ -2077,6 +2083,10 @@
 				81E34D852611783E00C53092 /* ReactiveCocoaViewController.m */,
 				81E34D8F26117BFE00C53092 /* RACNormalViewController.h */,
 				81E34D9026117BFE00C53092 /* RACNormalViewController.m */,
+				81E34DA826119B8800C53092 /* RACSignalViewController.h */,
+				81E34DA926119B8800C53092 /* RACSignalViewController.m */,
+				81E34DB22611E37300C53092 /* RACIntervalViewController.h */,
+				81E34DB32611E37300C53092 /* RACIntervalViewController.m */,
 			);
 			path = ReactiveCocoa;
 			sourceTree = "<group>";
@@ -4186,11 +4196,13 @@
 				81EDD01D22FBCD7B0006A52B /* FacadeMode2.m in Sources */,
 				81F550D8223A54B000B924F9 /* SearchBarViewController.m in Sources */,
 				8140BCA8222F9C6D009D1D65 /* QueueViewController.m in Sources */,
+				81E34DB42611E37300C53092 /* RACIntervalViewController.m in Sources */,
 				81E5392A221402E600D694CD /* LKLocationTransform.m in Sources */,
 				81E5392F221402E600D694CD /* LKDeviceNetInfo.m in Sources */,
 				81E5392D221402E600D694CD /* LKDeviceHardware.m in Sources */,
 				81052EB4230152D40083DC65 /* OCAudioPlayer.m in Sources */,
 				02E4BCB62259C53F0056686C /* HLThread.m in Sources */,
+				81E34DAA26119B8800C53092 /* RACSignalViewController.m in Sources */,
 				8179EC142251C46000B1AFBA /* XWMagicMovePushController.m in Sources */,
 				81E761AF2216699700811966 /* OCParamsInfo.m in Sources */,
 				81E0567323CC70B60003552C /* CoreTextViewController.m in Sources */,

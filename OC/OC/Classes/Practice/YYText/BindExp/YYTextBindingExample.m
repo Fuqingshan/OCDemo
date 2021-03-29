@@ -62,6 +62,9 @@
 
 @implementation YYTextBindingExample
 
+- (void)dealloc{
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
