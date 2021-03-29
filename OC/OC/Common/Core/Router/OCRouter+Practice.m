@@ -23,6 +23,14 @@
     else if([[url path] isEqualToString:@"/setting"]){
         [self showViewControllerByIdentifier:@"SettingVC" storyboardName:@"Setting"];
     }
+    //YYText
+    else if([[url path] isEqualToString:@"/yytext"]){
+        [self showViewControllerByIdentifier:@"YYTextVC" storyboardName:@"YYText"];
+    }
+    //ReactiveCocoa
+    else if([[url path] isEqualToString:@"/rac"]) {
+        [self showViewControllerByIdentifier:@"ReactiveCocoaVC" storyboardName:@"ReactiveCocoa"];
+    }
     else{
         return NO;
     }

@@ -187,6 +187,11 @@
 		81E0569623CC71AB0003552C /* CoreTextData.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E0568A23CC71AB0003552C /* CoreTextData.m */; };
 		81E0569723CC71AB0003552C /* CoreTextLinkData.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E0568C23CC71AB0003552C /* CoreTextLinkData.m */; };
 		81E30D0622239B37003D215D /* FoundationBridgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E30D0522239B37003D215D /* FoundationBridgeViewController.m */; };
+		81E34D862611783E00C53092 /* ReactiveCocoaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E34D852611783E00C53092 /* ReactiveCocoaViewController.m */; };
+		81E34D9126117BFE00C53092 /* RACNormalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E34D9026117BFE00C53092 /* RACNormalViewController.m */; };
+		81E34D9726117FA200C53092 /* YYTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E34D9626117FA200C53092 /* YYTextViewController.m */; };
+		81E34DA12611810200C53092 /* YYText.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81E34DA02611810100C53092 /* YYText.storyboard */; };
+		81E34DA52611810A00C53092 /* ReactiveCocoa.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81E34DA42611810A00C53092 /* ReactiveCocoa.storyboard */; };
 		81E3A197221E798A0081D6D2 /* WKWebView+Crash.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E3A191221E798A0081D6D2 /* WKWebView+Crash.m */; };
 		81E3A198221E798A0081D6D2 /* WKWebViewController+MessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E3A192221E798A0081D6D2 /* WKWebViewController+MessageHandler.m */; };
 		81E3A199221E798A0081D6D2 /* WKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E3A193221E798A0081D6D2 /* WKWebViewController.m */; };
@@ -899,6 +904,14 @@
 		81E0568C23CC71AB0003552C /* CoreTextLinkData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextLinkData.m; sourceTree = "<group>"; };
 		81E30D0422239B37003D215D /* FoundationBridgeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoundationBridgeViewController.h; sourceTree = "<group>"; };
 		81E30D0522239B37003D215D /* FoundationBridgeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoundationBridgeViewController.m; sourceTree = "<group>"; };
+		81E34D842611783E00C53092 /* ReactiveCocoaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReactiveCocoaViewController.h; sourceTree = "<group>"; };
+		81E34D852611783E00C53092 /* ReactiveCocoaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReactiveCocoaViewController.m; sourceTree = "<group>"; };
+		81E34D8F26117BFE00C53092 /* RACNormalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RACNormalViewController.h; sourceTree = "<group>"; };
+		81E34D9026117BFE00C53092 /* RACNormalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RACNormalViewController.m; sourceTree = "<group>"; };
+		81E34D9526117FA200C53092 /* YYTextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YYTextViewController.h; sourceTree = "<group>"; };
+		81E34D9626117FA200C53092 /* YYTextViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YYTextViewController.m; sourceTree = "<group>"; };
+		81E34DA02611810100C53092 /* YYText.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = YYText.storyboard; sourceTree = "<group>"; };
+		81E34DA42611810A00C53092 /* ReactiveCocoa.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReactiveCocoa.storyboard; sourceTree = "<group>"; };
 		81E3A191221E798A0081D6D2 /* WKWebView+Crash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+Crash.m"; sourceTree = "<group>"; };
 		81E3A192221E798A0081D6D2 /* WKWebViewController+MessageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebViewController+MessageHandler.m"; sourceTree = "<group>"; };
 		81E3A193221E798A0081D6D2 /* WKWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewController.m; sourceTree = "<group>"; };
@@ -2056,6 +2069,29 @@
 			path = CTFrameEngine;
 			sourceTree = "<group>";
 		};
+		81E34D83261177F100C53092 /* ReactiveCocoa */ = {
+			isa = PBXGroup;
+			children = (
+				81E34DA42611810A00C53092 /* ReactiveCocoa.storyboard */,
+				81E34D842611783E00C53092 /* ReactiveCocoaViewController.h */,
+				81E34D852611783E00C53092 /* ReactiveCocoaViewController.m */,
+				81E34D8F26117BFE00C53092 /* RACNormalViewController.h */,
+				81E34D9026117BFE00C53092 /* RACNormalViewController.m */,
+			);
+			path = ReactiveCocoa;
+			sourceTree = "<group>";
+		};
+		81E34D9426117F9300C53092 /* YYText */ = {
+			isa = PBXGroup;
+			children = (
+				81E34DA02611810100C53092 /* YYText.storyboard */,
+				81E34D9526117FA200C53092 /* YYTextViewController.h */,
+				81E34D9626117FA200C53092 /* YYTextViewController.m */,
+				81E5853C22603F5900385F43 /* BindExp */,
+			);
+			path = YYText;
+			sourceTree = "<group>";
+		};
 		81E3A190221E798A0081D6D2 /* WKWebView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2993,7 +3029,8 @@
 				81EBD9B72212BD7E0011392E /* Practice.storyboard */,
 				81EBD9B42212BD1D0011392E /* PracticeViewController.h */,
 				81EBD9B52212BD1D0011392E /* PracticeViewController.m */,
-				81E5853C22603F5900385F43 /* BindExp */,
+				81E34D9426117F9300C53092 /* YYText */,
+				81E34D83261177F100C53092 /* ReactiveCocoa */,
 				81E4F92122435D1C004724B4 /* Setting */,
 			);
 			path = Practice;
@@ -3989,6 +4026,7 @@
 				02F142EB2250C608008A442A /* L41.png in Resources */,
 				81FA8D772239088F00FE22A9 /* f028.png in Resources */,
 				81FA8DE32239088F00FE22A9 /* f056.png in Resources */,
+				81E34DA52611810A00C53092 /* ReactiveCocoa.storyboard in Resources */,
 				81FA8D9A2239088F00FE22A9 /* f070@2x.png in Resources */,
 				8140BCA4222F7712009D1D65 /* mutithread.png in Resources */,
 				81580B7C2394BC36005A25D1 /* Login.storyboard in Resources */,
@@ -4013,6 +4051,7 @@
 				81FA8D962239088F00FE22A9 /* f013.png in Resources */,
 				02E4BD7A2259D6A10056686C /* stage_5@2x.png in Resources */,
 				81FA8DA52239088F00FE22A9 /* f054@2x.png in Resources */,
+				81E34DA12611810200C53092 /* YYText.storyboard in Resources */,
 				81FA8DE72239088F00FE22A9 /* f080.png in Resources */,
 				81E7EF992237B2A6008CAD43 /* waterWave.gif in Resources */,
 				81FA8DA12239088F00FE22A9 /* f049.png in Resources */,
@@ -4156,6 +4195,7 @@
 				81E761AF2216699700811966 /* OCParamsInfo.m in Sources */,
 				81E0567323CC70B60003552C /* CoreTextViewController.m in Sources */,
 				81E53932221402E600D694CD /* LKPermissionCheck.m in Sources */,
+				81E34D862611783E00C53092 /* ReactiveCocoaViewController.m in Sources */,
 				81FA8E3922390C1200FE22A9 /* ChatEmojiCell.m in Sources */,
 				81ED14C924011DB200576FEA /* AVFoundationVC22.swift in Sources */,
 				81FABBE22232547C0084C645 /* DebugViewController.m in Sources */,
@@ -4168,6 +4208,7 @@
 				81EE98C4230D23520037FDCA /* MineViewController.m in Sources */,
 				81E53941221404A200D694CD /* LKLogManager.m in Sources */,
 				81E53955221404D900D694CD /* LKActionSheetCancleCell.m in Sources */,
+				81E34D9126117BFE00C53092 /* RACNormalViewController.m in Sources */,
 				81E7C88F221BF53300A034C3 /* PropertyCell.m in Sources */,
 				81EDD01322FBC7AC0006A52B /* ObserverMode.m in Sources */,
 				8149A9B3240BE0E400631664 /* Twitter.m in Sources */,
@@ -4190,6 +4231,7 @@
 				8179EC1D2251C46000B1AFBA /* XWPresentOneController.m in Sources */,
 				81E3A198221E798A0081D6D2 /* WKWebViewController+MessageHandler.m in Sources */,
 				81E7EF8B2237A52A008CAD43 /* AutomaticDimensionViewController.m in Sources */,
+				81E34D9726117FA200C53092 /* YYTextViewController.m in Sources */,
 				02F142EE2250E810008A442A /* UIView+Genie.m in Sources */,
 				81FABBDA22324AFD0084C645 /* NSObject+DLIntrospection.m in Sources */,
 				81EBD9B62212BD1D0011392E /* PracticeViewController.m in Sources */,

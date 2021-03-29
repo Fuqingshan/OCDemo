@@ -31,6 +31,8 @@
 @interface OCRouterPracticeModel : NSObject<YYModel>
 @property (nonatomic, strong) NSArray<OCRouterModel> *Practice;
 @property (nonatomic, strong) NSArray<OCRouterModel> *Setting;
+@property (nonatomic, strong) NSArray<OCRouterModel> *YYText;
+@property (nonatomic, strong) NSArray<OCRouterModel> *ReactiveCocoa;
 
 @property (nonatomic, strong) NSArray<OCRouterModel> *all;
 

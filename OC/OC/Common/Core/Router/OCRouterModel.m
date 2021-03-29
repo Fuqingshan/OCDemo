@@ -76,6 +76,12 @@
         for (OCRouterModel *model in self.Setting) {
             [models addObject:model];
         }
+        for (OCRouterModel *model in self.YYText) {
+            [models addObject:model];
+        }
+        for (OCRouterModel *model in self.ReactiveCocoa) {
+            [models addObject:model];
+        }
         _all = [models copy];
     }
     return _all;

@@ -1,23 +1,24 @@
 //
-//  PracticeViewController.m
+//  ReactiveCocoaViewController.m
 //  OC
 //
-//  Created by yier on 2019/2/12.
-//  Copyright © 2019 yier. All rights reserved.
+//  Created by yier on 2021/3/29.
+//  Copyright © 2021 yier. All rights reserved.
 //
 
-#import "PracticeViewController.h"
+#import "ReactiveCocoaViewController.h"
+#import "RACNormalViewController.h"
 
 #import <objc/message.h>
 
-@interface PracticeViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ReactiveCocoaViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSArray *dataSource;
 
 @end
 
-@implementation PracticeViewController
+@implementation ReactiveCocoaViewController
 
 - (void)dealloc{
     
@@ -30,40 +31,22 @@
 }
 
 - (void)setupUI{
-    self.navigationItem.title = LocalizedString(@"练习");
+    self.navigationItem.title = LocalizedString(@"ReactiveCocoa");
     self.tableView.tableFooterView = [UIView new];
     self.tableView.backgroundColor = [UIColor clearColor];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
-    [self setupBarButtons];
-}
-
-- (void)setupBarButtons{
-    UIButton *settingBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
-    [settingBtn setImage:[UIImage imageNamed:@"setting.png"] forState:UIControlStateNormal];
-    [settingBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [settingBtn addTarget:self action:@selector(tapSettingEvent) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *settingItem = [[UIBarButtonItem alloc] initWithCustomView:settingBtn];
-    self.navigationItem.rightBarButtonItem = settingItem;
-}
-
-- (void)tapSettingEvent{
-    [OCRouter openURL:[NSURL URLWithString:@"sumup://practice/setting"]];
 }
 
 - (void)changeLanguageEvent{
-    self.navigationItem.title = LocalizedString(@"练习");
+    self.navigationItem.title = LocalizedString(@"ReactiveCocoa");
 }
 
 - (void)initData{
 
     self.dataSource = @[
                         @{
-                            @"content":@"YYText"
-                            ,@"url":@"sumup://practice/yytext"
-                            }
-                        ,@{
-                            @"content":@"Rac练习"
-                            ,@"url":@"sumup://practice/rac"
+                            @"content":@"常见用法"
+                            ,@"sel":@"pushRACNormalVC"
                             }
                         ];
 
@@ -112,6 +95,12 @@
     } @finally {
         
     }
+}
+
+- (void)pushRACNormalVC{
+    RACNormalViewController *vc = [[RACNormalViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

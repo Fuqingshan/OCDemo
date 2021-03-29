@@ -21,6 +21,10 @@
 
 @implementation YYTextExampleEmailBindingParser
 
+- (void)dealloc{
+    
+}
+
 - (instancetype)init {
     self = [super init];
     NSString *pattern = @"[-_a-zA-Z@\\.]+[ ,\\n]";
@@ -29,7 +33,7 @@
 }
 - (BOOL)parseText:(NSMutableAttributedString *)text selectedRange:(NSRangePointer)range {
     __block BOOL changed = NO;
-    [_regex enumerateMatchesInString:text.string options:NSMatchingWithoutAnchoringBounds range:text.yy_rangeOfAll usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+    [self.regex enumerateMatchesInString:text.string options:NSMatchingWithoutAnchoringBounds range:text.yy_rangeOfAll usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
         if (!result) return;
         NSRange range = result.range;
         if (range.location == NSNotFound || range.length < 1) return;

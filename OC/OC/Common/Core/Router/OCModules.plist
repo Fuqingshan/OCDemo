@@ -465,6 +465,28 @@
 				<string>设置</string>
 			</dict>
 		</array>
+		<key>YYText</key>
+		<array>
+			<dict>
+				<key>url</key>
+				<string>sumup://practice/yytext</string>
+				<key>class</key>
+				<string>YYTextViewController</string>
+				<key>desc</key>
+				<string>YYText练习</string>
+			</dict>
+		</array>
+		<key>ReactiveCocoa</key>
+		<array>
+			<dict>
+				<key>url</key>
+				<string>sumup://practice/rac</string>
+				<key>class</key>
+				<string>ReactiveCocoaViewController</string>
+				<key>desc</key>
+				<string>rac练习</string>
+			</dict>
+		</array>
 	</dict>
 	<key>Mine</key>
 	<dict>
