@@ -19,6 +19,8 @@
 @property (nonatomic, strong) OCAudioPlayer *audioPlay;//背景音乐
 @property (nonatomic, strong) CustomAudioPlayer *customPlay;//自定义播放
 
+@property (nonatomic, strong) AVSpeechSynthesizer *synthesizer;
+
 @end
 
 @implementation AudioViewController
@@ -66,6 +68,10 @@
                             @"content":@"自定义播放器"
                             ,@"sel":@"customerPlay"
                             }
+                        ,@{
+                            @"content":@"语音朗读"
+                            ,@"sel":@"SpeechSelector"
+                        }
                         ];
     
     [self.tableView reloadData];
@@ -174,6 +180,21 @@
     NSLog(@"audioPlayerDidFinishPlaying");
 }
 
+#pragma mark - 语音朗读
+- (void)SpeechSelector{
+    //    [[AVAudioSession sharedInstance] setActive:YES error:nil];
+ //        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    
+     AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:@"读好书"];
+     //设置语言类别（不能被识别，返回值为nil）
+     AVSpeechSynthesisVoice *voiceType = [AVSpeechSynthesisVoice voiceWithLanguage:@"zh-CN"];
+     utterance.voice = voiceType;
+     //设置语速快慢(0.0 ~ 1.0)
+     utterance.rate = AVSpeechUtteranceDefaultSpeechRate;
+     //语音合成器会生成音频
+     [self.synthesizer speakUtterance:utterance];
+}
+
 #pragma mark - lazy load
 - (OCAudioPlayer *)audioPlay{
     if(!_audioPlay){
@@ -191,6 +212,13 @@
     }
     
     return _customPlay;
+}
+
+- (AVSpeechSynthesizer *)synthesizer{
+    if(!_synthesizer){
+        _synthesizer = [[AVSpeechSynthesizer alloc] init];
+    }
+    return _synthesizer;
 }
 
 @end
