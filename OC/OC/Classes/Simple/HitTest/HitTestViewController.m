@@ -70,7 +70,6 @@
     [path moveToPoint:pointStart];
     [path addCurveToPoint:pointEnd controlPoint1:controlPoint1 controlPoint2:controlPoint5];
     [path addCurveToPoint:pointStart controlPoint1:controlPoint6 controlPoint2:controlPoint4];
-    
     //    _view4.path = path;
 }
 

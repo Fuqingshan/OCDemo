@@ -91,6 +91,10 @@
 
 @implementation UICountingLabel
 
+- (void)dealloc{
+    
+}
+
 -(void)countFrom:(CGFloat)value to:(CGFloat)endValue {
     
     if (self.animationDuration == 0.0f) {

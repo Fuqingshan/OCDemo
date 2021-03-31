@@ -20,9 +20,9 @@
 
     UIView *view = [super hitTest:point withEvent:event];
     
-    //检测点击是否落在了centerBtn上
+    //检测点击是否落在了centerBtn上，且没有隐藏的情况下
     CGPoint hitPoint = [self.centerBtn convertPoint:point fromView:self];
-    if (![self.centerBtn pointInside:hitPoint withEvent:event]) {
+    if (![self.centerBtn pointInside:hitPoint withEvent:event] || self.hidden) {
         return view;
     }
 
