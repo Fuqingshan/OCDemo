@@ -9,8 +9,22 @@
 #import "LKActionSheetModel.h"
 
 @implementation LKActionSheetContentModel
++ (NSDictionary *)modelCustomPropertyMapper {
+    return @{
+             @"type":@"type",
+             @"content"  : @"content",
+             @"detail"  : @"detail"
+            };
+}
+
 @end
 
 @implementation LKActionSheetModel
+
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{
+             @"dataSource" : LKActionSheetContentModel.class,
+            };
+}
 
 @end

@@ -4,10 +4,11 @@
 static NSInteger const row = 5;
 static NSInteger const column = 5;
 
+@interface ZBFallenBricksAnimator()
+@property(nonatomic, strong) NSMutableArray *views;
+@end
+
 @implementation ZBFallenBricksAnimator
-{
-	NSMutableArray *views;
-}
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
 {
@@ -15,8 +16,8 @@ static NSInteger const column = 5;
 }
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext
 {
-	if (!views) {
-		views = [[NSMutableArray alloc] init];
+	if (!self.views) {
+        self.views = [[NSMutableArray alloc] init];
 	}
 
 	UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
@@ -36,7 +37,7 @@ static NSInteger const column = 5;
 			aView.transform = CGAffineTransformMakeRotation(angle);
 			aView.layer.borderWidth = 0.5;
 			aView.layer.backgroundColor = [UIColor colorWithWhite:1.0 alpha:1.0].CGColor;
-			[views addObject:aView];
+			[self.views addObject:aView];
 			[toVC.view insertSubview:aView atIndex:index];
 		}
 	}
@@ -45,15 +46,15 @@ static NSInteger const column = 5;
 
 	UIDynamicAnimator *animator = [[UIDynamicAnimator alloc] initWithReferenceView:toVC.view];
 	UIDynamicBehavior *behaviour = [[UIDynamicBehavior alloc] init];
-	UIGravityBehavior *gravityBehaviour = [[UIGravityBehavior alloc] initWithItems:views];
-	UICollisionBehavior *collisionBehavior = [[UICollisionBehavior alloc] initWithItems:views];
+	UIGravityBehavior *gravityBehaviour = [[UIGravityBehavior alloc] initWithItems:self.views];
+	UICollisionBehavior *collisionBehavior = [[UICollisionBehavior alloc] initWithItems:self.views];
 	collisionBehavior.translatesReferenceBoundsIntoBoundary = YES;
 	collisionBehavior.collisionMode = UICollisionBehaviorModeBoundaries;
 
 	[behaviour addChildBehavior:gravityBehaviour];
 	[behaviour addChildBehavior:collisionBehavior];
 
-	for (UIView *aView in views) {
+	for (UIView *aView in self.views) {
 		UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[aView]];
 		itemBehaviour.elasticity = (rand() % 5) / 8.0;
 		itemBehaviour.density = (rand() % 5 / 3.0);
@@ -65,14 +66,14 @@ static NSInteger const column = 5;
 	toVC.animator = animator;
 
 	[UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
-		for (UIView *aView in views) {
+		for (UIView *aView in self.views) {
 			aView.alpha = 0.0;
 		}
 	} completion:^(BOOL finished) {
-		for (UIView *view in views) {
+		for (UIView *view in self.views) {
 			[view removeFromSuperview];
 		}
-		[views removeAllObjects];
+		[self.views removeAllObjects];
 		[transitionContext completeTransition:YES];
 	}];
 }

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Rvl-AM-PyL" customClass="LivePushView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qln-ud-Vbe">
+                    <rect key="frame" x="344" y="194" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="SX2-kL-wiC"/>
+                        <constraint firstAttribute="width" constant="50" id="vXd-rJ-mcr"/>
+                    </constraints>
+                    <state key="normal" image="camra_beauty"/>
+                    <state key="selected" image="camra_beauty_close"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yGc-Bw-8Ak">
+                    <rect key="frame" x="344" y="264" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="bbK-A4-U6o"/>
+                        <constraint firstAttribute="width" constant="50" id="er2-3X-qZG"/>
+                    </constraints>
+                    <state key="normal" image="camra_preview"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ehf-e1-L6E">
+                    <rect key="frame" x="30" y="782" width="354" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="开始直播">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="未连接" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SIX-zw-97c">
+                    <rect key="frame" x="20" y="64" width="34" height="13.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DUB-2b-bY2">
+                    <rect key="frame" x="344" y="64" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="88k-VN-yhh"/>
+                        <constraint firstAttribute="height" constant="50" id="fuO-6A-ca1"/>
+                    </constraints>
+                    <state key="normal" image="close_preview"/>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="BPB-hL-PSR"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Ehf-e1-L6E" firstAttribute="leading" secondItem="BPB-hL-PSR" secondAttribute="leading" constant="30" id="98a-r0-Plj"/>
+                <constraint firstItem="DUB-2b-bY2" firstAttribute="top" secondItem="BPB-hL-PSR" secondAttribute="top" constant="20" id="M06-MB-L3u"/>
+                <constraint firstItem="BPB-hL-PSR" firstAttribute="bottom" secondItem="Ehf-e1-L6E" secondAttribute="bottom" constant="50" id="Mfw-EP-8QD"/>
+                <constraint firstItem="qln-ud-Vbe" firstAttribute="top" secondItem="BPB-hL-PSR" secondAttribute="top" constant="150" id="Qis-Xn-llZ"/>
+                <constraint firstItem="SIX-zw-97c" firstAttribute="top" secondItem="BPB-hL-PSR" secondAttribute="top" constant="20" id="TPt-M7-Zy5"/>
+                <constraint firstItem="BPB-hL-PSR" firstAttribute="trailing" secondItem="Ehf-e1-L6E" secondAttribute="trailing" constant="30" id="VOO-yO-Vm4"/>
+                <constraint firstItem="BPB-hL-PSR" firstAttribute="trailing" secondItem="qln-ud-Vbe" secondAttribute="trailing" constant="20" id="XYw-XD-EoL"/>
+                <constraint firstItem="SIX-zw-97c" firstAttribute="leading" secondItem="BPB-hL-PSR" secondAttribute="leading" constant="20" id="auV-eH-A4h"/>
+                <constraint firstItem="yGc-Bw-8Ak" firstAttribute="top" secondItem="qln-ud-Vbe" secondAttribute="bottom" constant="20" id="rHD-e5-mmp"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SIX-zw-97c" secondAttribute="trailing" constant="20" id="v8B-Hs-iT3"/>
+                <constraint firstItem="BPB-hL-PSR" firstAttribute="trailing" secondItem="yGc-Bw-8Ak" secondAttribute="trailing" constant="20" id="yug-ND-Ju9"/>
+                <constraint firstItem="BPB-hL-PSR" firstAttribute="trailing" secondItem="DUB-2b-bY2" secondAttribute="trailing" constant="20" id="zBk-j5-6Fo"/>
+            </constraints>
+            <connections>
+                <outlet property="beautyButton" destination="qln-ud-Vbe" id="n4C-ap-95d"/>
+                <outlet property="cameraButton" destination="yGc-Bw-8Ak" id="EFk-OL-geV"/>
+                <outlet property="closeButton" destination="DUB-2b-bY2" id="VLs-5A-v9N"/>
+                <outlet property="startLiveButton" destination="Ehf-e1-L6E" id="hvz-LL-g4H"/>
+                <outlet property="stateLabel" destination="SIX-zw-97c" id="szf-3t-68y"/>
+            </connections>
+            <point key="canvasLocation" x="-100" y="-512"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="camra_beauty" width="23" height="23"/>
+        <image name="camra_beauty_close" width="25" height="23"/>
+        <image name="camra_preview" width="22" height="19"/>
+        <image name="close_preview" width="18" height="18"/>
+    </resources>
+</document>

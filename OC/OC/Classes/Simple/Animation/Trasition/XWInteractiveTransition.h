@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^GestureConifg)();
+typedef void(^GestureConifg)(void);
 
 typedef NS_ENUM(NSUInteger, XWInteractiveTransitionGestureDirection) {//手势的方向
     XWInteractiveTransitionGestureDirectionLeft = 0,

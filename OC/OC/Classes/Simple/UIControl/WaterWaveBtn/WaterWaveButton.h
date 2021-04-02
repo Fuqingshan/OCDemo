@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^TapTarget)();
-typedef void(^WaterWaveButtonEndAnimation)();
+typedef void(^TapTarget)(void);
+typedef void(^WaterWaveButtonEndAnimation)(void);
 
 
 /**

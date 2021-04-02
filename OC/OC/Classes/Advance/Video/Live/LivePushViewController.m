@@ -16,15 +16,31 @@
 
 //推流 LFLiveKit：框架支持RTMP，由Adobe公司开发
 #import "LivePushViewController.h"
+#import "LivePushView.h"
 
 @interface LivePushViewController ()
-
+@property(nonatomic, strong) LivePushView *livePushView;
 @end
 
 @implementation LivePushViewController
 
 - (void)dealloc{
     
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    //禁用返回按钮，需要点击关闭按钮
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
 }
 
 - (void)viewDidLoad {
@@ -39,11 +55,20 @@
 
 - (void)setupUI{
     self.navigationItem.title = LocalizedString(@"直播推流");
+    [self.view addSubview:self.livePushView];
 }
 
 - (void)changeLanguageEvent{
     self.navigationItem.title = LocalizedString(@"直播推流");
     //更改样式之后刷新UI可以写在这儿
 }
+
+- (LivePushView *)livePushView{
+    if(!_livePushView){
+        _livePushView = [LivePushView initFromNib];
+    }
+    return _livePushView;
+}
+
 
 @end

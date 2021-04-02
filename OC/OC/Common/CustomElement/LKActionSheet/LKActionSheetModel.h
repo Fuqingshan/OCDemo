@@ -22,5 +22,5 @@ typedef NS_ENUM(NSInteger, LKActionSheetType) {
 @end
 
 @interface LKActionSheetModel : NSObject<YYModel>
-@property (nonatomic, strong) NSArray<LKActionSheetContentModel *> *dataSource;///<除开title和cancle按钮的其他按钮的标题
+@property (nonatomic, strong) NSArray *dataSource;///<除开title和cancle按钮的其他按钮的标题
 @end

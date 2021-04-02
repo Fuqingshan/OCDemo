@@ -11,6 +11,8 @@
 
 #import "UIControlHeader.h"
 
+#import "LKAlert.h"
+#import "LKActionSheet.h"
 #import "FQS_StartView.h"
 #import "UnReadBubbleView.h"
 #import "CustomButton.h"
@@ -70,6 +72,14 @@
 - (void)getDataSource{
     self.dataSource = @[
                         @{
+                            @"content":@"自定义alert"
+                            ,@"sel":@"alertSelector"
+                            }
+                        ,@{
+                            @"content":@"自定义actionsheet"
+                            ,@"sel":@"actionSheetSelector"
+                            }
+                        ,@{
                             @"content":@"星级评分(open/off)"
                             ,@"sel":@"StarSelector"
                             }
@@ -246,6 +256,29 @@
 //        NSLog(@"%f",scrollView.contentOffset.y);
         self.header.bgCH.constant = -scrollView.contentOffset.y+[UIControlHeader cellHeight];
     }
+}
+
+#pragma mark - Alert
+- (void)alertSelector{
+    [LKAlert initWithTitle:@"" image:[UIImage imageNamed:@"Icon"] message:@"真的要放弃吗？" buttons:@[@"放弃"] buttonBlock:^(NSInteger index) {
+        if (index == 0) {
+            NSLog(@"返回");
+        }else{
+            NSLog(@"我知道了");
+        }
+    }];
+}
+
+- (void)actionSheetSelector{
+    NSDictionary *dic = @{
+    @"dataSource":@[
+    @{@"type":@"0",@"content":@"选择添加银行卡的方式"}
+    ,@{@"type":@"1",@"content":@"从网银导入",@"detail":@"90%人选择"}
+    ,@{@"type":@"1",@"content":@"从邮箱导入"}
+    ,@{@"type":@"2",@"content":@"取消"}]
+    };
+    LKActionSheetModel *actionsheetModel = [LKActionSheetModel yy_modelWithDictionary:dic];
+     [LKActionSheet new].instance(actionsheetModel).show();
 }
 
 #pragma mark - 星级评分

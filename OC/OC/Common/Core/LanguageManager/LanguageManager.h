@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 extern NSString *const ChangeLanguageNotification;
 
 #define LocalizedString(key) NSLocalizedStringFromTableInBundle(key, @"Localizable", [LanguageManager shareInstance].bundle, nil)
 
-NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger,LanguageType) {
     LanguageTypeCH,///<中文

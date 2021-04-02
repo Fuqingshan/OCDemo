@@ -42,7 +42,6 @@ static CGFloat topConstraint = 64.0f;
 - (void)createBlackBackgroundView{
     UIView *bg = [UIView new];
     bg.tag = 'LABG';
-    bg.backgroundColor = [UIColor blackColor];
     bg.alpha = 0;
     [self addSubview:bg];
     [bg mas_makeConstraints:^(MASConstraintMaker *make) {

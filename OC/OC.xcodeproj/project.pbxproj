@@ -295,6 +295,22 @@
 		81E761AD2216699700811966 /* OCModules.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81E761992216699700811966 /* OCModules.plist */; };
 		81E761AE2216699700811966 /* OCRouter+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E761A32216699700811966 /* OCRouter+Common.m */; };
 		81E761AF2216699700811966 /* OCParamsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E761A42216699700811966 /* OCParamsInfo.m */; };
+		81E791772616E521003B9B69 /* LivePushView.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E791762616E521003B9B69 /* LivePushView.m */; };
+		81E7917B2616E52D003B9B69 /* LivePushView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81E7917A2616E52D003B9B69 /* LivePushView.xib */; };
+		81E791952616E860003B9B69 /* LKAlertImgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81E7917F2616E860003B9B69 /* LKAlertImgCell.xib */; };
+		81E791962616E860003B9B69 /* LKAlertCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E791802616E860003B9B69 /* LKAlertCircle.m */; };
+		81E791972616E860003B9B69 /* LKAlertModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E791812616E860003B9B69 /* LKAlertModel.m */; };
+		81E791982616E860003B9B69 /* LKAlertContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81E791822616E860003B9B69 /* LKAlertContentCell.xib */; };
+		81E791992616E860003B9B69 /* LKAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81E791842616E860003B9B69 /* LKAlert.xib */; };
+		81E7919A2616E860003B9B69 /* LKAlertContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E791872616E860003B9B69 /* LKAlertContentCell.m */; };
+		81E7919B2616E860003B9B69 /* LKAlertTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E791882616E860003B9B69 /* LKAlertTitleCell.m */; };
+		81E7919C2616E860003B9B69 /* LKAlertButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E791892616E860003B9B69 /* LKAlertButtonCell.m */; };
+		81E7919D2616E860003B9B69 /* LKAlertSpaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81E7918A2616E860003B9B69 /* LKAlertSpaceCell.xib */; };
+		81E7919E2616E860003B9B69 /* LKAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E7918B2616E860003B9B69 /* LKAlert.m */; };
+		81E7919F2616E860003B9B69 /* LKAlertTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81E7918E2616E860003B9B69 /* LKAlertTitleCell.xib */; };
+		81E791A02616E860003B9B69 /* LKAlertSpaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E791922616E860003B9B69 /* LKAlertSpaceCell.m */; };
+		81E791A12616E860003B9B69 /* LKAlertImgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E791932616E860003B9B69 /* LKAlertImgCell.m */; };
+		81E791A22616E860003B9B69 /* LKAlertButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81E791942616E860003B9B69 /* LKAlertButtonCell.xib */; };
 		81E7C87D221BD4C600A034C3 /* IntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E7C87C221BD4C600A034C3 /* IntroductionViewController.m */; };
 		81E7C881221BDB2800A034C3 /* ConstructorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E7C880221BDB2800A034C3 /* ConstructorViewController.m */; };
 		81E7C884221BDFD300A034C3 /* Eunuch.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E7C883221BDFD300A034C3 /* Eunuch.m */; };
@@ -1117,6 +1133,31 @@
 		81E761A22216699700811966 /* OCRouterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCRouterModel.h; sourceTree = "<group>"; };
 		81E761A32216699700811966 /* OCRouter+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OCRouter+Common.m"; sourceTree = "<group>"; };
 		81E761A42216699700811966 /* OCParamsInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCParamsInfo.m; sourceTree = "<group>"; };
+		81E791752616E521003B9B69 /* LivePushView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LivePushView.h; sourceTree = "<group>"; };
+		81E791762616E521003B9B69 /* LivePushView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LivePushView.m; sourceTree = "<group>"; };
+		81E7917A2616E52D003B9B69 /* LivePushView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LivePushView.xib; sourceTree = "<group>"; };
+		81E7917F2616E860003B9B69 /* LKAlertImgCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LKAlertImgCell.xib; sourceTree = "<group>"; };
+		81E791802616E860003B9B69 /* LKAlertCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAlertCircle.m; sourceTree = "<group>"; };
+		81E791812616E860003B9B69 /* LKAlertModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAlertModel.m; sourceTree = "<group>"; };
+		81E791822616E860003B9B69 /* LKAlertContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LKAlertContentCell.xib; sourceTree = "<group>"; };
+		81E791832616E860003B9B69 /* LKAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAlert.h; sourceTree = "<group>"; };
+		81E791842616E860003B9B69 /* LKAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LKAlert.xib; sourceTree = "<group>"; };
+		81E791852616E860003B9B69 /* LKAlertImgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAlertImgCell.h; sourceTree = "<group>"; };
+		81E791862616E860003B9B69 /* LKAlertSpaceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAlertSpaceCell.h; sourceTree = "<group>"; };
+		81E791872616E860003B9B69 /* LKAlertContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAlertContentCell.m; sourceTree = "<group>"; };
+		81E791882616E860003B9B69 /* LKAlertTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAlertTitleCell.m; sourceTree = "<group>"; };
+		81E791892616E860003B9B69 /* LKAlertButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAlertButtonCell.m; sourceTree = "<group>"; };
+		81E7918A2616E860003B9B69 /* LKAlertSpaceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LKAlertSpaceCell.xib; sourceTree = "<group>"; };
+		81E7918B2616E860003B9B69 /* LKAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAlert.m; sourceTree = "<group>"; };
+		81E7918C2616E860003B9B69 /* LKAlertModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAlertModel.h; sourceTree = "<group>"; };
+		81E7918D2616E860003B9B69 /* LKAlertCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAlertCircle.h; sourceTree = "<group>"; };
+		81E7918E2616E860003B9B69 /* LKAlertTitleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LKAlertTitleCell.xib; sourceTree = "<group>"; };
+		81E7918F2616E860003B9B69 /* LKAlertButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAlertButtonCell.h; sourceTree = "<group>"; };
+		81E791902616E860003B9B69 /* LKAlertTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAlertTitleCell.h; sourceTree = "<group>"; };
+		81E791912616E860003B9B69 /* LKAlertContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAlertContentCell.h; sourceTree = "<group>"; };
+		81E791922616E860003B9B69 /* LKAlertSpaceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAlertSpaceCell.m; sourceTree = "<group>"; };
+		81E791932616E860003B9B69 /* LKAlertImgCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAlertImgCell.m; sourceTree = "<group>"; };
+		81E791942616E860003B9B69 /* LKAlertButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LKAlertButtonCell.xib; sourceTree = "<group>"; };
 		81E7C87B221BD4C600A034C3 /* IntroductionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroductionViewController.h; sourceTree = "<group>"; };
 		81E7C87C221BD4C600A034C3 /* IntroductionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroductionViewController.m; sourceTree = "<group>"; };
 		81E7C87F221BDB2800A034C3 /* ConstructorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConstructorViewController.h; sourceTree = "<group>"; };
@@ -1905,6 +1946,9 @@
 				813B9B042615672000FC6D6B /* LivePushViewController.m */,
 				813B9B082615673500FC6D6B /* LivePlayerViewController.h */,
 				813B9B092615673500FC6D6B /* LivePlayerViewController.m */,
+				81E791752616E521003B9B69 /* LivePushView.h */,
+				81E791762616E521003B9B69 /* LivePushView.m */,
+				81E7917A2616E52D003B9B69 /* LivePushView.xib */,
 			);
 			path = Live;
 			sourceTree = "<group>";
@@ -2687,6 +2731,35 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		81E7917E2616E860003B9B69 /* LKAlert */ = {
+			isa = PBXGroup;
+			children = (
+				81E791832616E860003B9B69 /* LKAlert.h */,
+				81E7918B2616E860003B9B69 /* LKAlert.m */,
+				81E791842616E860003B9B69 /* LKAlert.xib */,
+				81E7918F2616E860003B9B69 /* LKAlertButtonCell.h */,
+				81E791892616E860003B9B69 /* LKAlertButtonCell.m */,
+				81E791942616E860003B9B69 /* LKAlertButtonCell.xib */,
+				81E7918D2616E860003B9B69 /* LKAlertCircle.h */,
+				81E791802616E860003B9B69 /* LKAlertCircle.m */,
+				81E791912616E860003B9B69 /* LKAlertContentCell.h */,
+				81E791872616E860003B9B69 /* LKAlertContentCell.m */,
+				81E791822616E860003B9B69 /* LKAlertContentCell.xib */,
+				81E791852616E860003B9B69 /* LKAlertImgCell.h */,
+				81E791932616E860003B9B69 /* LKAlertImgCell.m */,
+				81E7917F2616E860003B9B69 /* LKAlertImgCell.xib */,
+				81E7918C2616E860003B9B69 /* LKAlertModel.h */,
+				81E791812616E860003B9B69 /* LKAlertModel.m */,
+				81E791862616E860003B9B69 /* LKAlertSpaceCell.h */,
+				81E791922616E860003B9B69 /* LKAlertSpaceCell.m */,
+				81E7918A2616E860003B9B69 /* LKAlertSpaceCell.xib */,
+				81E791902616E860003B9B69 /* LKAlertTitleCell.h */,
+				81E791882616E860003B9B69 /* LKAlertTitleCell.m */,
+				81E7918E2616E860003B9B69 /* LKAlertTitleCell.xib */,
+			);
+			path = LKAlert;
+			sourceTree = "<group>";
+		};
 		81E7C87A221BD49800A034C3 /* Introduction */ = {
 			isa = PBXGroup;
 			children = (
@@ -2982,6 +3055,7 @@
 		81EBD97622129FAD0011392E /* CustomElement */ = {
 			isa = PBXGroup;
 			children = (
+				81E7917E2616E860003B9B69 /* LKAlert */,
 				81E3A190221E798A0081D6D2 /* WKWebView */,
 				81E53946221404D900D694CD /* LKActionSheet */,
 			);
@@ -3742,7 +3816,7 @@
 		81EBD95122129BE30011392E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = yier;
 				TargetAttributes = {
 					81EBD95822129BE30011392E = {
@@ -3794,6 +3868,7 @@
 				81E0567523CC71230003552C /* CoreText.storyboard in Resources */,
 				81FA8D742239088F00FE22A9 /* f040@2x.png in Resources */,
 				81FA8D832239088F00FE22A9 /* f042@2x.png in Resources */,
+				81E791952616E860003B9B69 /* LKAlertImgCell.xib in Resources */,
 				81FA8D7C2239088F00FE22A9 /* f015.png in Resources */,
 				81ED14CE24011DB200576FEA /* ring.png in Resources */,
 				81FA8E072239088F00FE22A9 /* f036.png in Resources */,
@@ -3841,6 +3916,7 @@
 				02E4BD8B2259D6A10056686C /* stage_3@2x.png in Resources */,
 				81FA8D762239088F00FE22A9 /* f014.png in Resources */,
 				81E538AC2213F64600D694CD /* LaunchScreen.storyboard in Resources */,
+				81E7919D2616E860003B9B69 /* LKAlertSpaceCell.xib in Resources */,
 				81E7EF7122378C3C008CAD43 /* backgroundStar@2x.png in Resources */,
 				81FA8D712239088F00FE22A9 /* f085@2x.png in Resources */,
 				81E538AD2213F64600D694CD /* Main.storyboard in Resources */,
@@ -3999,6 +4075,7 @@
 				81FA8D922239088F00FE22A9 /* f012.png in Resources */,
 				81E7EF902237A5F3008CAD43 /* AutomaticDimensionCell.xib in Resources */,
 				81E7C891221BF53300A034C3 /* PropertyCell.xib in Resources */,
+				81E791992616E860003B9B69 /* LKAlert.xib in Resources */,
 				81E4F93422435EE9004724B4 /* QRCode.storyboard in Resources */,
 				81E761AD2216699700811966 /* OCModules.plist in Resources */,
 				81FA8DC42239088F00FE22A9 /* f058.png in Resources */,
@@ -4013,6 +4090,7 @@
 				81FA8DDA2239088F00FE22A9 /* f097.png in Resources */,
 				81FA8D802239088F00FE22A9 /* f019@2x.png in Resources */,
 				81FA8DBC2239088F00FE22A9 /* f071.png in Resources */,
+				81E791982616E860003B9B69 /* LKAlertContentCell.xib in Resources */,
 				02E4BD852259D6A10056686C /* m5@2x.png in Resources */,
 				81E591C6224099DB001B71CA /* PhotoKit.png in Resources */,
 				81FA8E092239088F00FE22A9 /* f023.png in Resources */,
@@ -4040,6 +4118,7 @@
 				81FA8DD42239088F00FE22A9 /* f030@2x.png in Resources */,
 				81FA8D8C2239088F00FE22A9 /* f066@2x.png in Resources */,
 				8179EC1F2251C46000B1AFBA /* trasition_zrx3.jpg in Resources */,
+				81E791A22616E860003B9B69 /* LKAlertButtonCell.xib in Resources */,
 				81052EB123014E820083DC65 /* Audio.storyboard in Resources */,
 				81FA8DFB2239088F00FE22A9 /* f050.png in Resources */,
 				81052EAF23014D990083DC65 /* Video.storyboard in Resources */,
@@ -4085,6 +4164,7 @@
 				02E4BD972259D6A10056686C /* stage_4@2x.png in Resources */,
 				81FA8DAC2239088F00FE22A9 /* f063.png in Resources */,
 				81FA8E0C2239088F00FE22A9 /* f082@2x.png in Resources */,
+				81E7919F2616E860003B9B69 /* LKAlertTitleCell.xib in Resources */,
 				02E4BD932259D6A10056686C /* m32@2x.png in Resources */,
 				02E4BD842259D6A10056686C /* stage_7@2x.png in Resources */,
 				81FA8E142239088F00FE22A9 /* f059@2x.png in Resources */,
@@ -4098,6 +4178,7 @@
 				02E4BD7A2259D6A10056686C /* stage_5@2x.png in Resources */,
 				81FA8DA52239088F00FE22A9 /* f054@2x.png in Resources */,
 				81E34DA12611810200C53092 /* YYText.storyboard in Resources */,
+				81E7917B2616E52D003B9B69 /* LivePushView.xib in Resources */,
 				81FA8DE72239088F00FE22A9 /* f080.png in Resources */,
 				81E7EF992237B2A6008CAD43 /* waterWave.gif in Resources */,
 				81FA8DA12239088F00FE22A9 /* f049.png in Resources */,
@@ -4209,6 +4290,7 @@
 				81E538F72213FAD900D694CD /* UIFont+Safe.m in Sources */,
 				81F550BD223A34A500B924F9 /* JMPageControl.m in Sources */,
 				02E4BCCA2259D2C80056686C /* ZBFallenBricksAnimator.m in Sources */,
+				81E791A12616E860003B9B69 /* LKAlertImgCell.m in Sources */,
 				81E5393E221404A200D694CD /* LKSilenceLog.m in Sources */,
 				02E4BCA02259A2C30056686C /* Student.m in Sources */,
 				02E4BDC42259F1680056686C /* HitButton.m in Sources */,
@@ -4219,6 +4301,7 @@
 				8179EC1E2251C46000B1AFBA /* XWPresentedOneController.m in Sources */,
 				81E7C898221BFBC300A034C3 /* MsgForwardViewController.m in Sources */,
 				81052EAA23014D360083DC65 /* AudioViewController.m in Sources */,
+				81E7919E2616E860003B9B69 /* LKAlert.m in Sources */,
 				02E4BCCB2259D2C80056686C /* UIViewController+Animator.m in Sources */,
 				02E4BCA12259A2C30056686C /* Person.m in Sources */,
 				81E47978222E6FC3005F459A /* GCDViewController.m in Sources */,
@@ -4235,6 +4318,7 @@
 				81E34DB42611E37300C53092 /* RACIntervalViewController.m in Sources */,
 				81E5392A221402E600D694CD /* LKLocationTransform.m in Sources */,
 				81E5392F221402E600D694CD /* LKDeviceNetInfo.m in Sources */,
+				81E791972616E860003B9B69 /* LKAlertModel.m in Sources */,
 				81E5392D221402E600D694CD /* LKDeviceHardware.m in Sources */,
 				81052EB4230152D40083DC65 /* OCAudioPlayer.m in Sources */,
 				02E4BCB62259C53F0056686C /* HLThread.m in Sources */,
@@ -4276,8 +4360,10 @@
 				81E53933221402E600D694CD /* LKDeviceInfoModel.m in Sources */,
 				02F142E72250B851008A442A /* AnimationViewController.m in Sources */,
 				81EBD9A42212A7CD0011392E /* WMProgressView.m in Sources */,
+				81E791A02616E860003B9B69 /* LKAlertSpaceCell.m in Sources */,
 				8179EC1D2251C46000B1AFBA /* XWPresentOneController.m in Sources */,
 				81E3A198221E798A0081D6D2 /* WKWebViewController+MessageHandler.m in Sources */,
+				81E7919C2616E860003B9B69 /* LKAlertButtonCell.m in Sources */,
 				81E7EF8B2237A52A008CAD43 /* AutomaticDimensionViewController.m in Sources */,
 				81E34D9726117FA200C53092 /* YYTextViewController.m in Sources */,
 				02F142EE2250E810008A442A /* UIView+Genie.m in Sources */,
@@ -4310,6 +4396,7 @@
 				81EBD95E22129BE30011392E /* AppDelegate.m in Sources */,
 				81E539052213FAD900D694CD /* NSTimer+Addition.m in Sources */,
 				81E0569423CC71AB0003552C /* UIView+frameAdjust.m in Sources */,
+				81E7919A2616E860003B9B69 /* LKAlertContentCell.m in Sources */,
 				8179EC172251C46000B1AFBA /* XWPageCoverTransition.m in Sources */,
 				02E4BCC42259D24F0056686C /* PixelViewController.m in Sources */,
 				8149A9B6240BE0E400631664 /* TwitterViewController.m in Sources */,
@@ -4317,6 +4404,7 @@
 				81E5922E2240D71D001B71CA /* ContainerViewController.m in Sources */,
 				81E538F82213FAD900D694CD /* NSString+Helper.m in Sources */,
 				02E4BCA32259A2C30056686C /* RuntimeBaseModel.m in Sources */,
+				81E791772616E521003B9B69 /* LivePushView.m in Sources */,
 				81E538F52213FAD900D694CD /* NSObject+FindTopViewController.m in Sources */,
 				81ED14BB24011DB200576FEA /* AVFoundationVC16.m in Sources */,
 				81E53957221404D900D694CD /* LKActionSheetContentCell.m in Sources */,
@@ -4404,6 +4492,7 @@
 				81E53945221404BF00D694CD /* LKSafeData.m in Sources */,
 				81F550A5223A2B7F00B924F9 /* UICountingLabel.m in Sources */,
 				81E7C884221BDFD300A034C3 /* Eunuch.m in Sources */,
+				81E791962616E860003B9B69 /* LKAlertCircle.m in Sources */,
 				81ED14C024011DB200576FEA /* DisplayLinkDelloc.m in Sources */,
 				81E69FDE22153C690078CE80 /* LanguageManager.m in Sources */,
 				02E1BE87222EB76F005C4F61 /* main.m in Sources */,
@@ -4465,6 +4554,7 @@
 				81E7EF7622379110008CAD43 /* UnReadBubbleView.m in Sources */,
 				81EDD02222FBD0F80006A52B /* MemoMode.m in Sources */,
 				81C281B526030A8E003F606C /* PThreadViewController.m in Sources */,
+				81E7919B2616E860003B9B69 /* LKAlertTitleCell.m in Sources */,
 				81E591CA2240BD9D001B71CA /* WaterfallFlowViewController.m in Sources */,
 				02E4BCAD2259C4080056686C /* Runloop2ViewController.m in Sources */,
 				81EBD9A22212A7CD0011392E /* WMScrollView.m in Sources */,
@@ -4565,6 +4655,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -4590,7 +4681,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -4625,6 +4716,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -4644,10 +4736,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -4668,7 +4761,7 @@
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Resource/OC.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/$(PROJECT_NAME)/Resource/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4696,7 +4789,7 @@
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Resource/OC.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/$(PROJECT_NAME)/Resource/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

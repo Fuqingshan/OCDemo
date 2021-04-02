@@ -12,6 +12,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <MobileCoreServices/UTType.h>
 #import "AVFoundationVC5.h"
+#import "LKAlert.h"
 @interface AVFoundationVC6 ()
 @property(nonatomic, strong) AVMutableComposition *mutableComposition;
 @property(nonatomic, strong) AVMutableCompositionTrack *videoTrack;
@@ -155,8 +156,9 @@
         isSecondVideoPortrait = YES;
     }
     if ((isFirstVideoPortrait && !isSecondVideoPortrait) || (!isFirstVideoPortrait && isSecondVideoPortrait)) {
-        UIAlertView *incompatibleVideoOrientationAlert = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"Cannot combine a video shot in portrait mode with a video shot in landscape mode." delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-        [incompatibleVideoOrientationAlert show];
+        [LKAlert initWithTitle:@"Error!" image:[UIImage imageNamed:@"Icon"] message:@"Cannot combine a video shot in portrait mode with a video shot in landscape mode." buttons:@[@"Dismiss"] buttonBlock:^(NSInteger index) {
+                NSLog(@"dismiss");
+        }];
         return;
     }
     

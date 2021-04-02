@@ -109,6 +109,11 @@
 
 - (void)screenPan:(UIScreenEdgePanGestureRecognizer *)screenPan{
     
+    //如果当前tabbar是隐藏的，则侧滑展示`我的`页面不生效
+    if (self.tabbarVC.tabBar.hidden) {
+        return;;
+    }
+    
     float moveWidth = [screenPan translationInView:self.tabbarVC.view].x;
     //    float velocity = [screenPan velocityInView:tabbarVC.view].x;
     float percent = moveWidth/(self.tabbarVC.view.bounds.size.width*0.7);

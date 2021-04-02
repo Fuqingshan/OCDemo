@@ -39,7 +39,7 @@
                         <outlet property="tableView" destination="eez-GA-zyI" id="Se4-OT-3Ej"/>
                         <segue destination="QZa-Va-1Cy" kind="show" identifier="AVFoundation" id="xef-cn-0KQ"/>
                         <segue destination="T65-Tg-IQ9" kind="show" identifier="VideoPublish" id="aYz-HN-nYq"/>
-                        <segue destination="gVB-fU-OnB" kind="show" id="H9k-FT-BIs"/>
+                        <segue destination="gVB-fU-OnB" kind="show" identifier="LivePush" id="H9k-FT-BIs"/>
                         <segue destination="GdF-pA-gZt" kind="show" identifier="LivePlayer" id="7R7-80-bKE"/>
                         <segue destination="PQr-Xj-r7P" kind="show" identifier="VideoPlayer" id="ML2-OO-OAz"/>
                     </connections>

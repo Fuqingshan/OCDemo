@@ -17,8 +17,18 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    NSLog(@"currentVC:\n%@",self);
+    //    NSLog(@"currentVC:\n%@",self);
+
+    //默认显示，需要隐藏的页面重写viewWillAppear加上[self.navigationController setNavigationBarHidden:YES animated:YES]
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    //注意：需要禁用手势的页面只能在viewdidAppear禁用。在willapear禁用，如果从禁用的页面vc1 push到没有禁用的页面vc2，从vc2侧滑返回，此时willApear会走vc1的禁用方法，导致pop返回，但没有pop动画，此时页面会卡主
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -26,6 +26,7 @@ PODS:
     - CocoaLumberjack/Core (= 3.6.0)
   - CocoaLumberjack/Core (3.6.0)
   - fishhook (0.2)
+  - IJKMoviePlayer (0.8.8)
   - JLRoutes (2.1)
   - LFLiveKit (2.6)
   - Masonry (1.1.0)
@@ -59,6 +60,7 @@ DEPENDENCIES:
   - CKYPhotoBrowser
   - CocoaLumberjack (= 3.6.0)
   - fishhook
+  - IJKMoviePlayer (from `https://gitee.com/yier123456/IJKMoviePlayer.git`, tag `0.8.8`)
   - JLRoutes
   - LFLiveKit (from `https://gitee.com/yier123456/LFLiveKit.git`, tag `2.6`)
   - Masonry
@@ -100,6 +102,9 @@ SPEC REPOS:
     - YYWebImage
 
 EXTERNAL SOURCES:
+  IJKMoviePlayer:
+    :git: https://gitee.com/yier123456/IJKMoviePlayer.git
+    :tag: 0.8.8
   LFLiveKit:
     :git: https://gitee.com/yier123456/LFLiveKit.git
     :tag: '2.6'
@@ -107,6 +112,9 @@ EXTERNAL SOURCES:
     :path: "./LocalSpec/OpenSSL"
 
 CHECKOUT OPTIONS:
+  IJKMoviePlayer:
+    :git: https://gitee.com/yier123456/IJKMoviePlayer.git
+    :tag: 0.8.8
   LFLiveKit:
     :git: https://gitee.com/yier123456/LFLiveKit.git
     :tag: '2.6'
@@ -120,6 +128,7 @@ SPEC CHECKSUMS:
   CKYPhotoBrowser: ed30c642324e9341ce97709aa7afb82c7d1fdf96
   CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
   fishhook: ea19933abfe8f2f52c55fd8b6e2718467d3ebc89
+  IJKMoviePlayer: 4606a8f07e2aec6faa294f28d794424cf239d233
   JLRoutes: d755245322b94227662ea3e43492fdca94e05c5b
   LFLiveKit: 2219563721f8aa0f188effc3395a06e2d53b23f2
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
@@ -137,6 +146,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 16e3f6b7d5331ac0032015259738bf8016aa74d7
+PODFILE CHECKSUM: f61cb31eec4f3322204b6ac09e7306ed69117873
 
 COCOAPODS: 1.10.1
