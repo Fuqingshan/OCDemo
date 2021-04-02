@@ -94,11 +94,11 @@
 /*
  视频合成指令也可用于应用视频合成图层指令。 AVMutableVideoCompositionLayerInstruction对象可以对组合中的某个视频轨道应用变换，变换斜坡，不透明度和不透明度斜坡。 视频合成指令的layerInstructions数组中的图层指令的顺序决定了在构图指令的持续时间内，来自源轨道的视频帧应如何分层和组合。
 */
-//添加水印
+#pragma mark - 添加水印
 - (void)addWatermark{
     AVMutableVideoComposition *mutableVideoComposition = [AVMutableVideoComposition videoComposition];
 
-    UIImage *waterImage = [UIImage imageNamed:@""];
+    UIImage *waterImage = [UIImage imageNamed:@"AppIcon.png"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:waterImage];
     CALayer *watermarkLayer = imageView.layer;
     CALayer *parentLayer = [CALayer layer];

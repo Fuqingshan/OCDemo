@@ -110,7 +110,11 @@
     UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
         if ([[UIApplication sharedApplication] canOpenURL:url]) {
-            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+            if (@available(iOS 10.0, *)) {
+                [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+            } else {
+                // Fallback on earlier versions
+            }
         }
     }];
     

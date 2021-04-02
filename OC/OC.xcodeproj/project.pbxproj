@@ -129,6 +129,10 @@
 		81052EBC230153430083DC65 /* live_hangup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81052EB8230153430083DC65 /* live_hangup.mp3 */; };
 		81052EBF23015FF10083DC65 /* CustomAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 81052EBE23015FF10083DC65 /* CustomAudioPlayer.m */; };
 		810B86402240F03000397721 /* OCRouter+Mine.m in Sources */ = {isa = PBXBuildFile; fileRef = 810B863F2240F03000397721 /* OCRouter+Mine.m */; };
+		813B9B052615672000FC6D6B /* LivePushViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 813B9B042615672000FC6D6B /* LivePushViewController.m */; };
+		813B9B0A2615673500FC6D6B /* LivePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 813B9B092615673500FC6D6B /* LivePlayerViewController.m */; };
+		813B9B1126156AA200FC6D6B /* VideoPublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 813B9B1026156AA200FC6D6B /* VideoPublishViewController.m */; };
+		813B9B352615ADCF00FC6D6B /* VideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 813B9B342615ADCF00FC6D6B /* VideoPlayerViewController.m */; };
 		8140BC9B222F6D51009D1D65 /* Memory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8140BC9A222F6D51009D1D65 /* Memory.storyboard */; };
 		8140BC9D222F6E02009D1D65 /* Introduction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8140BC9C222F6E02009D1D65 /* Introduction.storyboard */; };
 		8140BC9F222F722F009D1D65 /* Advantage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8140BC9E222F722F009D1D65 /* Advantage.storyboard */; };
@@ -806,6 +810,14 @@
 		81052EBE23015FF10083DC65 /* CustomAudioPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomAudioPlayer.m; sourceTree = "<group>"; };
 		810B863E2240F03000397721 /* OCRouter+Mine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OCRouter+Mine.h"; sourceTree = "<group>"; };
 		810B863F2240F03000397721 /* OCRouter+Mine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "OCRouter+Mine.m"; sourceTree = "<group>"; };
+		813B9B032615672000FC6D6B /* LivePushViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LivePushViewController.h; sourceTree = "<group>"; };
+		813B9B042615672000FC6D6B /* LivePushViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LivePushViewController.m; sourceTree = "<group>"; };
+		813B9B082615673500FC6D6B /* LivePlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LivePlayerViewController.h; sourceTree = "<group>"; };
+		813B9B092615673500FC6D6B /* LivePlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LivePlayerViewController.m; sourceTree = "<group>"; };
+		813B9B0F26156AA200FC6D6B /* VideoPublishViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoPublishViewController.h; sourceTree = "<group>"; };
+		813B9B1026156AA200FC6D6B /* VideoPublishViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoPublishViewController.m; sourceTree = "<group>"; };
+		813B9B332615ADCF00FC6D6B /* VideoPlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewController.h; sourceTree = "<group>"; };
+		813B9B342615ADCF00FC6D6B /* VideoPlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerViewController.m; sourceTree = "<group>"; };
 		8140BC9A222F6D51009D1D65 /* Memory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Memory.storyboard; sourceTree = "<group>"; };
 		8140BC9C222F6E02009D1D65 /* Introduction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Introduction.storyboard; sourceTree = "<group>"; };
 		8140BC9E222F722F009D1D65 /* Advantage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Advantage.storyboard; sourceTree = "<group>"; };
@@ -1858,6 +1870,8 @@
 				81052EAB23014D430083DC65 /* VideoViewController.h */,
 				81052EAC23014D430083DC65 /* VideoViewController.m */,
 				81ED148F24011A9600576FEA /* AVFoundation */,
+				813B9B01261566CD00FC6D6B /* VideoPublish */,
+				813B9B02261566FC00FC6D6B /* Live */,
 			);
 			path = Video;
 			sourceTree = "<group>";
@@ -1871,6 +1885,28 @@
 				81052EB7230153430083DC65 /* live_waiting.mp3 */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		813B9B01261566CD00FC6D6B /* VideoPublish */ = {
+			isa = PBXGroup;
+			children = (
+				813B9B0F26156AA200FC6D6B /* VideoPublishViewController.h */,
+				813B9B1026156AA200FC6D6B /* VideoPublishViewController.m */,
+				813B9B332615ADCF00FC6D6B /* VideoPlayerViewController.h */,
+				813B9B342615ADCF00FC6D6B /* VideoPlayerViewController.m */,
+			);
+			path = VideoPublish;
+			sourceTree = "<group>";
+		};
+		813B9B02261566FC00FC6D6B /* Live */ = {
+			isa = PBXGroup;
+			children = (
+				813B9B032615672000FC6D6B /* LivePushViewController.h */,
+				813B9B042615672000FC6D6B /* LivePushViewController.m */,
+				813B9B082615673500FC6D6B /* LivePlayerViewController.h */,
+				813B9B092615673500FC6D6B /* LivePlayerViewController.m */,
+			);
+			path = Live;
 			sourceTree = "<group>";
 		};
 		8140BCA5222F9C57009D1D65 /* Queue */ = {
@@ -4261,6 +4297,7 @@
 				81E30D0622239B37003D215D /* FoundationBridgeViewController.m in Sources */,
 				81E0569323CC71AB0003552C /* CoreTextImageData.m in Sources */,
 				81E7EF5D22375B14008CAD43 /* NSObject+Hex.m in Sources */,
+				813B9B052615672000FC6D6B /* LivePushViewController.m in Sources */,
 				8179EBEB2251C3CE00B1AFBA /* UIView+anchorPoint.m in Sources */,
 				81E7EF5522374A44008CAD43 /* NSString+AES.m in Sources */,
 				02F143092251032A008A442A /* PPBannerView.m in Sources */,
@@ -4313,8 +4350,10 @@
 				81FA8E35223908FC00FE22A9 /* ChatEmojiViewController.m in Sources */,
 				81E539082213FAD900D694CD /* NSNumber+Formatter.m in Sources */,
 				81F8654A22FADAEA0026C1A2 /* FactoryChild3.m in Sources */,
+				813B9B0A2615673500FC6D6B /* LivePlayerViewController.m in Sources */,
 				81E3A197221E798A0081D6D2 /* WKWebView+Crash.m in Sources */,
 				81E538FC2213FAD900D694CD /* UIView+Animation.m in Sources */,
+				813B9B1126156AA200FC6D6B /* VideoPublishViewController.m in Sources */,
 				81E7EF972237AEC1008CAD43 /* WaterWaveButton.m in Sources */,
 				81E3A19C221E7B0E0081D6D2 /* NetworkErrorView.m in Sources */,
 				02E4BCD82259D2DE0056686C /* HUTransitionHorizontalLinesAnimator.m in Sources */,
@@ -4370,6 +4409,7 @@
 				02E1BE87222EB76F005C4F61 /* main.m in Sources */,
 				81E53931221402E600D694CD /* LKDeviceCollect.m in Sources */,
 				81EDD02C22FBF82D0006A52B /* AdapterMode.m in Sources */,
+				813B9B352615ADCF00FC6D6B /* VideoPlayerViewController.m in Sources */,
 				81E761A52216699700811966 /* OCRouter+Advance.m in Sources */,
 				81E761A72216699700811966 /* OCRouterFastCreate.m in Sources */,
 				81E7C894221BF5CF00A034C3 /* Dog.m in Sources */,

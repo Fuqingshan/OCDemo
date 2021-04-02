@@ -428,6 +428,38 @@
 				<key>desc</key>
 				<string>AVFoundation</string>
 			</dict>
+			<dict>
+				<key>url</key>
+				<string>sumup://advance/video/videopublish</string>
+				<key>class</key>
+				<string>VideoPublishViewController</string>
+				<key>desc</key>
+				<string>短视频上传</string>
+			</dict>
+			<dict>
+				<key>url</key>
+				<string>sumup://advance/video/videoplayer</string>
+				<key>class</key>
+				<string>VideoPlayerViewController</string>
+				<key>desc</key>
+				<string>短视频播放</string>
+			</dict>
+			<dict>
+				<key>url</key>
+				<string>sumup://advance/video/livepush</string>
+				<key>class</key>
+				<string>LivePushViewController</string>
+				<key>desc</key>
+				<string>直播推流</string>
+			</dict>
+			<dict>
+				<key>url</key>
+				<string>sumup://advance/video/liveplayer</string>
+				<key>class</key>
+				<string>LivePlayerViewController</string>
+				<key>desc</key>
+				<string>直播拉流</string>
+			</dict>
 		</array>
 		<key>CoreText</key>
 		<array>

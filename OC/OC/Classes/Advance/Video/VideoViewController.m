@@ -57,7 +57,19 @@
                             }
                         ,@{
                             @"content":@"视频的编辑和拍摄GPUImage"
-                            ,@"url":@"待添加"
+                            ,@"url":@"sumup://advance/video/videopublish"
+                            }
+                        ,@{
+                            @"content":@"短视频播放"
+                            ,@"url":@"sumup://advance/video/videoplayer"
+                            }
+                        ,@{
+                            @"content":@"直播推流"
+                            ,@"url":@"sumup://advance/video/livepush"
+                            }
+                        ,@{
+                            @"content":@"直播拉流"
+                            ,@"url":@"sumup://advance/video/liveplayer"
                             }
                         ];
     

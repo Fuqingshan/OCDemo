@@ -6,6 +6,7 @@
 //  Copyright © 2020 yier. All rights reserved.
 //
 
+//https://www.jianshu.com/p/6ff0e380f1d3
 #import "AVFoundationViewController.h"
 
 @interface AVFoundationViewController ()<UITableViewDelegate,UITableViewDataSource>

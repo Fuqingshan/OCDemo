@@ -106,7 +106,8 @@ static NSInteger secsPerHour = 60 * 60;
     }
 }
 
--(void)createDisplayLink{    
+-(void)createDisplayLink{
+    //引入NSProxy持有self，这样self->CADisplayLink之间没有循环引用，页面返回时能直接走dealloc
     DisplayLinkDelloc *displaylinkDealloc = [DisplayLinkDelloc weakProxyForObject:self];
     self.updater = [CADisplayLink displayLinkWithTarget:displaylinkDealloc selector:@selector(updateUI)];
     [self.updater addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];

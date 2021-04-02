@@ -66,7 +66,7 @@
     [self.view addSubview:self.changeFilterButton];
     
     self.captureButton = [[UIButton alloc] initWithFrame:CGRectMake(100, 700, 120, 30)];
-    [self.captureButton setTitle:@"开始录制" forState:UIControlStateNormal];
+    [self.captureButton setTitle:@"开始录制/停止录制" forState:UIControlStateNormal];
     [self.captureButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     [self.captureButton addTarget:self action:@selector(didClickCapture) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.captureButton];

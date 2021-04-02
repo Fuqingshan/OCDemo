@@ -53,6 +53,18 @@
     else if([[url path] isEqualToString:@"/video/avfoundation"]) {
         [self showViewControllerByIdentifier:@"AVFoundationVC" storyboardName:@"Video"];
     }
+    else if([[url path] isEqualToString:@"/video/videopublish"]) {
+        [self showViewControllerByIdentifier:@"VideoPublishVC" storyboardName:@"Video"];
+    }
+    else if([[url path] isEqualToString:@"/video/videoplayer"]) {
+        [self showViewControllerByIdentifier:@"VideoPlayerVC" storyboardName:@"Video"];
+    }
+    else if([[url path] isEqualToString:@"/video/livepush"]) {
+        [self showViewControllerByIdentifier:@"LivePushVC" storyboardName:@"Video"];
+    }
+    else if([[url path] isEqualToString:@"/video/liveplayer"]) {
+        [self showViewControllerByIdentifier:@"LivePlayerVC" storyboardName:@"Video"];
+    }
     //CoreText
     else if([[url path] isEqualToString:@"/coretext"]) {
         [self showViewControllerByIdentifier:@"CoreTextVC" storyboardName:@"CoreText"];
