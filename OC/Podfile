@@ -32,8 +32,8 @@ target 'OC' do
   #直播推流，源地址：https://github.com/LaiFengiOS/LFLiveKit
   pod 'LFLiveKit', :git => 'https://gitee.com/yier123456/LFLiveKit.git’, :tag => ‘2.6'
   
-  #直播拉流用的IJK,源地址：https://github.com/ChaneyLau/IJKMoviePlayer
-  pod 'IJKMoviePlayer', :git => 'https://gitee.com/yier123456/IJKMoviePlayer.git’, :tag => ‘0.8.8'
+  #直播拉流用的IJK,源地址：
+  pod 'IJKMediaFramework', :git => 'https://gitee.com/renzifeng/IJKMediaFramework.git’, :tag => ‘0.1.5'
 
 end
 
