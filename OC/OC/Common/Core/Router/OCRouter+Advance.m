@@ -46,6 +46,9 @@
     else if([[url path] isEqualToString:@"/audio"]) {
         [self showViewControllerByIdentifier:@"AudioVC" storyboardName:@"Audio"];
     }
+    else if([[url path] isEqualToString:@"/audio/audioequalizer"]) {
+        [self showViewControllerByIdentifier:@"AudioEqualizerVC" storyboardName:@"Audio"];
+    }
     //Video
     else if([[url path] isEqualToString:@"/video"]) {
         [self showViewControllerByIdentifier:@"VideoVC" storyboardName:@"Video"];

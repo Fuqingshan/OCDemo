@@ -15,7 +15,7 @@ target 'OC' do
   pod 'MJRefresh','3.2.2'
   pod 'OpenSSL',:path => './LocalSpec/OpenSSL'
   pod 'CocoaLumberjack','3.6.0'
-  pod 'fishhook'
+  pod 'fishhook', :git => 'https://github.com/facebook/fishhook.git'
   pod 'Bugly'
   pod 'SAMKeychain'
   pod 'ReactiveObjC'
@@ -34,6 +34,9 @@ target 'OC' do
   
   #直播拉流用的IJK,源地址：
   pod 'IJKMediaFramework', :git => 'https://gitee.com/renzifeng/IJKMediaFramework.git’, :tag => ‘0.1.5'
+  
+  #可以换成audioKit
+  pod 'TheAmazingAudioEngine'
 
 end
 

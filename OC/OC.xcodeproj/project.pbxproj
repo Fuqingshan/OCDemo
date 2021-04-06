@@ -175,6 +175,12 @@
 		8179EC2F2251FCE200B1AFBA /* DrawCircleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8179EC2E2251FCE200B1AFBA /* DrawCircleViewController.m */; };
 		819E6544221A8BD9008C2B9D /* AdvantageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 819E6543221A8BD9008C2B9D /* AdvantageViewController.m */; };
 		819E6548221AA28D008C2B9D /* FoundationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 819E6547221AA28D008C2B9D /* FoundationViewController.m */; };
+		81BAD8F0261C0B0200107AFA /* AudioEqualizerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BAD8EF261C0B0200107AFA /* AudioEqualizerViewController.m */; };
+		81BAD91C261C0FDE00107AFA /* 百战成诗.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81BAD91B261C0FDE00107AFA /* 百战成诗.mp3 */; };
+		81BAD927261C241B00107AFA /* UploadGarageBandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BAD926261C241B00107AFA /* UploadGarageBandViewController.m */; };
+		81BAD92B261C244800107AFA /* bandfolder.band in Resources */ = {isa = PBXBuildFile; fileRef = 81BAD92A261C244800107AFA /* bandfolder.band */; };
+		81BAD933261C26CA00107AFA /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BAD930261C26CA00107AFA /* libmp3lame.a */; };
+		81BAD934261C26CA00107AFA /* ExtAudioConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BAD931261C26CA00107AFA /* ExtAudioConverter.m */; };
 		81C281B526030A8E003F606C /* PThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C281B426030A8E003F606C /* PThreadViewController.m */; };
 		81E0567323CC70B60003552C /* CoreTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E0567223CC70B60003552C /* CoreTextViewController.m */; };
 		81E0567523CC71230003552C /* CoreText.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81E0567423CC71230003552C /* CoreText.storyboard */; };
@@ -906,6 +912,16 @@
 		819E6543221A8BD9008C2B9D /* AdvantageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdvantageViewController.m; sourceTree = "<group>"; };
 		819E6546221AA28D008C2B9D /* FoundationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoundationViewController.h; sourceTree = "<group>"; };
 		819E6547221AA28D008C2B9D /* FoundationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoundationViewController.m; sourceTree = "<group>"; };
+		81BAD8EE261C0B0200107AFA /* AudioEqualizerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioEqualizerViewController.h; sourceTree = "<group>"; };
+		81BAD8EF261C0B0200107AFA /* AudioEqualizerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioEqualizerViewController.m; sourceTree = "<group>"; };
+		81BAD91B261C0FDE00107AFA /* 百战成诗.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "百战成诗.mp3"; sourceTree = "<group>"; };
+		81BAD925261C241B00107AFA /* UploadGarageBandViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadGarageBandViewController.h; sourceTree = "<group>"; };
+		81BAD926261C241B00107AFA /* UploadGarageBandViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadGarageBandViewController.m; sourceTree = "<group>"; };
+		81BAD92A261C244800107AFA /* bandfolder.band */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = bandfolder.band; sourceTree = "<group>"; };
+		81BAD92F261C26CA00107AFA /* ExtAudioConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtAudioConverter.h; sourceTree = "<group>"; };
+		81BAD930261C26CA00107AFA /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
+		81BAD931261C26CA00107AFA /* ExtAudioConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtAudioConverter.m; sourceTree = "<group>"; };
+		81BAD932261C26CA00107AFA /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
 		81C281B326030A8E003F606C /* PThreadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PThreadViewController.h; sourceTree = "<group>"; };
 		81C281B426030A8E003F606C /* PThreadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PThreadViewController.m; sourceTree = "<group>"; };
 		81E0567123CC70B60003552C /* CoreTextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreTextViewController.h; sourceTree = "<group>"; };
@@ -1602,6 +1618,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28D91D224AC50DA2FFCFC9ED /* libPods-OC.a in Frameworks */,
+				81BAD933261C26CA00107AFA /* libmp3lame.a in Frameworks */,
 				02E4BCB82259C72B0056686C /* CrashReporter.framework in Frameworks */,
 				814C0FC1258F438B0013AD98 /* PhotosUI.framework in Frameworks */,
 			);
@@ -1900,6 +1917,10 @@
 				81052EB3230152D40083DC65 /* OCAudioPlayer.m */,
 				81052EBD23015FF10083DC65 /* CustomAudioPlayer.h */,
 				81052EBE23015FF10083DC65 /* CustomAudioPlayer.m */,
+				81BAD8EE261C0B0200107AFA /* AudioEqualizerViewController.h */,
+				81BAD8EF261C0B0200107AFA /* AudioEqualizerViewController.m */,
+				81BAD925261C241B00107AFA /* UploadGarageBandViewController.h */,
+				81BAD926261C241B00107AFA /* UploadGarageBandViewController.m */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -1920,10 +1941,12 @@
 		81052EA523014CA80083DC65 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				81BAD92A261C244800107AFA /* bandfolder.band */,
 				81052EB6230153430083DC65 /* live_busy.mp3 */,
 				81052EB8230153430083DC65 /* live_hangup.mp3 */,
 				81052EB5230153420083DC65 /* live_preWaiting.mp3 */,
 				81052EB7230153430083DC65 /* live_waiting.mp3 */,
+				81BAD91B261C0FDE00107AFA /* 百战成诗.mp3 */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -2105,6 +2128,17 @@
 				81E4B44322263ECC008576B9 /* SubProxy.m */,
 			);
 			path = Foundation;
+			sourceTree = "<group>";
+		};
+		81BAD92E261C26CA00107AFA /* libmp3 */ = {
+			isa = PBXGroup;
+			children = (
+				81BAD92F261C26CA00107AFA /* ExtAudioConverter.h */,
+				81BAD930261C26CA00107AFA /* libmp3lame.a */,
+				81BAD931261C26CA00107AFA /* ExtAudioConverter.m */,
+				81BAD932261C26CA00107AFA /* lame.h */,
+			);
+			path = libmp3;
 			sourceTree = "<group>";
 		};
 		81C281B226030A57003F606C /* PThread */ = {
@@ -3081,6 +3115,7 @@
 			isa = PBXGroup;
 			children = (
 				81EBD99A2212A7CD0011392E /* PSPDFUIKitMainThreadGuard.m */,
+				81BAD92E261C26CA00107AFA /* libmp3 */,
 				02F142F22251032A008A442A /* PPBanner */,
 				81E4F91A224330FD004724B4 /* JImagePickerManager */,
 				81EBD97F2212A7CC0011392E /* iCarousel */,
@@ -3900,6 +3935,7 @@
 				81FA8E292239088F00FE22A9 /* f061@2x.png in Resources */,
 				81FA8DF12239088F00FE22A9 /* f091.png in Resources */,
 				02E4BD7F2259D6A10056686C /* m19@2x.png in Resources */,
+				81BAD92B261C244800107AFA /* bandfolder.band in Resources */,
 				81FA8D812239088F00FE22A9 /* f007@2x.png in Resources */,
 				8179EC242251C46000B1AFBA /* trasition_pic2.jpeg in Resources */,
 				81FA8E172239088F00FE22A9 /* f008.png in Resources */,
@@ -3988,6 +4024,7 @@
 				02E1BE88222EB76F005C4F61 /* Assets.xcassets in Resources */,
 				81FA8DFE2239088F00FE22A9 /* f043@2x.png in Resources */,
 				81E5395B221404D900D694CD /* LKActionSheetTitleCell.xib in Resources */,
+				81BAD91C261C0FDE00107AFA /* 百战成诗.mp3 in Resources */,
 				81FA8DCF2239088F00FE22A9 /* f055.png in Resources */,
 				02E4BDA42259D6A10056686C /* m38@2x.png in Resources */,
 				02E4BD9C2259D6A10056686C /* sample.jpg in Resources */,
@@ -4346,6 +4383,7 @@
 				8149A9B3240BE0E400631664 /* Twitter.m in Sources */,
 				81ED14C524011DB200576FEA /* VideoTableViewCell.swift in Sources */,
 				8179EC212251C46000B1AFBA /* XWCircleSpreadPresentedController.m in Sources */,
+				81BAD934261C26CA00107AFA /* ExtAudioConverter.m in Sources */,
 				81ED149224011BB200576FEA /* AVFoundationViewController.m in Sources */,
 				81EBD9A62212A7CD0011392E /* PSPDFUIKitMainThreadGuard.m in Sources */,
 				81E47974222E123E005F459A /* MultithreadViewController.m in Sources */,
@@ -4393,6 +4431,7 @@
 				81ED15B7240557A800576FEA /* VideoWriteManager.m in Sources */,
 				81E5388F2213CB6900D694CD /* BaseTabBarViewController.m in Sources */,
 				81ED14CA24011DB200576FEA /* VideoEditor.m in Sources */,
+				81BAD927261C241B00107AFA /* UploadGarageBandViewController.m in Sources */,
 				81EBD95E22129BE30011392E /* AppDelegate.m in Sources */,
 				81E539052213FAD900D694CD /* NSTimer+Addition.m in Sources */,
 				81E0569423CC71AB0003552C /* UIView+frameAdjust.m in Sources */,
@@ -4544,6 +4583,7 @@
 				81E7EF4F22374A1A008CAD43 /* GTMBase64.m in Sources */,
 				81ED15962403C27700576FEA /* UnitTestPerson.m in Sources */,
 				81E3A1A4221EAC160081D6D2 /* OCMemoryViewController.m in Sources */,
+				81BAD8F0261C0B0200107AFA /* AudioEqualizerViewController.m in Sources */,
 				81ED14BD24011DB200576FEA /* AVFoundationVC5.m in Sources */,
 				81E0569123CC71AB0003552C /* CTDisplayView.m in Sources */,
 				81E7EF4A22374817008CAD43 /* NSString+MD5.m in Sources */,
@@ -4766,6 +4806,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OC/Common/ThirdParty/libmp3",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yier.sumup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -4793,6 +4837,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OC/Common/ThirdParty/libmp3",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yier.sumup;
 				PRODUCT_NAME = "$(TARGET_NAME)";

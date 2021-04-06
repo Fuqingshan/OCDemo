@@ -72,6 +72,10 @@
                             @"content":@"语音朗读"
                             ,@"sel":@"SpeechSelector"
                         }
+                        ,@{
+                            @"content":@"均衡器"
+                            ,@"url":@"sumup://advance/audio/audioequalizer"
+                        }
                         ];
     
     [self.tableView reloadData];
@@ -192,7 +196,7 @@
      //设置语速快慢(0.0 ~ 1.0)
      utterance.rate = AVSpeechUtteranceDefaultSpeechRate;
      //语音合成器会生成音频
-     [self.synthesizer speakUtterance:utterance];
+    [self.synthesizer speakUtterance:utterance];
 }
 
 #pragma mark - lazy load

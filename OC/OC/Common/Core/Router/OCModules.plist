@@ -409,6 +409,14 @@
 				<key>desc</key>
 				<string>音频</string>
 			</dict>
+			<dict>
+				<key>url</key>
+				<string>sumup://advance/audio/audioequalizer</string>
+				<key>class</key>
+				<string>AudioEqualizer ViewController</string>
+				<key>desc</key>
+				<string>音频均衡器</string>
+			</dict>
 		</array>
 		<key>Video</key>
 		<array>

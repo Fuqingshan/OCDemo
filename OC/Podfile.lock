@@ -39,6 +39,7 @@ PODS:
   - SDWebImage (5.11.0):
     - SDWebImage/Core (= 5.11.0)
   - SDWebImage/Core (5.11.0)
+  - TheAmazingAudioEngine (1.5.8)
   - YYCache (1.0.4)
   - YYCategories (1.0.4):
     - YYCategories/no-arc (= 1.0.4)
@@ -59,7 +60,7 @@ DEPENDENCIES:
   - Bugly
   - CKYPhotoBrowser
   - CocoaLumberjack (= 3.6.0)
-  - fishhook
+  - fishhook (from `https://github.com/facebook/fishhook.git`)
   - IJKMediaFramework (from `https://gitee.com/renzifeng/IJKMediaFramework.git`, tag `0.1.5`)
   - JLRoutes
   - LFLiveKit (from `https://gitee.com/yier123456/LFLiveKit.git`, tag `2.6`)
@@ -71,6 +72,7 @@ DEPENDENCIES:
   - ReactiveObjC
   - SAMKeychain
   - SDWebImage
+  - TheAmazingAudioEngine
   - YYCategories
   - YYImage
   - YYModel
@@ -85,7 +87,6 @@ SPEC REPOS:
     - Bugly
     - CKYPhotoBrowser
     - CocoaLumberjack
-    - fishhook
     - JLRoutes
     - Masonry
     - MBProgressHUD
@@ -94,6 +95,7 @@ SPEC REPOS:
     - ReactiveObjC
     - SAMKeychain
     - SDWebImage
+    - TheAmazingAudioEngine
     - YYCache
     - YYCategories
     - YYImage
@@ -102,6 +104,8 @@ SPEC REPOS:
     - YYWebImage
 
 EXTERNAL SOURCES:
+  fishhook:
+    :git: https://github.com/facebook/fishhook.git
   IJKMediaFramework:
     :git: https://gitee.com/renzifeng/IJKMediaFramework.git
     :tag: 0.1.5
@@ -112,6 +116,9 @@ EXTERNAL SOURCES:
     :path: "./LocalSpec/OpenSSL"
 
 CHECKOUT OPTIONS:
+  fishhook:
+    :commit: 8ef82f0711494ecc78d16bf6ce76f5ad92e5f67b
+    :git: https://github.com/facebook/fishhook.git
   IJKMediaFramework:
     :git: https://gitee.com/renzifeng/IJKMediaFramework.git
     :tag: 0.1.5
@@ -139,6 +146,7 @@ SPEC CHECKSUMS:
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SDWebImage: 7acbb57630ac7db4a495547fb73916ff3e432f6b
+  TheAmazingAudioEngine: 24e382d9468283bb1b3f08df29b514aa522ef4fd
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
@@ -146,6 +154,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 6e3a0c6b50fa135dcbba1b1693de830fc5ebcbd1
+PODFILE CHECKSUM: ae549eef23ec5839cd338d91e19ddd0d22cd0c63
 
 COCOAPODS: 1.10.1
