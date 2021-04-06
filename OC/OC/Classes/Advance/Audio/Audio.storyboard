@@ -38,11 +38,105 @@
                     <connections>
                         <outlet property="tableView" destination="2rh-90-fOd" id="ua7-ON-vhq"/>
                         <segue destination="Wud-rF-Stl" kind="show" identifier="AudioEqualizer" id="dJq-wm-uBs"/>
+                        <segue destination="e2R-Tj-VtD" kind="show" identifier="UploadGarageBand" id="YY0-oL-s2M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zJW-hw-vIZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1548" y="472"/>
+        </scene>
+        <!--Upload Garage Band View Controller-->
+        <scene sceneID="pCy-Sv-xUj">
+            <objects>
+                <viewController storyboardIdentifier="UploadGarageBandVC" hidesBottomBarWhenPushed="YES" id="e2R-Tj-VtD" customClass="UploadGarageBandViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ueg-hz-X1w">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="CkZ-5A-rdJ">
+                                <rect key="frame" x="10" y="100" width="394" height="100"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j0T-Vg-rcM">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="50"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="起点" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtz-WY-DOZ">
+                                                <rect key="frame" x="10" y="15" width="35" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nBg-4C-UXR">
+                                                <rect key="frame" x="55" y="8" width="329" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="dtz-WY-DOZ" firstAttribute="leading" secondItem="j0T-Vg-rcM" secondAttribute="leading" constant="10" id="BIy-v4-rWa"/>
+                                            <constraint firstAttribute="trailing" secondItem="nBg-4C-UXR" secondAttribute="trailing" constant="10" id="G3j-ag-Zo5"/>
+                                            <constraint firstItem="nBg-4C-UXR" firstAttribute="leading" secondItem="dtz-WY-DOZ" secondAttribute="trailing" constant="10" id="QQa-LY-HiM"/>
+                                            <constraint firstItem="nBg-4C-UXR" firstAttribute="centerY" secondItem="j0T-Vg-rcM" secondAttribute="centerY" id="ZAd-dl-Lml"/>
+                                            <constraint firstItem="dtz-WY-DOZ" firstAttribute="centerY" secondItem="j0T-Vg-rcM" secondAttribute="centerY" id="xwC-wd-fhv"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uS2-lm-shT">
+                                        <rect key="frame" x="0.0" y="50" width="394" height="50"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="终点" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bta-TL-WpT">
+                                                <rect key="frame" x="10" y="15" width="35" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BFY-D2-9RW">
+                                                <rect key="frame" x="55" y="8" width="329" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="Bta-TL-WpT" firstAttribute="centerY" secondItem="uS2-lm-shT" secondAttribute="centerY" id="JEG-mk-jfW"/>
+                                            <constraint firstItem="Bta-TL-WpT" firstAttribute="leading" secondItem="uS2-lm-shT" secondAttribute="leading" constant="10" id="gcD-v1-3pk"/>
+                                            <constraint firstItem="BFY-D2-9RW" firstAttribute="centerY" secondItem="uS2-lm-shT" secondAttribute="centerY" id="hJ3-HP-t9K"/>
+                                            <constraint firstAttribute="trailing" secondItem="BFY-D2-9RW" secondAttribute="trailing" constant="10" id="qdx-M7-TgY"/>
+                                            <constraint firstItem="BFY-D2-9RW" firstAttribute="leading" secondItem="Bta-TL-WpT" secondAttribute="trailing" constant="10" id="qlk-mr-s5K"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="QYy-ob-qV2"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fMN-C8-UPi">
+                                <rect key="frame" x="191.5" y="300" width="31" height="30"/>
+                                <state key="normal" title="导出"/>
+                                <connections>
+                                    <action selector="exportEvent:" destination="e2R-Tj-VtD" eventType="touchUpInside" id="pb8-pr-t76"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="GRD-Da-IKR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fMN-C8-UPi" firstAttribute="top" secondItem="CkZ-5A-rdJ" secondAttribute="bottom" constant="100" id="0k5-4x-qmA"/>
+                            <constraint firstItem="CkZ-5A-rdJ" firstAttribute="leading" secondItem="GRD-Da-IKR" secondAttribute="leading" constant="10" id="TOQ-v9-H2k"/>
+                            <constraint firstItem="fMN-C8-UPi" firstAttribute="centerX" secondItem="ueg-hz-X1w" secondAttribute="centerX" id="avH-qV-6MK"/>
+                            <constraint firstItem="CkZ-5A-rdJ" firstAttribute="top" secondItem="GRD-Da-IKR" secondAttribute="top" constant="100" id="sX8-XH-F5K"/>
+                            <constraint firstItem="GRD-Da-IKR" firstAttribute="trailing" secondItem="CkZ-5A-rdJ" secondAttribute="trailing" constant="10" id="u9k-fX-wQ6"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="4eR-Wv-3QF"/>
+                    <connections>
+                        <outlet property="beginTextField" destination="nBg-4C-UXR" id="PPc-w6-kod"/>
+                        <outlet property="endTextField" destination="BFY-D2-9RW" id="ltn-JN-bnd"/>
+                        <outlet property="exportBtn" destination="fMN-C8-UPi" id="eUI-em-cQ3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DMX-Ml-OBb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2357.971014492754" y="874.55357142857144"/>
         </scene>
         <!--Audio Equalizer View Controller-->
         <scene sceneID="a0V-Dd-GUg">
@@ -58,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vfy-hW-9TA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2232" y="465"/>
+            <point key="canvasLocation" x="2345" y="167"/>
         </scene>
     </scenes>
     <resources>

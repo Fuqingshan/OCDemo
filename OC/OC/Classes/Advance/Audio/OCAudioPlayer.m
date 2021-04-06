@@ -75,6 +75,10 @@
     [self playAudio:playPath type:type];
 }
 
+- (void)playAudio:(NSString *)audioPath{
+    [self playAudio:audioPath type:FAAudioPlayTypePreWaiting];
+}
+
 - (void)playAudio:(NSString *)audioPath type:(FAAudioPlayType)type{
     if(self.player.isPlaying){
         //不会走回调

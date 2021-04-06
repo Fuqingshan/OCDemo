@@ -417,6 +417,14 @@
 				<key>desc</key>
 				<string>音频均衡器</string>
 			</dict>
+			<dict>
+				<key>url</key>
+				<string>sumup://advance/audio/uploadgarageband</string>
+				<key>class</key>
+				<string>UploadGarageBandViewController</string>
+				<key>desc</key>
+				<string>上传铃声</string>
+			</dict>
 		</array>
 		<key>Video</key>
 		<array>

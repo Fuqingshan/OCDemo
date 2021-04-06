@@ -76,6 +76,10 @@
                             @"content":@"均衡器"
                             ,@"url":@"sumup://advance/audio/audioequalizer"
                         }
+                        ,@{
+                            @"content":@"上传铃声"
+                            ,@"url":@"sumup://advance/audio/uploadgarageband"
+                        }
                         ];
     
     [self.tableView reloadData];

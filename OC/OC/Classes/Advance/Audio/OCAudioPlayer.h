@@ -27,6 +27,7 @@ typedef void (^FAAudioPlayCompleteBlock)(FAAudioPlayStatus status);
 @interface OCAudioPlayer : NSObject
 @property (nonatomic, copy) FAAudioPlayCompleteBlock playCompleteBlock;///<语音播放回调
 
+- (void)playAudio:(NSString *)audioPath;
 - (void)playRecord:(FAAudioPlayType)type;
 - (void)stopCurrentPlayer;
 - (void)pause;
