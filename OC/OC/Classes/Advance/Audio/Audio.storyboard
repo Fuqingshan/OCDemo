@@ -67,11 +67,12 @@
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nBg-4C-UXR">
                                                 <rect key="frame" x="55" y="8" width="329" height="34"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="dtz-WY-DOZ" firstAttribute="leading" secondItem="j0T-Vg-rcM" secondAttribute="leading" constant="10" id="BIy-v4-rWa"/>
                                             <constraint firstAttribute="trailing" secondItem="nBg-4C-UXR" secondAttribute="trailing" constant="10" id="G3j-ag-Zo5"/>
@@ -91,11 +92,12 @@
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BFY-D2-9RW">
                                                 <rect key="frame" x="55" y="8" width="329" height="34"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Bta-TL-WpT" firstAttribute="centerY" secondItem="uS2-lm-shT" secondAttribute="centerY" id="JEG-mk-jfW"/>
                                             <constraint firstItem="Bta-TL-WpT" firstAttribute="leading" secondItem="uS2-lm-shT" secondAttribute="leading" constant="10" id="gcD-v1-3pk"/>
@@ -105,6 +107,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="QYy-ob-qV2"/>
                                 </constraints>
