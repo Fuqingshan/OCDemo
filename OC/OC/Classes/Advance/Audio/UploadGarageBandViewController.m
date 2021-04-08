@@ -157,7 +157,19 @@
 
 - (IBAction)exportEvent:(id)sender {
     [self.view endEditing:NO];
+    if (![self checkInstallGarageBand]) {
+        [self showAlertViewWithMessage:@"制作铃声需要您先安装库乐队app" pushSetting:NO];
+        return;
+    }
     [self cropAudio];
+}
+
+- (BOOL)checkInstallGarageBand{
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"garageband://"]]) {
+        return YES;
+    }else{
+        return NO;
+    }
 }
 
 #pragma mark - 先裁剪，后转换格式
@@ -290,7 +302,7 @@
     return result;
 }
 
-- (void)showAlertViewWithMessage:(NSString *)message
+- (void)showAlertViewWithMessage:(NSString *)message pushSetting:(BOOL)push
 {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *ensureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -303,7 +315,9 @@
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     }];
     
-    [alertVC addAction:ensureAction];
+    if (push) {
+        [alertVC addAction:ensureAction];
+    }
     [alertVC addAction:cancelAction];
     
     [self presentViewController:alertVC animated:YES completion:nil];
