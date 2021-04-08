@@ -45,3 +45,6 @@ typedef void(^VOIDBlockWithTwoModel)(id model1,id model2);
 #define PingFangSCSemibold(point) [UIFont lk_fontWithName:@"PingFangSC-Semibold" size:point]///<中粗
 
 #define RTMPURL @"rtmp://192.168.199.154:1935/rtmplive/room"//本地推流地址,ip为当前电脑ip
+
+
+#define kPlayerViewTag 'ZFPT'

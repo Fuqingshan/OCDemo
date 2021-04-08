@@ -182,6 +182,9 @@
 		81BAD9E6261ECD8F00107AFA /* TwitterConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BAD9DD261ECD8F00107AFA /* TwitterConnection.m */; };
 		81BAD9E7261ECD8F00107AFA /* TwitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BAD9E1261ECD8F00107AFA /* TwitterViewController.m */; };
 		81BAD9EE261ED05400107AFA /* UnitTestPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BAD9ED261ED05400107AFA /* UnitTestPerson.m */; };
+		81BADADC261EFEB900107AFA /* VideoPlayerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BADADA261EFEB900107AFA /* VideoPlayerCollectionViewCell.m */; };
+		81BADADD261EFEB900107AFA /* VideoPlayerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81BADADB261EFEB900107AFA /* VideoPlayerCollectionViewCell.xib */; };
+		81BADAE4261EFED300107AFA /* VideoPlayerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BADAE3261EFED300107AFA /* VideoPlayerModel.m */; };
 		81C281B526030A8E003F606C /* PThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C281B426030A8E003F606C /* PThreadViewController.m */; };
 		81E0567323CC70B60003552C /* CoreTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E0567223CC70B60003552C /* CoreTextViewController.m */; };
 		81E0567523CC71230003552C /* CoreText.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81E0567423CC71230003552C /* CoreText.storyboard */; };
@@ -924,6 +927,11 @@
 		81BAD9E2261ECD8F00107AFA /* Twitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Twitter.h; sourceTree = "<group>"; };
 		81BAD9EC261ED05400107AFA /* UnitTestPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTestPerson.h; sourceTree = "<group>"; };
 		81BAD9ED261ED05400107AFA /* UnitTestPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitTestPerson.m; sourceTree = "<group>"; };
+		81BADAD9261EFEB900107AFA /* VideoPlayerCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoPlayerCollectionViewCell.h; sourceTree = "<group>"; };
+		81BADADA261EFEB900107AFA /* VideoPlayerCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerCollectionViewCell.m; sourceTree = "<group>"; };
+		81BADADB261EFEB900107AFA /* VideoPlayerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerCollectionViewCell.xib; sourceTree = "<group>"; };
+		81BADAE2261EFED300107AFA /* VideoPlayerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoPlayerModel.h; sourceTree = "<group>"; };
+		81BADAE3261EFED300107AFA /* VideoPlayerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerModel.m; sourceTree = "<group>"; };
 		81C281B326030A8E003F606C /* PThreadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PThreadViewController.h; sourceTree = "<group>"; };
 		81C281B426030A8E003F606C /* PThreadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PThreadViewController.m; sourceTree = "<group>"; };
 		81E0567123CC70B60003552C /* CoreTextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreTextViewController.h; sourceTree = "<group>"; };
@@ -1958,6 +1966,7 @@
 				813B9B1026156AA200FC6D6B /* VideoPublishViewController.m */,
 				813B9B332615ADCF00FC6D6B /* VideoPlayerViewController.h */,
 				813B9B342615ADCF00FC6D6B /* VideoPlayerViewController.m */,
+				81BADAD8261EFE9400107AFA /* VideoPlayer */,
 			);
 			path = VideoPublish;
 			sourceTree = "<group>";
@@ -2138,6 +2147,18 @@
 				81BAD9E1261ECD8F00107AFA /* TwitterViewController.m */,
 			);
 			path = Twitter;
+			sourceTree = "<group>";
+		};
+		81BADAD8261EFE9400107AFA /* VideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				81BADAD9261EFEB900107AFA /* VideoPlayerCollectionViewCell.h */,
+				81BADADA261EFEB900107AFA /* VideoPlayerCollectionViewCell.m */,
+				81BADADB261EFEB900107AFA /* VideoPlayerCollectionViewCell.xib */,
+				81BADAE2261EFED300107AFA /* VideoPlayerModel.h */,
+				81BADAE3261EFED300107AFA /* VideoPlayerModel.m */,
+			);
+			path = VideoPlayer;
 			sourceTree = "<group>";
 		};
 		81C281B226030A57003F606C /* PThread */ = {
@@ -4054,6 +4075,7 @@
 				81FA8DE92239088F00FE22A9 /* f086@2x.png in Resources */,
 				02E4BDA22259D6A10056686C /* stage_2@2x.png in Resources */,
 				02E4BD862259D6A10056686C /* m27@2x.png in Resources */,
+				81BADADD261EFEB900107AFA /* VideoPlayerCollectionViewCell.xib in Resources */,
 				81FA8DD32239088F00FE22A9 /* f065@2x.png in Resources */,
 				81E4F92822435D1C004724B4 /* Setting.storyboard in Resources */,
 				81E538AB2213F64600D694CD /* InfoPlist.strings in Resources */,
@@ -4485,6 +4507,7 @@
 				02E4BCD82259D2DE0056686C /* HUTransitionHorizontalLinesAnimator.m in Sources */,
 				81E7EF7C22379847008CAD43 /* UIImage+Custom.m in Sources */,
 				81580B772394B32F005A25D1 /* LoginViewController.m in Sources */,
+				81BADAE4261EFED300107AFA /* VideoPlayerModel.m in Sources */,
 				81FA16A02252FD710075E582 /* SystemFontViewController.m in Sources */,
 				81E761A82216699700811966 /* OCRouter+Simple.m in Sources */,
 				81E761A62216699700811966 /* OCRouter.m in Sources */,
@@ -4561,6 +4584,7 @@
 				81E4F92B22435D1C004724B4 /* SettingViewController.m in Sources */,
 				81E7EF6E22378C3C008CAD43 /* FQS_StartView.m in Sources */,
 				81EC9EA4223FA75500838908 /* TagViewController.m in Sources */,
+				81BADADC261EFEB900107AFA /* VideoPlayerCollectionViewCell.m in Sources */,
 				8179EC152251C46000B1AFBA /* XWMagicMoveCell.m in Sources */,
 				81EBD9AA2212A8A90011392E /* Global.m in Sources */,
 				81E761A92216699700811966 /* OCRouterModel.m in Sources */,

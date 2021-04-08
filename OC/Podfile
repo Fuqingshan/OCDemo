@@ -32,11 +32,17 @@ target 'OC' do
   #直播推流，源地址：https://github.com/LaiFengiOS/LFLiveKit
   pod 'LFLiveKit', :git => 'https://gitee.com/yier123456/LFLiveKit.git’, :tag => ‘2.6'
   
-  #直播拉流用的IJK,源地址：
+  #直播拉流用的IJK,这人放gitee上cocoapods怎么验证过的，自己试了，cdn提示访问不了gitee：
   pod 'IJKMediaFramework', :git => 'https://gitee.com/renzifeng/IJKMediaFramework.git’, :tag => ‘0.1.5'
   
   #可以换成audioKit
   pod 'TheAmazingAudioEngine'
+  
+  #引入短视频播放组件,上面的IJKMediaFramework也是这个人的
+  pod 'ZFPlayer/AVPlayer', '~> 4.0'
+  
+  #唱吧的HTTP缓存策略
+  pod 'KTVHTTPCache', '~> 2.0.0'
 
 end
 

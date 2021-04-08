@@ -22,12 +22,17 @@ PODS:
   - Bugly (2.5.71)
   - CKYPhotoBrowser (1.0.0):
     - YYWebImage
+  - CocoaAsyncSocket (7.6.5)
   - CocoaLumberjack (3.6.0):
     - CocoaLumberjack/Core (= 3.6.0)
   - CocoaLumberjack/Core (3.6.0)
   - fishhook (0.2)
   - IJKMediaFramework (0.1.5)
   - JLRoutes (2.1)
+  - KTVCocoaHTTPServer (1.0.0):
+    - CocoaAsyncSocket
+  - KTVHTTPCache (2.0.1):
+    - KTVCocoaHTTPServer
   - LFLiveKit (2.6)
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
@@ -52,6 +57,9 @@ PODS:
   - YYWebImage (1.0.5):
     - YYCache
     - YYImage
+  - ZFPlayer/AVPlayer (4.0.1):
+    - ZFPlayer/Core
+  - ZFPlayer/Core (4.0.1)
 
 DEPENDENCIES:
   - AFNetworking
@@ -63,6 +71,7 @@ DEPENDENCIES:
   - fishhook (from `https://github.com/facebook/fishhook.git`)
   - IJKMediaFramework (from `https://gitee.com/renzifeng/IJKMediaFramework.git`, tag `0.1.5`)
   - JLRoutes
+  - KTVHTTPCache (~> 2.0.0)
   - LFLiveKit (from `https://gitee.com/yier123456/LFLiveKit.git`, tag `2.6`)
   - Masonry
   - MBProgressHUD
@@ -77,6 +86,7 @@ DEPENDENCIES:
   - YYImage
   - YYModel
   - YYText
+  - ZFPlayer/AVPlayer (~> 4.0)
 
 SPEC REPOS:
   trunk:
@@ -86,8 +96,11 @@ SPEC REPOS:
     - AMapSearch
     - Bugly
     - CKYPhotoBrowser
+    - CocoaAsyncSocket
     - CocoaLumberjack
     - JLRoutes
+    - KTVCocoaHTTPServer
+    - KTVHTTPCache
     - Masonry
     - MBProgressHUD
     - MJRefresh
@@ -102,6 +115,7 @@ SPEC REPOS:
     - YYModel
     - YYText
     - YYWebImage
+    - ZFPlayer
 
 EXTERNAL SOURCES:
   fishhook:
@@ -133,10 +147,13 @@ SPEC CHECKSUMS:
   AMapSearch: 3dcbf85c403a2a0fe0eda5318caabc272b31f5e1
   Bugly: fd066c75c4a0eca1440f9b6a84bd37d51bfc85ac
   CKYPhotoBrowser: ed30c642324e9341ce97709aa7afb82c7d1fdf96
+  CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
   fishhook: ea19933abfe8f2f52c55fd8b6e2718467d3ebc89
   IJKMediaFramework: f1119f6324c96bc4654f3045a5beaa95ba0596c0
   JLRoutes: d755245322b94227662ea3e43492fdca94e05c5b
+  KTVCocoaHTTPServer: df8d7b861e603ff8037e9b2138aca2563a6b768d
+  KTVHTTPCache: 588c3eb16f6bd1e6fde1e230dabfb7bd4e490a4d
   LFLiveKit: 2219563721f8aa0f188effc3395a06e2d53b23f2
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
@@ -153,7 +170,8 @@ SPEC CHECKSUMS:
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
+  ZFPlayer: f88787c815f7b0801279c42f131a89e2823e669e
 
-PODFILE CHECKSUM: ae549eef23ec5839cd338d91e19ddd0d22cd0c63
+PODFILE CHECKSUM: 06ab46aff652feac41556c5994915f44f30b29e8
 
 COCOAPODS: 1.10.1
