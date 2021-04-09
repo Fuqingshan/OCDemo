@@ -38,9 +38,6 @@ target 'OC' do
   #可以换成audioKit
   pod 'TheAmazingAudioEngine'
   
-  #引入短视频播放组件,上面的IJKMediaFramework也是这个人的
-  pod 'ZFPlayer/AVPlayer', '~> 4.0'
-  
   #唱吧的HTTP缓存策略
   pod 'KTVHTTPCache', '~> 2.0.0'
 

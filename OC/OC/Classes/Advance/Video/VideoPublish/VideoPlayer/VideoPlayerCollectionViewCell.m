@@ -10,7 +10,6 @@
 #import "VideoPlayerModel.h"
 
 @interface VideoPlayerCollectionViewCell()
-@property (weak, nonatomic) IBOutlet UIImageView *videoThumbnailImageView;
 @property (weak, nonatomic) IBOutlet UIButton *sureBtn;
 @property (weak, nonatomic) IBOutlet UIButton *replyBtn;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
@@ -36,16 +35,27 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.backgroundColor = [UIColor blackColor];
-    self.videoThumbnailImageView.tag = kPlayerViewTag;
+    self.playView.hidden = YES;
     self.videoThumbnailImageView.userInteractionEnabled = YES;
-    self.videoThumbnailImageView.contentMode = UIViewContentModeScaleAspectFit;
-
+    self.videoThumbnailImageView.contentMode = UIViewContentModeScaleAspectFill;
+    
+    [[self.sureBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        NSLog(@"点赞");
+    }];
+    
+    [[self.replyBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        NSLog(@"回复");
+    }];
 }
 
 - (void)fillCellWithModel:(id)model indexPath:(NSIndexPath *)indexPath{
     if ([model isKindOfClass:[VideoPlayerModel class]]) {
         self.model = model;
-        [self.videoThumbnailImageView sd_setImageWithURL:self.model.thumbnailURL];
+        
+        CGFloat aspectRatio = self.model .width / self.model .height;
+        self.videoThumbnailImageView.contentMode = aspectRatio <= 0.57 ? UIViewContentModeScaleAspectFill: UIViewContentModeScaleAspectFit;
+        
+        [self.videoThumbnailImageView sd_setImageWithURL:self.model.thumbnailURL placeholderImage:[UIImage imageNamed:@"mineBG.png"]];
         self.contentLabel.text = self.model.content;
     }
 }

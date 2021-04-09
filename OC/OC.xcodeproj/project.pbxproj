@@ -185,6 +185,9 @@
 		81BADADC261EFEB900107AFA /* VideoPlayerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BADADA261EFEB900107AFA /* VideoPlayerCollectionViewCell.m */; };
 		81BADADD261EFEB900107AFA /* VideoPlayerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81BADADB261EFEB900107AFA /* VideoPlayerCollectionViewCell.xib */; };
 		81BADAE4261EFED300107AFA /* VideoPlayerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BADAE3261EFED300107AFA /* VideoPlayerModel.m */; };
+		81BADBC3262052CC00107AFA /* OCVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BADBC0262052CC00107AFA /* OCVideoPlayer.m */; };
+		81BADBC4262052CC00107AFA /* OCVideoLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BADBC1262052CC00107AFA /* OCVideoLoadingView.m */; };
+		81BADBCE2620610600107AFA /* OCPlayList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81BADBCD2620610500107AFA /* OCPlayList.plist */; };
 		81C281B526030A8E003F606C /* PThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C281B426030A8E003F606C /* PThreadViewController.m */; };
 		81E0567323CC70B60003552C /* CoreTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E0567223CC70B60003552C /* CoreTextViewController.m */; };
 		81E0567523CC71230003552C /* CoreText.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81E0567423CC71230003552C /* CoreText.storyboard */; };
@@ -932,6 +935,11 @@
 		81BADADB261EFEB900107AFA /* VideoPlayerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerCollectionViewCell.xib; sourceTree = "<group>"; };
 		81BADAE2261EFED300107AFA /* VideoPlayerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoPlayerModel.h; sourceTree = "<group>"; };
 		81BADAE3261EFED300107AFA /* VideoPlayerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerModel.m; sourceTree = "<group>"; };
+		81BADBBF262052CC00107AFA /* OCVideoLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCVideoLoadingView.h; sourceTree = "<group>"; };
+		81BADBC0262052CC00107AFA /* OCVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCVideoPlayer.m; sourceTree = "<group>"; };
+		81BADBC1262052CC00107AFA /* OCVideoLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCVideoLoadingView.m; sourceTree = "<group>"; };
+		81BADBC2262052CC00107AFA /* OCVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCVideoPlayer.h; sourceTree = "<group>"; };
+		81BADBCD2620610500107AFA /* OCPlayList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = OCPlayList.plist; sourceTree = "<group>"; };
 		81C281B326030A8E003F606C /* PThreadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PThreadViewController.h; sourceTree = "<group>"; };
 		81C281B426030A8E003F606C /* PThreadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PThreadViewController.m; sourceTree = "<group>"; };
 		81E0567123CC70B60003552C /* CoreTextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreTextViewController.h; sourceTree = "<group>"; };
@@ -2152,6 +2160,7 @@
 		81BADAD8261EFE9400107AFA /* VideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				81BADBCD2620610500107AFA /* OCPlayList.plist */,
 				81BADAD9261EFEB900107AFA /* VideoPlayerCollectionViewCell.h */,
 				81BADADA261EFEB900107AFA /* VideoPlayerCollectionViewCell.m */,
 				81BADADB261EFEB900107AFA /* VideoPlayerCollectionViewCell.xib */,
@@ -2159,6 +2168,17 @@
 				81BADAE3261EFED300107AFA /* VideoPlayerModel.m */,
 			);
 			path = VideoPlayer;
+			sourceTree = "<group>";
+		};
+		81BADBBE262052CC00107AFA /* OCPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				81BADBBF262052CC00107AFA /* OCVideoLoadingView.h */,
+				81BADBC1262052CC00107AFA /* OCVideoLoadingView.m */,
+				81BADBC2262052CC00107AFA /* OCVideoPlayer.h */,
+				81BADBC0262052CC00107AFA /* OCVideoPlayer.m */,
+			);
+			path = OCPlayer;
 			sourceTree = "<group>";
 		};
 		81C281B226030A57003F606C /* PThread */ = {
@@ -3109,6 +3129,7 @@
 		81EBD97622129FAD0011392E /* CustomElement */ = {
 			isa = PBXGroup;
 			children = (
+				81BADBBE262052CC00107AFA /* OCPlayer */,
 				81E7917E2616E860003B9B69 /* LKAlert */,
 				81E3A190221E798A0081D6D2 /* WKWebView */,
 				81E53946221404D900D694CD /* LKActionSheet */,
@@ -3977,6 +3998,7 @@
 				81FA8D712239088F00FE22A9 /* f085@2x.png in Resources */,
 				81E538AD2213F64600D694CD /* Main.storyboard in Resources */,
 				81FA169F2252FD710075E582 /* SystemFont.storyboard in Resources */,
+				81BADBCE2620610600107AFA /* OCPlayList.plist in Resources */,
 				81ED14D124011DB200576FEA /* AVFoundation_waiting.mp3 in Resources */,
 				81FA8DCA2239088F00FE22A9 /* f069@2x.png in Resources */,
 				81FABBD322320AC30084C645 /* ios开发知识体系.png in Resources */,
@@ -4378,6 +4400,7 @@
 				81E34DB42611E37300C53092 /* RACIntervalViewController.m in Sources */,
 				81E5392A221402E600D694CD /* LKLocationTransform.m in Sources */,
 				81E5392F221402E600D694CD /* LKDeviceNetInfo.m in Sources */,
+				81BADBC4262052CC00107AFA /* OCVideoLoadingView.m in Sources */,
 				81E791972616E860003B9B69 /* LKAlertModel.m in Sources */,
 				81E5392D221402E600D694CD /* LKDeviceHardware.m in Sources */,
 				81052EB4230152D40083DC65 /* OCAudioPlayer.m in Sources */,
@@ -4546,6 +4569,7 @@
 				81EC9EAF223FA84C00838908 /* TagsCollectionViewFlowLayout.m in Sources */,
 				8179EC2F2251FCE200B1AFBA /* DrawCircleViewController.m in Sources */,
 				81E3B3A822360A8A0041ED7B /* NSString+ThreeDES.m in Sources */,
+				81BADBC3262052CC00107AFA /* OCVideoPlayer.m in Sources */,
 				81F8653922FACFA20026C1A2 /* DesignModeViewController.m in Sources */,
 				81EBD9AD2212AEBA0011392E /* BaseViewController.m in Sources */,
 				02E4BCAA2259C3FC0056686C /* Runloop1ViewController.m in Sources */,

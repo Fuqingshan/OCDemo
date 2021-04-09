@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSURL *thumbnailURL;
 @property(nonatomic, copy) NSString *content;
 
+@property(nonatomic, assign) CGFloat width;
+@property(nonatomic, assign) CGFloat height;
+
 @end
 
 NS_ASSUME_NONNULL_END

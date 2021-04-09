@@ -12,6 +12,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoPlayerCollectionViewCell : UICollectionViewCell<OCFillCellProtocol>
+@property (weak, nonatomic) IBOutlet UIImageView *videoThumbnailImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *playView;
 
 @end
 

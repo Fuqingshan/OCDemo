@@ -12,9 +12,11 @@
 
 + (NSDictionary *)modelCustomPropertyMapper {
     return @{
-             @"videoURL":@"videoURL",
-             @"thumbnailURL"  : @"thumbnailURL",
-             @"content"  : @"content"
+             @"videoURL":@"videoURL"
+             ,@"thumbnailURL"  : @"thumbnailURL"
+             ,@"content"  : @"content"
+             ,@"width":@"width"
+             ,@"height":@"height"
             };
 }
 
