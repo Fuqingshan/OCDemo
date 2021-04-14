@@ -40,7 +40,7 @@ target 'OC' do
   
   #唱吧的HTTP缓存策略
   pod 'KTVHTTPCache', '~> 2.0.0'
-
+  
 end
 
 target 'OCTests' do

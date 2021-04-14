@@ -168,6 +168,8 @@
 		8179EC2A2251F84B00B1AFBA /* LKSubmitButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8179EC282251F84B00B1AFBA /* LKSubmitButton.m */; };
 		8179EC2B2251F84B00B1AFBA /* UIImage+SubmitBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 8179EC292251F84B00B1AFBA /* UIImage+SubmitBtn.m */; };
 		8179EC2F2251FCE200B1AFBA /* DrawCircleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8179EC2E2251FCE200B1AFBA /* DrawCircleViewController.m */; };
+		817EB7152626B43000AB0661 /* CIFilter+ColorLUT.m in Sources */ = {isa = PBXBuildFile; fileRef = 817EB7142626B43000AB0661 /* CIFilter+ColorLUT.m */; };
+		817EB71E2626B55500AB0661 /* LUTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 817EB71D2626B55500AB0661 /* LUTViewController.m */; };
 		819E6544221A8BD9008C2B9D /* AdvantageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 819E6543221A8BD9008C2B9D /* AdvantageViewController.m */; };
 		819E6548221AA28D008C2B9D /* FoundationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 819E6547221AA28D008C2B9D /* FoundationViewController.m */; };
 		81BAD8F0261C0B0200107AFA /* AudioEqualizerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BAD8EF261C0B0200107AFA /* AudioEqualizerViewController.m */; };
@@ -904,6 +906,10 @@
 		8179EC292251F84B00B1AFBA /* UIImage+SubmitBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SubmitBtn.m"; sourceTree = "<group>"; };
 		8179EC2D2251FCE200B1AFBA /* DrawCircleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawCircleViewController.h; sourceTree = "<group>"; };
 		8179EC2E2251FCE200B1AFBA /* DrawCircleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawCircleViewController.m; sourceTree = "<group>"; };
+		817EB7132626B43000AB0661 /* CIFilter+ColorLUT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CIFilter+ColorLUT.h"; sourceTree = "<group>"; };
+		817EB7142626B43000AB0661 /* CIFilter+ColorLUT.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CIFilter+ColorLUT.m"; sourceTree = "<group>"; };
+		817EB71C2626B55500AB0661 /* LUTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LUTViewController.h; sourceTree = "<group>"; };
+		817EB71D2626B55500AB0661 /* LUTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LUTViewController.m; sourceTree = "<group>"; };
 		819E6542221A8BD9008C2B9D /* AdvantageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdvantageViewController.h; sourceTree = "<group>"; };
 		819E6543221A8BD9008C2B9D /* AdvantageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdvantageViewController.m; sourceTree = "<group>"; };
 		819E6546221AA28D008C2B9D /* FoundationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoundationViewController.h; sourceTree = "<group>"; };
@@ -1974,6 +1980,7 @@
 				813B9B1026156AA200FC6D6B /* VideoPublishViewController.m */,
 				813B9B332615ADCF00FC6D6B /* VideoPlayerViewController.h */,
 				813B9B342615ADCF00FC6D6B /* VideoPlayerViewController.m */,
+				817EB70B2626B39000AB0661 /* LUT */,
 				81BADAD8261EFE9400107AFA /* VideoPlayer */,
 			);
 			path = VideoPublish;
@@ -2105,6 +2112,17 @@
 				8179EC2E2251FCE200B1AFBA /* DrawCircleViewController.m */,
 			);
 			path = DrawCircle;
+			sourceTree = "<group>";
+		};
+		817EB70B2626B39000AB0661 /* LUT */ = {
+			isa = PBXGroup;
+			children = (
+				817EB7132626B43000AB0661 /* CIFilter+ColorLUT.h */,
+				817EB7142626B43000AB0661 /* CIFilter+ColorLUT.m */,
+				817EB71C2626B55500AB0661 /* LUTViewController.h */,
+				817EB71D2626B55500AB0661 /* LUTViewController.m */,
+			);
+			path = LUT;
 			sourceTree = "<group>";
 		};
 		819E6541221A8BB9008C2B9D /* Advantage */ = {
@@ -4389,6 +4407,7 @@
 				81E47978222E6FC3005F459A /* GCDViewController.m in Sources */,
 				8179EC2B2251F84B00B1AFBA /* UIImage+SubmitBtn.m in Sources */,
 				81E0569223CC71AB0003552C /* CTFrameParser.m in Sources */,
+				817EB71E2626B55500AB0661 /* LUTViewController.m in Sources */,
 				81E539042213FAD900D694CD /* UIColor+Hex.m in Sources */,
 				81E591F72240C1CC001B71CA /* JLViewModel.m in Sources */,
 				81EBD99B2212A7CD0011392E /* iCarousel.m in Sources */,
@@ -4453,6 +4472,7 @@
 				02F142EE2250E810008A442A /* UIView+Genie.m in Sources */,
 				81FABBDA22324AFD0084C645 /* NSObject+DLIntrospection.m in Sources */,
 				81EBD9B62212BD1D0011392E /* PracticeViewController.m in Sources */,
+				817EB7152626B43000AB0661 /* CIFilter+ColorLUT.m in Sources */,
 				81EBD9A02212A7CD0011392E /* UIViewController+WMPageController.m in Sources */,
 				02E4BDC62259F1680056686C /* View2.m in Sources */,
 				81052EAD23014D430083DC65 /* VideoViewController.m in Sources */,

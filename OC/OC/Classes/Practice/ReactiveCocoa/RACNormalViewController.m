@@ -412,7 +412,7 @@
     self.channelTerminalB = @"改变B";
 }
 
-#pragma mark - flatmap：把源信号的内容映射成一个新的信号，信号可以是任意类型。 类似：func a<T,U>(_ mapper:T) -> Result<U>
+#pragma mark - flattenMap：把源信号的内容映射成一个新的信号，信号可以是任意类型。 类似：func a<T,U>(_ mapper:T) -> Result<U>
 /*
 flattenMap使用步骤:
 1.传入一个block，block类型是返回值RACStream，参数value

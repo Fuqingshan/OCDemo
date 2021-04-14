@@ -41,13 +41,18 @@
 }
 
 - (void)initData{
+    //以下是withInputParameters不传参数的效果,[CIFilter filterWithName:strongSelf.currentFilter withInputParameters:@{}];
     self.filters = @ [@"CIPhotoEffectChrome",
                        @"CIPhotoEffectFade",
                         @"CIPhotoEffectInstant",
                          @"CIPhotoEffectMono",
                           @"CIPhotoEffectNoir",
                            @"CIPhotoEffectProcess",
-                      @"CIPhotoEffectTransfer"];
+                      @"CIPhotoEffectTonal",
+                      @"CIPhotoEffectTransfer",
+                      @"CILinearToSRGBToneCurve",
+                      @"CISRGBToneCurveToLinear"
+                      ];
     self.currentFilter = @"CIPhotoEffectTonal";
     [self setupCaptureManager];
 }
@@ -99,8 +104,10 @@
         CIImage *ciImage = [CIImage imageWithCVImageBuffer:imageBuffer];
         
         //加滤镜
-        CIFilter *filter = [CIFilter filterWithName:strongSelf.currentFilter];
+        CIFilter *filter = [CIFilter filterWithName:strongSelf.currentFilter withInputParameters:@{}];
         [filter setValue:ciImage forKey:kCIInputImageKey];
+        //一般情况下，一个滤镜是满足不了需求的，需要把前一个滤镜作为新滤镜的输入，叠加滤镜效果
+//        [[ciImage imageByApplyingFilter:@"CIGaussianBlur" withInputParameters:@{@"inputRadius":@5.0}] imageByApplyingFilter:@"CIPixellate"]
         CIImage *finalImage= filter.outputImage;
         if (!finalImage) {
             return;

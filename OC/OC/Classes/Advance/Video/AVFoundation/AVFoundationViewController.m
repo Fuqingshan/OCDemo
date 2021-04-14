@@ -58,6 +58,7 @@
     NSString *vcName =  [NSString stringWithFormat:@"AVFoundationVC%zd",indexPath.row+1];
     Class class = NSClassFromString(vcName);
     if (!class) {
+        //swift要加bundleName，oc不需要，这儿理论上是不走的，当初是怎么遇到这个问题的？？？
         class = NSClassFromString([NSString stringWithFormat:@"%@.%@",[[[NSBundle mainBundle]infoDictionary] objectForKey:@"CFBundleName"],vcName]);
     }
     if(!class){

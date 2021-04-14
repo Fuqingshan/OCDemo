@@ -7,6 +7,7 @@
 //
 
 #import "VideoViewController.h"
+#import "LUTViewController.h"
 #import <objc/message.h>
 
 @interface VideoViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -71,6 +72,10 @@
                             @"content":@"直播拉流"
                             ,@"url":@"sumup://advance/video/liveplayer"
                             }
+                        ,@{
+                            @"content":@"LUT"
+                            ,@"sel":@"pushLUTViewController"
+                        }
                         ];
     
     [self.tableView reloadData];
@@ -120,6 +125,9 @@
     }
 }
 
-
+- (void)pushLUTViewController{
+    LUTViewController *vc = [[UIStoryboard storyboardWithName:@"Video" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"LUTVC"];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end
