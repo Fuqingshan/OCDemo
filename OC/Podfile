@@ -30,7 +30,9 @@ target 'OC' do
   pod 'AMapSearch', '6.1.1'
   
   #直播推流，源地址：https://github.com/LaiFengiOS/LFLiveKit
-  pod 'LFLiveKit', :git => 'https://gitee.com/yier123456/LFLiveKit.git’, :tag => ‘2.6'
+  #本地的版本是暴露GPUImage的版本，作者在GPUImageFrameBuffer里面加了方法，不能用第三方GPUImage
+#  pod 'LFLiveKit', :git => 'https://gitee.com/yier123456/LFLiveKit.git’, :tag => ‘2.6'
+  pod 'LFLiveKit',:path => './LocalSpec/LFLiveKit'
   
   #直播拉流用的IJK,这人放gitee上cocoapods怎么验证过的，自己试了，cdn提示访问不了gitee：
   pod 'IJKMediaFramework', :git => 'https://gitee.com/renzifeng/IJKMediaFramework.git’, :tag => ‘0.1.5'

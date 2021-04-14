@@ -8,6 +8,7 @@
 
 #import "VideoViewController.h"
 #import "LUTViewController.h"
+#import "GPUBeautifyViewController.h"
 #import <objc/message.h>
 
 @interface VideoViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -76,6 +77,10 @@
                             @"content":@"LUT"
                             ,@"sel":@"pushLUTViewController"
                         }
+                        ,@{
+                            @"content":@"GPUBeautify"
+                            ,@"sel":@"pushGPUBeautifyViewController"
+                        }
                         ];
     
     [self.tableView reloadData];
@@ -127,6 +132,12 @@
 
 - (void)pushLUTViewController{
     LUTViewController *vc = [[UIStoryboard storyboardWithName:@"Video" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"LUTVC"];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)pushGPUBeautifyViewController{
+    GPUBeautifyViewController *vc = [[GPUBeautifyViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -69,7 +69,7 @@ DEPENDENCIES:
   - IJKMediaFramework (from `https://gitee.com/renzifeng/IJKMediaFramework.git`, tag `0.1.5`)
   - JLRoutes
   - KTVHTTPCache (~> 2.0.0)
-  - LFLiveKit (from `https://gitee.com/yier123456/LFLiveKit.git`, tag `2.6`)
+  - LFLiveKit (from `./LocalSpec/LFLiveKit`)
   - Masonry
   - MBProgressHUD
   - MJRefresh (= 3.2.2)
@@ -119,8 +119,7 @@ EXTERNAL SOURCES:
     :git: https://gitee.com/renzifeng/IJKMediaFramework.git
     :tag: 0.1.5
   LFLiveKit:
-    :git: https://gitee.com/yier123456/LFLiveKit.git
-    :tag: '2.6'
+    :path: "./LocalSpec/LFLiveKit"
   OpenSSL:
     :path: "./LocalSpec/OpenSSL"
 
@@ -131,9 +130,6 @@ CHECKOUT OPTIONS:
   IJKMediaFramework:
     :git: https://gitee.com/renzifeng/IJKMediaFramework.git
     :tag: 0.1.5
-  LFLiveKit:
-    :git: https://gitee.com/yier123456/LFLiveKit.git
-    :tag: '2.6'
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
@@ -149,7 +145,7 @@ SPEC CHECKSUMS:
   JLRoutes: d755245322b94227662ea3e43492fdca94e05c5b
   KTVCocoaHTTPServer: df8d7b861e603ff8037e9b2138aca2563a6b768d
   KTVHTTPCache: 588c3eb16f6bd1e6fde1e230dabfb7bd4e490a4d
-  LFLiveKit: 2219563721f8aa0f188effc3395a06e2d53b23f2
+  LFLiveKit: 4653055d61ada82f0a83044a2564a7e4042b46c7
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJRefresh: 72a46ecaa2a0feaf48fc5198dff95f25f8bb27c6
@@ -166,6 +162,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 6cf38af1fd0ca71fca756f45da3ad2dace91f532
+PODFILE CHECKSUM: b4d92c24eb26dd6a07a30d777995940302d237b0
 
 COCOAPODS: 1.10.1
