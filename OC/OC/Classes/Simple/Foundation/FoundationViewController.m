@@ -385,9 +385,34 @@
 - (void)NSHostSelector{
     NSNetService *a;
     NSLog(@"%@",a);
-    
+
     NSString *name=[[NSProcessInfo processInfo] processName];
     NSLog(@"name:%@  hostName:%@",name,[NSProcessInfo processInfo].hostName);
+
+    NSProcessInfo *processInfo = [NSProcessInfo processInfo];
+    //当前进程的环境信息，是一个数据字典
+    NSLog(@"environment:%@",processInfo.environment);
+    //获取进程开启时，传入的命令行参数，可以在scheme的Arguments Passed on launch设置,比如: {"name":"oc","dev":"yier"}
+    NSLog(@"arguments:%@",processInfo.arguments);
+    
+    NSLog(@"hostName:%@",processInfo.hostName);
+    //进程名称,一般为工程名称，可以更改
+    processInfo.processName = @"custom_process_name";
+    NSLog(@"processName:%@",processInfo.processName);
+    //进程ID
+    NSLog(@"processIdentifier:%d",processInfo.processIdentifier);
+    //全球唯一码
+    NSLog(@"globallyUniqueString:%@",processInfo.globallyUniqueString);
+    //操作系统版本号
+    NSLog(@"operatingSystemVersionString:%@",processInfo.operatingSystemVersionString);
+    //主版本号，次版本号，补丁版本号
+    NSLog(@"operatingSystemVersion.majorVersion:%ld",processInfo.operatingSystemVersion.majorVersion);
+    NSLog(@"operatingSystemVersion.minorVersion:%ld",processInfo.operatingSystemVersion.minorVersion);
+    NSLog(@"operatingSystemVersion.patchVersion:%ld",processInfo.operatingSystemVersion.patchVersion);
+    //系统启动时间
+    NSLog(@"systemUptime:%f",processInfo.systemUptime);
+    //是否开启低电量
+    NSLog(@"lowPowerModeEnabled:%d",processInfo.lowPowerModeEnabled);
 }
 
 #pragma mark - 正则表达式和文本处理
