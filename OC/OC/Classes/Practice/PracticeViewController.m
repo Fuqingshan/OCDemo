@@ -56,8 +56,19 @@
 
 - (void)initData{
 
+    
+    NSDictionary *dic = @{
+                          @"urlStr":@"https://www.boxueio.com/series/swift-up-and-running/episodes/1"
+                          ,@"ignoreWebTitle":@"0"
+                          };
+    NSURLComponents *components = [NSString mapQuerysURLByDictionary:dic url:@"sumup://common/web"];
+
     self.dataSource = @[
-                        @{
+                    @{
+                        @"content":LocalizedString(@"WKWebView")
+                        ,@"url":nilToEmptyString(components.URL.absoluteString)
+                        }
+                        ,@{
                             @"content":@"YYText"
                             ,@"url":@"sumup://practice/yytext"
                             }

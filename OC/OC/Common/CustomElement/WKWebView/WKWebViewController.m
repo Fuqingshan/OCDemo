@@ -360,6 +360,17 @@ NSString *const kMessageHandler = @"OCMessageHandler";
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     LKLogm(@"WKWebView --- finish load web %@", webView.URL.absoluteString);
     self.progressView.hidden = YES;
+    
+    @weakify(self);
+      [self getVideoURLByWebView:webView completedBlock:^(id response, NSError *error) {
+          @strongify(self);
+          if(![response isEqual:[NSNull null]] && !response){
+              //截获到视频地址了
+              NSLog(@"网页中的视频地址 == %@",response);
+          }else{
+              //没有视频链接
+          }
+      }];
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error
@@ -571,6 +582,16 @@ NSString *const kMessageHandler = @"OCMessageHandler";
     }
     
     return retValue;
+}
+
+#pragma mark - Get video from webView
+- (void)getVideoURLByWebView:(WKWebView *)webView completedBlock:(VOIDBlockWithTwoModel)block{
+    //这儿获取视频的url要看h5是怎么写的，第一步肯定是通过getElementsByTagName拿video标签，如果video标签的src直接是videoURL，那就好，不是的话就看代码怎么写的，比如泊学的这个url，video下面就包了一层source标签(https://www.boxueio.com/series/swift-up-and-running/episodes/1)
+//    NSString *JsStr = @"(document.getElementsByTagName(\"video\")[0]).src";
+    NSString *JsStr = @"((document.getElementsByTagName(\"video\")[0]).getElementsByTagName(\"source\")[0]).src";
+   [webView evaluateJavaScript:JsStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+       !block?:block(response, error);
+   }];
 }
 
 - (void)didReceiveMemoryWarning {
