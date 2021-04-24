@@ -132,11 +132,11 @@
 #pragma mark - 开始播放音乐
 - (void)beginAudio{
     @weakify(self);
-    [[[self playAudioWithPlayType:FAAudioPlayTypePreWaiting] takeUntil:self.rac_willDeallocSignal] subscribeCompleted:^{
+    [[[self playAudioWithPlayType:OCAudioPlayTypePreWaiting] takeUntil:self.rac_willDeallocSignal] subscribeCompleted:^{
         @strongify(self);
         //AVAudioPlayer歇气需要时间，0.01秒也可以
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.audioPlay playRecord:FAAudioPlayTypeWaiting];
+            [self.audioPlay playRecord:OCAudioPlayTypeWaiting];
         });
     }];
 }
@@ -144,17 +144,17 @@
 #pragma mark - 播放繁忙
 - (void)playBusyAudio{
     @weakify(self);
-    [[[self playAudioWithPlayType:FAAudioPlayTypeBusy] takeUntil:self.rac_willDeallocSignal] subscribeCompleted:^{
+    [[[self playAudioWithPlayType:OCAudioPlayTypeBusy] takeUntil:self.rac_willDeallocSignal] subscribeCompleted:^{
         @strongify(self);
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.audioPlay playRecord:FAAudioPlayTypeWaiting];
+            [self.audioPlay playRecord:OCAudioPlayTypeWaiting];
         });
     }];
 }
 
 #pragma mark - 播放挂断
 - (void)playHangup{
-    [self.audioPlay playRecord:FAAudioPlayTypeHangup];
+    [self.audioPlay playRecord:OCAudioPlayTypeHangup];
 }
 
 #pragma mark - 停止播放音乐
@@ -162,12 +162,12 @@
     [self.audioPlay stopCurrentPlayer];
 }
 
-- (RACSignal *)playAudioWithPlayType:(FAAudioPlayType)type{
+- (RACSignal *)playAudioWithPlayType:(OCAudioPlayType)type{
     return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
-        self.audioPlay.playCompleteBlock = ^(FAAudioPlayStatus status) {
-            if (status == FAAudioPlayStatusNormal) {
+        self.audioPlay.playCompleteBlock = ^(OCAudioPlayStatus status) {
+            if (status == OCAudioPlayStatusNormal) {
                 [subscriber sendCompleted];
-            }else if(status == FAAudioPlayStatusSystemInterruption){
+            }else if(status == OCAudioPlayStatusSystemInterruption){
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"CloseEvent" object:@(YES)];
                 [subscriber sendError:nil];
             }else{

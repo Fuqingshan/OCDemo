@@ -36,7 +36,7 @@
                         }
                         [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
                         self.player = nil;
-                        !self.playCompleteBlock?:self.playCompleteBlock(FAAudioPlayStatusSystemInterruption);
+                        !self.playCompleteBlock?:self.playCompleteBlock(OCAudioPlayStatusSystemInterruption);
                     }
                     break;
                 case AVAudioSessionInterruptionTypeEnded:
@@ -55,19 +55,19 @@
     return self;
 }
 
-- (void)playRecord:(FAAudioPlayType)type{
+- (void)playRecord:(OCAudioPlayType)type{
     NSString *playPath;
     switch (type) {
-        case FAAudioPlayTypePreWaiting:
+        case OCAudioPlayTypePreWaiting:
             playPath = [self preWaitingPath];
             break;
-        case FAAudioPlayTypeWaiting:
+        case OCAudioPlayTypeWaiting:
             playPath = [self waitingPath];
             break;
-        case FAAudioPlayTypeBusy:
+        case OCAudioPlayTypeBusy:
             playPath = [self busyPath];
             break;
-        case FAAudioPlayTypeHangup:
+        case OCAudioPlayTypeHangup:
             playPath = [self hangupPath];
             break;
     }
@@ -76,10 +76,10 @@
 }
 
 - (void)playAudio:(NSString *)audioPath{
-    [self playAudio:audioPath type:FAAudioPlayTypePreWaiting];
+    [self playAudio:audioPath type:OCAudioPlayTypePreWaiting];
 }
 
-- (void)playAudio:(NSString *)audioPath type:(FAAudioPlayType)type{
+- (void)playAudio:(NSString *)audioPath type:(OCAudioPlayType)type{
     if(self.player.isPlaying){
         //不会走回调
         [self.player stop];
@@ -90,7 +90,7 @@
     if (![audioPath isValide]) {
         NSString * log = [NSString stringWithFormat:@"AudioService --- 播放语音异常：文件路径错误"];
         LKLog(log);
-        !self.playCompleteBlock?:self.playCompleteBlock(FAAudioPlayStatusError);
+        !self.playCompleteBlock?:self.playCompleteBlock(OCAudioPlayStatusError);
         return;
     }
     
@@ -98,7 +98,7 @@
     if (!data) {
         NSString * log = [NSString stringWithFormat:@"AudioService --- 播放语音异常：文件数据错误"];
         LKLog(log);
-        !self.playCompleteBlock?:self.playCompleteBlock(FAAudioPlayStatusError);
+        !self.playCompleteBlock?:self.playCompleteBlock(OCAudioPlayStatusError);
         return;
     }
     
@@ -110,13 +110,13 @@
     NSError * error = nil;
     self.player = [[AVAudioPlayer alloc] initWithData:data error:&error];
     self.player.delegate = self;
-    self.player.numberOfLoops = type == FAAudioPlayTypeWaiting? -1: 0;
+    self.player.numberOfLoops = type == OCAudioPlayTypeWaiting? -1: 0;
     [self.player prepareToPlay];
     BOOL playBOOL = [self.player play];
     if (!playBOOL || error) {
         NSString * log = [NSString stringWithFormat:@"AudioService --- 播放语音异常：\n%@",error];
         LKLog(log);
-        !self.playCompleteBlock?:self.playCompleteBlock(FAAudioPlayStatusError);
+        !self.playCompleteBlock?:self.playCompleteBlock(OCAudioPlayStatusError);
         return;
     }
 }
@@ -126,7 +126,7 @@
         [self.player stop];
         //不会走回调
         self.player = nil;
-        !self.playCompleteBlock?:self.playCompleteBlock(FAAudioPlayStatusError);
+        !self.playCompleteBlock?:self.playCompleteBlock(OCAudioPlayStatusError);
         [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
     }
 }
@@ -146,7 +146,7 @@
 #pragma mark - player delegate
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
     [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
-    !self.playCompleteBlock?:self.playCompleteBlock(FAAudioPlayStatusNormal);
+    !self.playCompleteBlock?:self.playCompleteBlock(OCAudioPlayStatusNormal);
     self.player = nil;
     NSString * playLog = [NSString stringWithFormat:@"AudioService --- 正常播放完成回调"];
     LKLog(playLog);
@@ -154,7 +154,7 @@
 
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError * __nullable)error{
     [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
-    !self.playCompleteBlock?:self.playCompleteBlock(FAAudioPlayStatusError);
+    !self.playCompleteBlock?:self.playCompleteBlock(OCAudioPlayStatusError);
     self.player = nil;
     NSString * playLog = [NSString stringWithFormat:@"AudioService --- 播放Error回调:%@",error];
     LKLog(playLog);

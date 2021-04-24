@@ -9,26 +9,26 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-typedef NS_ENUM(NSInteger,FAAudioPlayStatus){
-    FAAudioPlayStatusNormal,///<未播放的正常状态
-    FAAudioPlayStatusError,///<播放异常
-    FAAudioPlayStatusSystemInterruption,///<停止播放
+typedef NS_ENUM(NSInteger,OCAudioPlayStatus){
+    OCAudioPlayStatusNormal,///<未播放的正常状态
+    OCAudioPlayStatusError,///<播放异常
+    OCAudioPlayStatusSystemInterruption,///<停止播放
 };
 
-typedef NS_ENUM(NSInteger,FAAudioPlayType){
-    FAAudioPlayTypePreWaiting,///<预加载
-    FAAudioPlayTypeWaiting,///<等待
-    FAAudioPlayTypeBusy,///<坐席忙
-    FAAudioPlayTypeHangup,///<挂断
+typedef NS_ENUM(NSInteger,OCAudioPlayType){
+    OCAudioPlayTypePreWaiting,///<预加载
+    OCAudioPlayTypeWaiting,///<等待
+    OCAudioPlayTypeBusy,///<坐席忙
+    OCAudioPlayTypeHangup,///<挂断
 };
 
-typedef void (^FAAudioPlayCompleteBlock)(FAAudioPlayStatus status);
+typedef void (^OCAudioPlayCompleteBlock)(OCAudioPlayStatus status);
 
 @interface OCAudioPlayer : NSObject
-@property (nonatomic, copy) FAAudioPlayCompleteBlock playCompleteBlock;///<语音播放回调
+@property (nonatomic, copy) OCAudioPlayCompleteBlock playCompleteBlock;///<语音播放回调
 
 - (void)playAudio:(NSString *)audioPath;
-- (void)playRecord:(FAAudioPlayType)type;
+- (void)playRecord:(OCAudioPlayType)type;
 - (void)stopCurrentPlayer;
 - (void)pause;
 - (void)resume;
