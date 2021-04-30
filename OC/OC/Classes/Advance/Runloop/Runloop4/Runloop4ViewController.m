@@ -7,7 +7,7 @@
 //
 
 #import "Runloop4ViewController.h"
-#import "LKCrashMonitor.h"
+#import "OCCrashMonitor.h"
 #import "MBProgressHUD+LKAdditions.h"
 
 @interface Runloop4ViewController ()
@@ -23,9 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [LKCrashMonitor registerExceptionHandler];
-
-    [[[[NSNotificationCenter defaultCenter] rac_addObserverForName:LKAppOnException object:nil] takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNotification * _Nullable x) {
+    [[[[NSNotificationCenter defaultCenter] rac_addObserverForName:OCAppOnException object:nil] takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNotification * _Nullable x) {
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"程序崩溃了"
                                                         message:@"如果你能让程序起死回生，那你的决定是？"
@@ -34,7 +32,7 @@
                                               otherButtonTitles:@"起死回生", nil];
         [alert show];
         
-        [LKCrashMonitor crashAfterDelay:5];
+        [OCCrashMonitor crashAfterDelay:5];
     }];
 }
 

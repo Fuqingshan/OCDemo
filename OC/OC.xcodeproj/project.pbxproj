@@ -144,7 +144,7 @@
 		81580B7C2394BC36005A25D1 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81580B7B2394BC36005A25D1 /* Login.storyboard */; };
 		81580B7F2394EEC1005A25D1 /* LoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 81580B7E2394EEC1005A25D1 /* LoginViewModel.m */; };
 		8167681926271ED600A44A31 /* GPUBeautifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8167681826271ED600A44A31 /* GPUBeautifyViewController.m */; };
-		8167696B262927FC00A44A31 /* LKCrashMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8167696A262927FC00A44A31 /* LKCrashMonitor.m */; };
+		8167696B262927FC00A44A31 /* OCCrashMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8167696A262927FC00A44A31 /* OCCrashMonitor.m */; };
 		8179EBEA2251C3CE00B1AFBA /* UIView+FrameChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 8179EBE82251C3CE00B1AFBA /* UIView+FrameChange.m */; };
 		8179EBEB2251C3CE00B1AFBA /* UIView+anchorPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 8179EBE92251C3CE00B1AFBA /* UIView+anchorPoint.m */; };
 		8179EC122251C46000B1AFBA /* XWMagicMoveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8179EBEF2251C46000B1AFBA /* XWMagicMoveCell.xib */; };
@@ -865,8 +865,8 @@
 		81580B7E2394EEC1005A25D1 /* LoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewModel.m; sourceTree = "<group>"; };
 		8167681726271ED600A44A31 /* GPUBeautifyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GPUBeautifyViewController.h; sourceTree = "<group>"; };
 		8167681826271ED600A44A31 /* GPUBeautifyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GPUBeautifyViewController.m; sourceTree = "<group>"; };
-		81676969262927FC00A44A31 /* LKCrashMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKCrashMonitor.h; sourceTree = "<group>"; };
-		8167696A262927FC00A44A31 /* LKCrashMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKCrashMonitor.m; sourceTree = "<group>"; };
+		81676969262927FC00A44A31 /* OCCrashMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCCrashMonitor.h; sourceTree = "<group>"; };
+		8167696A262927FC00A44A31 /* OCCrashMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCCrashMonitor.m; sourceTree = "<group>"; };
 		8179EBE62251C3CE00B1AFBA /* UIView+FrameChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameChange.h"; sourceTree = "<group>"; };
 		8179EBE72251C3CE00B1AFBA /* UIView+anchorPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+anchorPoint.h"; sourceTree = "<group>"; };
 		8179EBE82251C3CE00B1AFBA /* UIView+FrameChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameChange.m"; sourceTree = "<group>"; };
@@ -2030,8 +2030,8 @@
 		8167693B262924FC00A44A31 /* LKMonitor */ = {
 			isa = PBXGroup;
 			children = (
-				81676969262927FC00A44A31 /* LKCrashMonitor.h */,
-				8167696A262927FC00A44A31 /* LKCrashMonitor.m */,
+				81676969262927FC00A44A31 /* OCCrashMonitor.h */,
+				8167696A262927FC00A44A31 /* OCCrashMonitor.m */,
 			);
 			path = LKMonitor;
 			sourceTree = "<group>";
@@ -4533,7 +4533,7 @@
 				02E4BCC42259D24F0056686C /* PixelViewController.m in Sources */,
 				81EDD01A22FBCD700006A52B /* FacadeMode1.m in Sources */,
 				81E5922E2240D71D001B71CA /* ContainerViewController.m in Sources */,
-				8167696B262927FC00A44A31 /* LKCrashMonitor.m in Sources */,
+				8167696B262927FC00A44A31 /* OCCrashMonitor.m in Sources */,
 				81E538F82213FAD900D694CD /* NSString+Helper.m in Sources */,
 				02E4BCA32259A2C30056686C /* RuntimeBaseModel.m in Sources */,
 				81E791772616E521003B9B69 /* LivePushView.m in Sources */,

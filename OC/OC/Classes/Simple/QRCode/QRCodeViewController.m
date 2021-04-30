@@ -11,7 +11,7 @@
 #import "NSTimer+Addition.h"
 
 @import AVFoundation;
-@interface QRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate>
+@interface QRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate,AVCaptureVideoDataOutputSampleBufferDelegate>
 {
     int num;
     BOOL upOrdown;
@@ -19,6 +19,7 @@
 @property (strong,nonatomic)AVCaptureDevice * device;
 @property (strong,nonatomic)AVCaptureDeviceInput * input;
 @property (strong,nonatomic)AVCaptureMetadataOutput * output;
+@property (nonatomic, strong) AVCapturePhotoOutput *photoOutput;
 @property (strong,nonatomic)AVCaptureSession * session;
 @property (strong,nonatomic)AVCaptureVideoPreviewLayer * preview;
 @property (nonatomic, retain) UIImageView * line;
@@ -33,6 +34,10 @@
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIView *blackView;
 @property (weak, nonatomic) IBOutlet UIView *QRBGView;
+
+@property (nonatomic, assign) CGFloat maxZoomFactor;// 最大缩放比例
+@property (nonatomic, assign) CGFloat minZoomFactor;// 最小缩放比例
+@property (nonatomic, assign) CGFloat currentZoomFactor;// 当前缩放比例
 @end
 
 @implementation QRCodeViewController
@@ -80,7 +85,7 @@
     
     UIAlertAction * actionGo = [UIAlertAction actionWithTitle:@"前往" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
         [self dismissViewControllerAnimated:YES completion:^{
             
         }];
@@ -115,81 +120,142 @@
 #pragma mark - setupUI
 - (void)initCamera
 {
-    // Device
-    /**
-     *  初始化相机设备
-     */
-    _device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    //初始化相机设备
+    self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
-    // Input
-    /**
-     *  初始化输入
-     */
-    _input = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:nil];
+    // 添加主题区域更改监视，比如旋转手机就会触发
+    // 当AVCaptureDevice的subjectAreaChangeMonitoringEnabled属性为YES时才会发送此通知
+    @weakify(self);
+    [[[[NSNotificationCenter defaultCenter] rac_addObserverForName:AVCaptureDeviceSubjectAreaDidChangeNotification object:self.device] takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNotification * _Nullable x) {
+        @strongify(self);
+        CGPoint point = self.bgView.center;
+        //对拍照设备操作前，先进行锁定，防止其他线程访问
+        NSError *error = nil;
+        
+        if ([self.device lockForConfiguration:&error]){
+            [self.session beginConfiguration];
+            
+            // 获取聚焦点
+            CGPoint focusPoint = [self.preview captureDevicePointOfInterestForPoint:point];
+            
+            // 设置聚焦点，必须先设置聚焦点再设置聚焦模式
+            if ([self.device isFocusPointOfInterestSupported]) {
+                self.device.focusPointOfInterest = focusPoint;
+            }
+            
+            // 设置聚焦模式
+            if ([self.device isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
+                self.device.focusMode = AVCaptureFocusModeContinuousAutoFocus;
+            }
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                self.bgView.transform = CGAffineTransformMakeScale(1.1, 1.1);
+            }completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.bgView.transform = CGAffineTransformIdentity;
+                } completion:^(BOOL finished) {
+                    [self.session commitConfiguration];
+                    [self.device unlockForConfiguration];
+                }];
+            }];
+        }
+    }];
     
-    // Output
-    /**
-     初始化输出
-     */
-    _output = [[AVCaptureMetadataOutput alloc]init];
-    [_output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+    // 更改subjectAreaChangeMonitoringEnabled属性时需加锁处理
+    [self.device lockForConfiguration:nil];
+    self.device.subjectAreaChangeMonitoringEnabled = YES;
+    [self.device unlockForConfiguration];
     
-    // Session
-    /**
-     初始化session
-     */
-    _session = [[AVCaptureSession alloc]init];
+    //初始化输入
+    self.input = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:nil];
+    
+    //初始化输出
+    self.output = [[AVCaptureMetadataOutput alloc]init];
+    [self.output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+    
+    // 初始化session
+    self.session = [[AVCaptureSession alloc]init];
     // 对于识别率的精度 就是屏幕有波浪一样
-    [_session setSessionPreset:AVCaptureSessionPresetHigh];
+    [self.session setSessionPreset:AVCaptureSessionPresetHigh];
     // 改成了 降低采集频率
-    //    [_session setSessionPreset:AVCaptureSessionPreset640x480];
-    if ([_session canAddInput:self.input])
-    {
-        [_session addInput:self.input];
+    //    [self.session setSessionPreset:AVCaptureSessionPreset640x480];
+    if ([self.session canAddInput:self.input]){
+        [self.session addInput:self.input];
     }
     
-    if ([_session canAddOutput:self.output])
-    {
-        [_session addOutput:self.output];
+    if ([self.session canAddOutput:self.output]){
+        [self.session addOutput:self.output];
     }
     
     // 条码类型 AVMetadataObjectTypeQRCode
     /**
      *  判断是否可以扫描，如果不可以扫描，提示用户开启相机授权。
      */
-    if (![_output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeQRCode]) {
-        
+    if (![self.output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeQRCode]) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self showErrorAlert];
         });
-        
     }else{
-        _output.metadataObjectTypes =@[AVMetadataObjectTypeQRCode,AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];//设置扫描类型;
+        self.output.metadataObjectTypes =@[AVMetadataObjectTypeQRCode,AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];//设置扫描类型;
     }
     //设置扫描区域
-    [_output setRectOfInterest:CGRectMake(0, 0, self.bgView.frame.size.width, self.bgView.frame.size.height)];//设置扫描区域
+    [self.output setRectOfInterest:CGRectMake(0, 0, self.bgView.frame.size.width, self.bgView.frame.size.height)];//设置扫描区域
     
-    // Preview
-    /**
-     *  初始化一个显示扫描界面的layer
-     */
-    _preview =[AVCaptureVideoPreviewLayer layerWithSession:self.session];
-    _preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    _preview.frame = CGRectMake(0, 0, self.bgView.frame.size.width,self.bgView.frame.size.height);
-    [self.bgView.layer insertSublayer:_preview atIndex:0];
-    // Start
-    /**
-     *  session执行
-     */
-//    [_session startRunning];
+
+    // 创建摄像设备输出流，用于识别光线强弱
+    AVCaptureVideoDataOutput *videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
+    [videoDataOutput setSampleBufferDelegate:self queue:dispatch_get_main_queue()];
+    // 添加摄像设备输出流到会话对象
+    if ([self.session canAddOutput:videoDataOutput]) {
+        [self.session addOutput:videoDataOutput];
+    }
+    
+    //图形输出
+    self.photoOutput = [[AVCapturePhotoOutput  alloc] init];
+    AVCapturePhotoSettings *settings = [AVCapturePhotoSettings photoSettingsWithFormat:@{AVVideoCodecKey:AVVideoCodecTypeJPEG}];
+    self.photoOutput.photoSettingsForSceneMonitoring = settings;
+    if ([self.session canAddOutput:self.photoOutput]) {
+        [self.session addOutput:self.photoOutput];
+    }
+    
+    //初始化一个显示扫描界面的layer
+    self.preview =[AVCaptureVideoPreviewLayer layerWithSession:self.session];
+    self.preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    self.preview.frame = CGRectMake(0, 0, self.bgView.frame.size.width,self.bgView.frame.size.height);
+    [self.bgView.layer insertSublayer:self.preview atIndex:0];
+    
+    // 给预览父视图添加缩放手势
+    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] init];
+    [self.bgView addGestureRecognizer:pinch];
+    
+    [[pinch rac_gestureSignal] subscribeNext:^(__kindof UIGestureRecognizer * _Nullable x) {
+        @strongify(self);
+        if (![self.session isRunning] ){
+            return;
+        }
+        
+        //当UIGestureRecognizerStateChanged时，根据手势改变当前的zoomFactor
+        if (pinch.state == UIGestureRecognizerStateBegan) {
+            self.currentZoomFactor = self.device.videoZoomFactor;
+        } else if (pinch.state == UIGestureRecognizerStateChanged) {
+            CGFloat currentZoomFactor = self.currentZoomFactor * pinch.scale;
+            if (currentZoomFactor < self.maxZoomFactor && currentZoomFactor > self.minZoomFactor) {
+                //改变videoZoomFactor需要加锁
+                if ([self.device lockForConfiguration:nil]) {
+                    self.device.videoZoomFactor = currentZoomFactor;
+                    [self.device unlockForConfiguration];
+                }
+            }
+        }
+    }];
 }
 
 - (void)layout
 {
     upOrdown = NO;
     num =0;
-    _line = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.QRBGView.frame), CGRectGetMinY(self.QRBGView.frame)+2*num-30, CGRectGetWidth(self.QRBGView.frame), 2)];
-    _line.image = [UIImage imageNamed:@"QRCode_line.png"];
+    self.line = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.QRBGView.frame), CGRectGetMinY(self.QRBGView.frame)+2*num-30, CGRectGetWidth(self.QRBGView.frame), 2)];
+    self.line.image = [UIImage imageNamed:@"QRCode_line.png"];
     [self.view addSubview:_line];
     
 }
@@ -200,14 +266,14 @@
 {
     if (upOrdown == NO) {
         num ++;
-        _line.frame = CGRectMake(CGRectGetMinX(self.QRBGView.frame), CGRectGetMinY(self.QRBGView.frame)+2*num-30, CGRectGetWidth(self.QRBGView.frame), 2);
+        self.line.frame = CGRectMake(CGRectGetMinX(self.QRBGView.frame), CGRectGetMinY(self.QRBGView.frame)+2*num-30, CGRectGetWidth(self.QRBGView.frame), 2);
         if (2*num == CGRectGetHeight(self.QRBGView.frame)) {
             upOrdown = YES;
         }
     }
     else {
         num --;
-        _line.frame = CGRectMake(CGRectGetMinX(self.QRBGView.frame), CGRectGetMinY(self.QRBGView.frame)+2*num-30, CGRectGetWidth(self.QRBGView.frame), 2);
+        self.line.frame = CGRectMake(CGRectGetMinX(self.QRBGView.frame), CGRectGetMinY(self.QRBGView.frame)+2*num-30, CGRectGetWidth(self.QRBGView.frame), 2);
         if (num == 0) {
             upOrdown = NO;
         }
@@ -358,6 +424,43 @@
 
 - (IBAction)createQRCodeEvent:(UIButton *)sender {
     [OCRouter openInnerURL:[NSURL URLWithString:@"sumup://simple/QRCode/QRCodeCreate"]];
+}
+
+#pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate
+- (void)captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(nonnull CMSampleBufferRef)sampleBuffer fromConnection:(nonnull AVCaptureConnection *)connection {
+    CFDictionaryRef metadataDict = CMCopyDictionaryOfAttachments(NULL,sampleBuffer, kCMAttachmentMode_ShouldPropagate);
+    NSDictionary *metadata = [[NSMutableDictionary alloc] initWithDictionary:(__bridge NSDictionary*)metadataDict];
+    CFRelease(metadataDict);
+    NSDictionary *exifMetadata = [[metadata objectForKey:(NSString *)kCGImagePropertyExifDictionary] mutableCopy];
+    CGFloat brightnessValue = [[exifMetadata objectForKey:(NSString *)kCGImagePropertyExifBrightnessValue] floatValue];
+    //一般为-7到2波动，暗->亮
+//    NSLog(@"====%f",brightnessValue);
+}
+
+#pragma mark - lazy load
+- (CGFloat)maxZoomFactor {
+    CGFloat max = 1;
+    if (@available(iOS 11.0, *)) {
+        max = self.device.maxAvailableVideoZoomFactor;
+    } else {
+        max = self.device.activeFormat.videoMaxZoomFactor;
+    }
+    
+    // 对最大缩放比例再次做限制
+    if (max > 5) {
+        max = 5;
+    }
+    
+    return max;
+}
+
+- (CGFloat)minZoomFactor {
+    CGFloat min = 1;
+    if (@available(iOS 11.0, *)) {
+        min = self.device.minAvailableVideoZoomFactor;
+    }
+    
+    return min;
 }
 
 @end

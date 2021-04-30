@@ -1,39 +1,39 @@
 //
-//  LKCrashMonitor.m
+//  OCCrashMonitor.m
 //  App
 //
 //  Created by yier on 2019/9/30.
 //  Copyright © 2019 yooli. All rights reserved.
 //
 
-#import "LKCrashMonitor.h"
+#import "OCCrashMonitor.h"
 
-NSString *const LKAppOnException = @"kLKAppOnException";
-static NSUncaughtExceptionHandler *LKUncaughtExceptionHandler;
+NSString *const OCAppOnException = @"kOCAppOnException";
+static NSUncaughtExceptionHandler *OCUncaughtExceptionHandler;
 
-@implementation LKCrashMonitor
+@implementation OCCrashMonitor
 
 + (void)registerExceptionHandler{
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        LKUncaughtExceptionHandler = NSGetUncaughtExceptionHandler();
+        OCUncaughtExceptionHandler = NSGetUncaughtExceptionHandler();
         NSSetUncaughtExceptionHandler(&HandleException);
     }) ;
 }
 
 void HandleException (NSException *exception) {
-    if (LKUncaughtExceptionHandler) {
-        [[LKCrashMonitor class] performSelectorOnMainThread:@selector(handleException:) withObject:exception waitUntilDone:YES];
-        LKUncaughtExceptionHandler(exception);
+    if (OCUncaughtExceptionHandler) {
+        [[OCCrashMonitor class] performSelectorOnMainThread:@selector(handleException:) withObject:exception waitUntilDone:YES];
+        OCUncaughtExceptionHandler(exception);
     }else{
-        [[LKCrashMonitor class] performSelectorOnMainThread:@selector(handleException:) withObject:exception waitUntilDone:YES];
+        [[OCCrashMonitor class] performSelectorOnMainThread:@selector(handleException:) withObject:exception waitUntilDone:YES];
     }
 }
 
 + (void)handleException:(NSException *)exception{
-    [LKCrashMonitor handleExceptionMsg:exception];
-    [LKCrashMonitor handleExceptionNotify:exception];
+    [OCCrashMonitor handleExceptionMsg:exception];
+    [OCCrashMonitor handleExceptionNotify:exception];
 }
 
 + (void)handleExceptionMsg:(NSException *)exception{
@@ -54,16 +54,16 @@ void HandleException (NSException *exception) {
    }
    
    NSString *path = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask,YES).firstObject;
-   NSString *crashPath = [path stringByAppendingPathComponent:@"LKCrashs"];
+   NSString *crashPath = [path stringByAppendingPathComponent:@"OCCrashs"];
    BOOL createDir = [[NSFileManager defaultManager] createDirectoryAtPath:crashPath withIntermediateDirectories:YES attributes:nil error:nil];
    
    if (!createDir) {
-       LKLog(@"LKCrashMonitor --- 崩溃日志存储目录创建失败");
+       LKLog(@"OCCrashMonitor --- 崩溃日志存储目录创建失败");
        return;
    }
    
    if (![callStacksStr isValide]) {
-       LKLog(@"LKCrashMonitor --- 没有崩溃堆栈");
+       LKLog(@"OCCrashMonitor --- 没有崩溃堆栈");
        return;
    }
    
@@ -81,14 +81,14 @@ void HandleException (NSException *exception) {
    BOOL success = [crashData writeToFile:writePath atomically:YES];
     
     if (success) {
-        LKLogm(@"LKCrashMonitor --- 日志存储成功：%@",writePath);
+        LKLogm(@"OCCrashMonitor --- 日志存储成功：%@",writePath);
     }else{
-        LKLogm(@"LKCrashMonitor --- 日志存储失败：%@",writePath);
+        LKLogm(@"OCCrashMonitor --- 日志存储失败：%@",writePath);
     }
 }
 
 + (void)handleExceptionNotify:(NSException *)exception{
-    [[NSNotificationCenter defaultCenter] postNotificationName:LKAppOnException object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:OCAppOnException object:nil];
     CFRunLoopRef runLoop = CFRunLoopGetCurrent();
     CFArrayRef allModes = CFRunLoopCopyAllModes(runLoop);
     

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "OCCrashMonitor.h"
 
 @implementation AppDelegate(Appearance)
 
@@ -32,6 +33,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self configAppearance];
+    [OCCrashMonitor registerExceptionHandler];
     return YES;
 }
 
