@@ -123,7 +123,7 @@
     //初始化相机设备
     self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
-    // 添加主题区域更改监视，比如旋转手机就会触发
+    // 添加主题区域更改监听，比如旋转手机就会触发
     // 当AVCaptureDevice的subjectAreaChangeMonitoringEnabled属性为YES时才会发送此通知
     @weakify(self);
     [[[[NSNotificationCenter defaultCenter] rac_addObserverForName:AVCaptureDeviceSubjectAreaDidChangeNotification object:self.device] takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNotification * _Nullable x) {
@@ -284,12 +284,13 @@
       fromConnection:(AVCaptureConnection *)connection
 {
     if (self.isReading == NO) {
-        self.isReading = YES;
         
         NSString *stringValue;
         
         if (metadataObjects != nil && [metadataObjects count] > 0)
         {
+            self.isReading = YES;
+
             AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex:0];
             stringValue = metadataObject.stringValue;
             NSLog(@"stringValue:%@",stringValue);

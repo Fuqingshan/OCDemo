@@ -185,7 +185,10 @@ CGSize IMSizeReduce(CGSize size, CGFloat limit)
     UIImagePickerController *pickerController = [[UIImagePickerController alloc]init];
     pickerController.allowsEditing = editing;
     pickerController.sourceType = sourceType;
-    pickerController.navigationBar.tintColor = [UIColor orangeColor];
+    //下面两行设置无效，优先级还是appearance高
+//    pickerController.navigationBar.tintColor = [UIColor orangeColor];
+//    pickerController.navigationBar.barTintColor = [UIColor orangeColor];
+    pickerController.modalPresentationStyle = UIModalPresentationFullScreen;
     
     [pickerController showWithModalViewController:viewController animated:YES selectedHandler:^(UIImage *image, NSDictionary *info) {
         //resize image

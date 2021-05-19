@@ -5,6 +5,26 @@
 //  Created by yier on 2019/3/31.
 //  Copyright © 2019 yier. All rights reserved.
 //
+/*
+ IOS Animation-KeyPath值
+
+ keyPath值    说明    值类型
+ position 移动位置    CGPoint
+ opacity 透明度    0-1
+ bounds 变大与位置    CGRect
+ bounds.size 由小变大 CGSize
+ backgroundColor 背景颜色 CGColor
+ cornerRadius 渐变圆角  任意数值
+ borderWidth 改变边框border的大小，(图形周围边框，border默认为黑色) 任意数值
+ contents 改变layer内容(图片)，注意如果想要达到改变内容的动画效果，首先在运行动画之前定义好layer的contents  CGImage
+ transform.scale 缩放、放大 0.0-1.0
+ transform.rotation.x 旋转动画(翻转，沿着X轴) M_PI*n
+ transform.rotation.y 旋转动画(翻转，沿着Y轴)  M_PI*n
+ transform.rotation.z     旋转动画(翻转，沿着Z轴)    M_PI*n
+ transform.translation.x 横向移动（沿着X轴）任意数值
+ transform.translation.y 纵向移动（沿着Y轴）任意数值
+ */
+
 
 #import "AnimationViewController.h"
 #import <objc/message.h>
