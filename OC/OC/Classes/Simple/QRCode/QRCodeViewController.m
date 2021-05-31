@@ -49,14 +49,18 @@
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:YES];
     [self.timer pauseTimer];
-    [_session stopRunning];
+    if (_session.isRunning) {
+        [_session stopRunning];
+    }
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
     [self.timer resumeTimer];
     self.isReading = YES;
-    [_session startRunning];
+    if (!_session.isRunning) {
+        [_session startRunning];
+    }
 }
 
 - (void)viewDidLoad {
@@ -133,7 +137,6 @@
         NSError *error = nil;
         
         if ([self.device lockForConfiguration:&error]){
-            [self.session beginConfiguration];
             
             // 获取聚焦点
             CGPoint focusPoint = [self.preview captureDevicePointOfInterestForPoint:point];
@@ -154,7 +157,6 @@
                 [UIView animateWithDuration:0.3 animations:^{
                     self.bgView.transform = CGAffineTransformIdentity;
                 } completion:^(BOOL finished) {
-                    [self.session commitConfiguration];
                     [self.device unlockForConfiguration];
                 }];
             }];
