@@ -437,6 +437,9 @@
 		81EDD02F22FBFD550006A52B /* AdapterOld.m in Sources */ = {isa = PBXBuildFile; fileRef = 81EDD02E22FBFD550006A52B /* AdapterOld.m */; };
 		81EE98C4230D23520037FDCA /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81EE98C2230D23520037FDCA /* MineViewController.m */; };
 		81EE98C5230D23520037FDCA /* Mine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81EE98C3230D23520037FDCA /* Mine.storyboard */; };
+		81F2DAE72667D33A007DB3DD /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F2DAE62667D33A007DB3DD /* ShareViewController.m */; };
+		81F2DAEA2667D33A007DB3DD /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81F2DAE82667D33A007DB3DD /* MainInterface.storyboard */; };
+		81F2DAEE2667D33A007DB3DD /* OCShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 81F2DAE32667D33A007DB3DD /* OCShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		81F550A5223A2B7F00B924F9 /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F550A4223A2B7F00B924F9 /* UICountingLabel.m */; };
 		81F550BC223A34A500B924F9 /* PageControlModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F550B6223A34A500B924F9 /* PageControlModel.m */; };
 		81F550BD223A34A500B924F9 /* JMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F550B8223A34A500B924F9 /* JMPageControl.m */; };
@@ -673,7 +676,28 @@
 			remoteGlobalIDString = 81EBD95822129BE30011392E;
 			remoteInfo = OC;
 		};
+		81F2DAEC2667D33A007DB3DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81EBD95122129BE30011392E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 81F2DAE22667D33A007DB3DD;
+			remoteInfo = OCShareExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		81F2DAEF2667D33A007DB3DD /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				81F2DAEE2667D33A007DB3DD /* OCShareExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		02E1BE85222EB76F005C4F61 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1388,6 +1412,13 @@
 		81EE98C1230D23520037FDCA /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		81EE98C2230D23520037FDCA /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		81EE98C3230D23520037FDCA /* Mine.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Mine.storyboard; sourceTree = "<group>"; };
+		81F2DAE32667D33A007DB3DD /* OCShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OCShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		81F2DAE52667D33A007DB3DD /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		81F2DAE62667D33A007DB3DD /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		81F2DAE92667D33A007DB3DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		81F2DAEB2667D33A007DB3DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81F2DAF32667D77A007DB3DD /* OCShareExtensionDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OCShareExtensionDebug.entitlements; sourceTree = "<group>"; };
+		81F2DAF42667D7AF007DB3DD /* OCDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OCDebug.entitlements; sourceTree = "<group>"; };
 		81F550A3223A2B7F00B924F9 /* UICountingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICountingLabel.h; sourceTree = "<group>"; };
 		81F550A4223A2B7F00B924F9 /* UICountingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICountingLabel.m; sourceTree = "<group>"; };
 		81F550B4223A34A500B924F9 /* JMPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMPageControl.h; sourceTree = "<group>"; };
@@ -1657,6 +1688,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EFBB3814493D8DC6B071F6C /* libPods-OCTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81F2DAE02667D33A007DB3DD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3083,6 +3121,7 @@
 			children = (
 				81EBD95B22129BE30011392E /* OC */,
 				81ED15882403BD0500576FEA /* OCTests */,
+				81F2DAE42667D33A007DB3DD /* OCShareExtension */,
 				81EBD95A22129BE30011392E /* Products */,
 				864CA6331D99EA6473F891FA /* Pods */,
 				F2AA6FEBCB8165D161AA93CC /* Frameworks */,
@@ -3094,6 +3133,7 @@
 			children = (
 				81EBD95922129BE30011392E /* OC.app */,
 				81ED15872403BD0500576FEA /* OCTests.xctest */,
+				81F2DAE32667D33A007DB3DD /* OCShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3101,6 +3141,7 @@
 		81EBD95B22129BE30011392E /* OC */ = {
 			isa = PBXGroup;
 			children = (
+				81F2DAF42667D7AF007DB3DD /* OCDebug.entitlements */,
 				81EBD95C22129BE30011392E /* AppDelegate.h */,
 				81EBD95D22129BE30011392E /* AppDelegate.m */,
 				81EBD97A22129FAD0011392E /* Classes */,
@@ -3541,6 +3582,18 @@
 			path = Mine;
 			sourceTree = "<group>";
 		};
+		81F2DAE42667D33A007DB3DD /* OCShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				81F2DAF32667D77A007DB3DD /* OCShareExtensionDebug.entitlements */,
+				81F2DAE52667D33A007DB3DD /* ShareViewController.h */,
+				81F2DAE62667D33A007DB3DD /* ShareViewController.m */,
+				81F2DAE82667D33A007DB3DD /* MainInterface.storyboard */,
+				81F2DAEB2667D33A007DB3DD /* Info.plist */,
+			);
+			path = OCShareExtension;
+			sourceTree = "<group>";
+		};
 		81F550A2223A2B7F00B924F9 /* UICountingLabel */ = {
 			isa = PBXGroup;
 			children = (
@@ -3901,10 +3954,12 @@
 				81EBD95622129BE30011392E /* Frameworks */,
 				81EBD95722129BE30011392E /* Resources */,
 				BA70124983332AEDD48B974A /* [CP] Copy Pods Resources */,
+				81F2DAEF2667D33A007DB3DD /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				81F2DAED2667D33A007DB3DD /* PBXTargetDependency */,
 			);
 			name = OC;
 			productName = OC;
@@ -3930,6 +3985,23 @@
 			productReference = 81ED15872403BD0500576FEA /* OCTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		81F2DAE22667D33A007DB3DD /* OCShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81F2DAF22667D33A007DB3DD /* Build configuration list for PBXNativeTarget "OCShareExtension" */;
+			buildPhases = (
+				81F2DADF2667D33A007DB3DD /* Sources */,
+				81F2DAE02667D33A007DB3DD /* Frameworks */,
+				81F2DAE12667D33A007DB3DD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OCShareExtension;
+			productName = OCShareExtension;
+			productReference = 81F2DAE32667D33A007DB3DD /* OCShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -3945,6 +4017,9 @@
 					81ED15862403BD0500576FEA = {
 						CreatedOnToolsVersion = 11.3.1;
 						TestTargetID = 81EBD95822129BE30011392E;
+					};
+					81F2DAE22667D33A007DB3DD = {
+						CreatedOnToolsVersion = 12.5;
 					};
 				};
 			};
@@ -3964,6 +4039,7 @@
 			targets = (
 				81EBD95822129BE30011392E /* OC */,
 				81ED15862403BD0500576FEA /* OCTests */,
+				81F2DAE22667D33A007DB3DD /* OCShareExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -4344,6 +4420,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		81F2DAE12667D33A007DB3DD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81F2DAEA2667D33A007DB3DD /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -4711,6 +4795,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		81F2DADF2667D33A007DB3DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81F2DAE72667D33A007DB3DD /* ShareViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -4718,6 +4810,11 @@
 			isa = PBXTargetDependency;
 			target = 81EBD95822129BE30011392E /* OC */;
 			targetProxy = 81ED158C2403BD0500576FEA /* PBXContainerItemProxy */;
+		};
+		81F2DAED2667D33A007DB3DD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 81F2DAE22667D33A007DB3DD /* OCShareExtension */;
+			targetProxy = 81F2DAEC2667D33A007DB3DD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -4758,6 +4855,14 @@
 				81E538B62213F73800D694CD /* zh-Hans */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		81F2DAE82667D33A007DB3DD /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				81F2DAE92667D33A007DB3DD /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -4885,6 +4990,7 @@
 			baseConfigurationReference = E12C7DB1EB7A02EA7B0264BE /* Pods-OC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = OC/OCDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y3667C365X;
 				ENABLE_BITCODE = NO;
@@ -4988,6 +5094,45 @@
 			};
 			name = Release;
 		};
+		81F2DAF02667D33A007DB3DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = OCShareExtension/OCShareExtensionDebug.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y3667C365X;
+				INFOPLIST_FILE = OCShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yier.sumup.OCShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		81F2DAF12667D33A007DB3DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y3667C365X;
+				INFOPLIST_FILE = OCShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yier.sumup.OCShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -5014,6 +5159,15 @@
 			buildConfigurations = (
 				81ED158E2403BD0500576FEA /* Debug */,
 				81ED158F2403BD0500576FEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81F2DAF22667D33A007DB3DD /* Build configuration list for PBXNativeTarget "OCShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81F2DAF02667D33A007DB3DD /* Debug */,
+				81F2DAF12667D33A007DB3DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
